@@ -11,6 +11,7 @@ create table user(
     user_birth_date date not null;
     user_email text not null;
     user_phone integer not null
+    
 )
 
 create table rol(
@@ -19,14 +20,14 @@ create table rol(
 )
 
 create table product(
-    product_id integer primary key;
-    product_name text;
-    product_description text;
-    product_price integer;
-    product_stock integer;
-    product_latitude integer;
-    product_length integer;
-    
+    product_id integer primary key,
+    product_name text,
+    product_description text,
+    product_price integer,
+    product_stock integer,
+    product_latitude integer,
+    product_length integer,
+    FOREIGN KEY (user_id) REFERENCES user(id)
 );
 
 CREATE TABLE order (
@@ -40,3 +41,5 @@ CREATE TABLE order (
   FOREIGN KEY (user_id) REFERENCES user(id),
   FOREIGN KEY (product_id) REFERENCES product(id)
 );
+
+
