@@ -45,8 +45,8 @@ create table product(
     product_description text not null,
     product_price real not null,
     product_stock integer not null,
-    product_latitude integer not null,
-    product_length integer not null,
+    product_latitude REAL not null,
+    product_longitude REAL not null,
     constraint fk_product_user FOREIGN KEY (user_id) REFERENCES user(user_id),
     constraint fk_product_category FOREIGN KEY (category_id) REFERENCES category(category_id),
     constraint fk_product_state FOREIGN KEY (state_product_id) REFERENCES state_product(state_product_id)
