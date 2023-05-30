@@ -1,16 +1,14 @@
 package co.unicauca.openmarket.commons.domain;
 
-import java.util.HashMap;
-
 public class ShoppingCart {
     private Long id;
     private User owner;
-    HashMap<Product, Integer> products;// Productos y su cantidad
+    Product product;// Productos y su cantidad
 
-    public ShoppingCart(Long id, User owner, HashMap<Product, Integer> products) {
+    public ShoppingCart(Long id, User owner, Product product) {
         this.id = id;
         this.owner = owner;
-        this.products = products;
+        this.product = product;
     }
 
     public Long getId() {
@@ -29,12 +27,12 @@ public class ShoppingCart {
         this.owner = owner;
     }
 
-    public HashMap<Product, Integer> getProducts() {
-        return products;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProducts(HashMap<Product, Integer> products) {
-        this.products = products;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
 }
