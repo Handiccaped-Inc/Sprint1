@@ -47,7 +47,7 @@ INSERT INTO orders (user_id, product_id, order_status_id, orders_price, orders_q
 (3, 3, 3, 5.99, NULL, '2023-05-29');
 
 -- Inserts para la tabla delivery
-INSERT INTO delivery (orders_id, repartidor_id, delivery_receptor, delivery_date) VALUES
+INSERT INTO delivery (orders_id, deliveryman_id, delivery_receiver, delivery_date) VALUES
 (1, 3, 'Receptor 1', '2023-05-29'),
 (2, 2, 'Receptor 2', '2023-05-29'),
 (3, 1, 'Receptor 3', '2023-05-29');

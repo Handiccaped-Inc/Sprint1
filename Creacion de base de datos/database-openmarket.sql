@@ -92,10 +92,10 @@ CREATE TABLE orders (
 -- Tabla delivery: Almacena la información de los envíos
 CREATE TABLE delivery (
     orders_id INTEGER NOT NULL,
-    repartidor_id INTEGER NOT NULL,
+    deliveryman_id INTEGER NOT NULL,
     delivery_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    delivery_receptor TEXT NOT NULL,
+    delivery_receiver TEXT NOT NULL,
     delivery_date DATE NOT NULL,
     CONSTRAINT fk_delivery_orders FOREIGN KEY (orders_id) REFERENCES orders (orders_id),
-    CONSTRAINT fk_delivery_user FOREIGN KEY (repartidor_id) REFERENCES user (user_id)
+    CONSTRAINT fk_delivery_user FOREIGN KEY (deliveryman_id) REFERENCES user (user_id)
 );
