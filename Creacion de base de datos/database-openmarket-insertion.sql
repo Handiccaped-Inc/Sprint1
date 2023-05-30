@@ -20,7 +20,7 @@ INSERT INTO state_product (state_product_name) VALUES
 ('disponible'),
 ('no disponible');
 
-INSERT INTO product (user_id, category_id, state_product_id, product_name, product_description, product_price, product_stock, product_latitude, product_length) VALUES
+INSERT INTO product (user_id, category_id, state_product_id, product_name, product_description, product_price, product_stock, product_latitude, product_longitude) VALUES
 (1, 1, 1, 'Teléfono móvil', 'Un teléfono inteligente de última generación', 999.99, 10, 12345, 67890),
 (2, 2, 1, 'Camiseta', 'Camiseta de algodón de manga corta', 19.99, 50, 54321, 98765),
 (3, 1, 2, 'Portátil', 'Portátil ligero y potente', 1499.99, 5, 98765, 43210),
