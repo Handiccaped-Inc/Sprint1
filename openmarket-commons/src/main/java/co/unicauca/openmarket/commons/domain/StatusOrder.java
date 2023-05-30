@@ -1,10 +1,10 @@
 package co.unicauca.openmarket.commons.domain;
 
-public class Rol {
+public class StatusOrder {
     private Long id;
     private String name;
 
-    public Rol(Long id, String name) {
+    public StatusOrder(Long id, String name) {
         this.id = id;
         this.name = name;
     }
