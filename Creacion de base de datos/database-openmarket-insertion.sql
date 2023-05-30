@@ -5,11 +5,11 @@ INSERT INTO rol (rol_name) VALUES
 ('Usuario Regular'),
 ('Invitado');
 
-INSERT INTO user (rol_id, user_birth_date, user_email, user_phone, user_card, user_realname, user_username, user_password) VALUES
-(1, '1990-05-15', 'santiago@example.com', '1234567890', '1234 5678 9012 3456', 'Santiago Agredo', 'santiago', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f'),-- password123
-(2, '1995-10-20', 'pablo@example.com', '9876543210', '9876 5432 1098 7654', 'Pablo Restrepo', 'pablo', 'c6ba91b90d922e159893f46c387e5dc1b3dc5c101a5a4522f03b987177a24a91'),-- password456
-(2, '1988-12-01', 'jojan@example.com', '5555555555', '5555 5555 5555 5555', 'Jojan Serna', 'jojan', '5efc2b017da4f7736d192a74dde5891369e0685d4d38f2a455b6fcdab282df9c'), -- password789
-(3, '2000-03-25', 'arturo@example.com', '9999999999', '9999 9999 9999 9999', 'Arturo Restrepo', 'arturo', '6733b7ffeace4887c3b31258079c780d8db3018db9cbc05c500df3521f968df8'); --passwordabc
+INSERT INTO user (rol_id, user_birth_date, user_email, user_phone, user_card, user_realname, user_username, user_password, user_address) VALUES
+(1, '1990-05-15', 'santiago@example.com', '1234567890', '1234 5678 9012 3456', 'Santiago Agredo', 'santiago', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Dirección 1'),-- password123
+(2, '1995-10-20', 'pablo@example.com', '9876543210', '9876 5432 1098 7654', 'Pablo Restrepo', 'pablo', 'c6ba91b90d922e159893f46c387e5dc1b3dc5c101a5a4522f03b987177a24a91', 'Dirección 1'),-- password456
+(2, '1988-12-01', 'jojan@example.com', '5555555555', '5555 5555 5555 5555', 'Jojan Serna', 'jojan', '5efc2b017da4f7736d192a74dde5891369e0685d4d38f2a455b6fcdab282df9c', 'Calle 73N #20-531'), -- password789
+(3, '2000-03-25', 'arturo@example.com', '9999999999', '9999 9999 9999 9999', 'Arturo Restrepo', 'arturo', '6733b7ffeace4887c3b31258079c780d8db3018db9cbc05c500df3521f968df8', 'Dirección 1'); --passwordabc
 
 INSERT INTO category (category_name) VALUES
 ('Electrónica'),

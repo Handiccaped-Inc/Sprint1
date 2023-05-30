@@ -21,6 +21,7 @@ create table user(
     user_realname text not null,
     user_username text not null,
     user_password text not null,
+    user_address text not null,
     constraint fk_user_rol FOREIGN key (rol_id) REFERENCES rol(rol_id)
 );
 
