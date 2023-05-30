@@ -74,6 +74,7 @@ CREATE TABLE orders(
   order_status_id INTEGER not null,
   orders_status TEXT not null,
   orders_price REAL not null,
+  orders_qualification REAL,
   constraint fk_orders_user FOREIGN KEY (user_id) REFERENCES user(user_id),
   constraint fk_orders_product FOREIGN KEY (product_id) REFERENCES product(product_id),
   constraint fk_orders_order_status FOREIGN KEY (order_status_id) REFERENCES order_status(order_status_id)

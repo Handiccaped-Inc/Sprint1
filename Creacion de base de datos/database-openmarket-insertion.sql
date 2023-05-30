@@ -37,11 +37,11 @@ INSERT INTO order_status (order_status_name) VALUES
 ('cancelado'),
 ('en espera');
 
-INSERT INTO orders (user_id, product_id, order_status_id, orders_status, orders_price) VALUES
-(1, 1, 1, 'Pendiente', 999.99),
-(2, 2, 2, 'Cancelado', 19.99),
-(3, 3, 3, 'En espera', 1499.99),
-(4, 4, 1, 'Pendiente', 699.99);
+INSERT INTO orders (user_id, product_id, order_status_id, orders_status, orders_price, orders_qualification) VALUES
+(1, 1, 1, 'Pendiente', 999.99, null),
+(2, 2, 2, 'Cancelado', 19.99, 4.0),
+(3, 3, 3, 'En espera', 1499.99, null),
+(4, 4, 1, 'Pendiente', 699.99, null);
 
 INSERT INTO delivery (orders_id, repartidor_id, delivery_receptor, delivery_date) VALUES
 (1, 3, 'Juan Pérez', '2023-05-01'),
