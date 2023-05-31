@@ -5,9 +5,9 @@ import co.unicauca.openmarket.server.access.IUserRepository;
 
 public class UserService implements IUserService {
 
-    private static IUserRepository repository;
+    private IUserRepository repository;
 
-    public UserService(IUserRepository repository){
+    public UserService(IUserRepository repository) {
         this.repository = repository;
     }
 
@@ -20,5 +20,5 @@ public class UserService implements IUserService {
     public User findById(Long userId) {
         return repository.findById(userId);
     }
-    
+
 }
