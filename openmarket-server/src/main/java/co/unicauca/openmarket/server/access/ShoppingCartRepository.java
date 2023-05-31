@@ -82,12 +82,12 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                ShoppingCart newCart = new ShoppingCart();
-                newCart.setOwner(UserService.findUserById(rs.getLong("user_id")));
-                newCart.setProduct(ProductService.findProductbyId(rs.getLong("product_id")));
-                newCart.setId(rs.getLong("shopping_cart_id"));
-                newCart.setQuantity(rs.getLong("shopping_cart_quantity"));
-                carts.add(newCart);
+                ShoppingCart newCart = new ShoppingCart(
+                    UserService.findUserById(rs.getLong("user_id")),
+                    ProductService.findProductbyId(rs.getLong("product_id")),
+                    rs.getLong("shopping_cart_id"),
+                    rs.getLong("shopping_cart_quantity")
+                );
             }
             //this.disconnect();
 
