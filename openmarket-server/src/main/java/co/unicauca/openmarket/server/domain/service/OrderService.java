@@ -8,13 +8,14 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderService {
+public class OrderService implements IOrderService {
     private IOrderRepository orderRepository;
 
     public OrderService(IOrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
 
+    @Override
     public String save(Order newOrder) {
         List<JsonError> errors = new ArrayList<>();
         String response;
@@ -40,6 +41,7 @@ public class OrderService {
         return response;
     }
 
+    @Override
     public String update(Order updatedOrder) {
         List<JsonError> errors = new ArrayList<>();
         String response;
@@ -65,10 +67,12 @@ public class OrderService {
         return response;
     }
 
+    @Override
     public synchronized List<Order> findByState(StatusOrder status) {
         return orderRepository.findByState(status);
     }
 
+    @Override
     public synchronized List<Order> findByUser(Integer userId) {
         return orderRepository.findByUser(userId);
     }

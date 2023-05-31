@@ -16,7 +16,7 @@ public interface IOrderService {
      * @param NewOrder objeto de esquema de una orden
      * @return boolean deacuerdo a resulado
      */
-    public boolean save(Order newOrder);
+    public String save(Order newOrder);
 
     /**
      * @brief Metodo para actualizar una orden
@@ -24,7 +24,7 @@ public interface IOrderService {
      * @return boolean deacuerdo a resulado
      */
 
-    public boolean update(Order newOrder);
+    public String update(Order newOrder);
 
     /**
      * @brief Metodo que encuentra la orden por el estado de esta
