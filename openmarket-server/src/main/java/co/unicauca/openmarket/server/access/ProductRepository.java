@@ -139,4 +139,31 @@ public class ProductRepository implements IProductRepository {
         }
     }
 
+    @Override
+    public Product findById(Long id) {
+        try {
+            String sql = "SELECT * FROM product WHERE product_id=?";
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, id);
+            ResultSet result = pstmt.executeQuery();
+            if (result.next()) {
+                Product newProduct = new Product();
+                newProduct.setId(result.getLong("product_id"));
+                newProduct.setOwner(new UserRepository().findById(result.getLong("user_id")));
+                newProduct.setCategory(new CategoryRepository().findById(result.getLong("category_id")));
+                newProduct.setState(new StateProductRepository().findById(result.getLong("state_product_id")));
+                newProduct.setName(result.getString("product_name"));
+                newProduct.setDescription(result.getString("product_description"));
+                newProduct.setPrice(result.getDouble("product_price"));
+                newProduct.setStock(result.getLong("product_stock"));
+                newProduct.setLatitude(result.getDouble("product_latitude"));
+                newProduct.setLongitude(result.getDouble("product_longitude"));
+                return newProduct;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
 }
