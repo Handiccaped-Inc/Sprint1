@@ -13,7 +13,7 @@ import co.unicauca.openmarket.server.access.IShoppingCartRepository;
 
 public class ShoppingCartService implements IShoppingCartService{
     
-    private static IShoppingCartRepository repository;
+    private IShoppingCartRepository repository;
 
     public ShoppingCartService(IShoppingCartRepository repository){
         this.repository = repository;
@@ -33,13 +33,14 @@ public class ShoppingCartService implements IShoppingCartService{
             return errosJson;
 
         }
-
-        
         return repository.save(newCart) ? "ok" : "!error";
     }
 
     @Override
     public List<Product> findByOwner(User owner){
+        if (owner == null){
+            return new ArrayList<>();
+        }
         List<Product> products = new ArrayList<>();
         products = repository.findByOwner(owner);
         return products;
@@ -54,6 +55,9 @@ public class ShoppingCartService implements IShoppingCartService{
 
     @Override
     public List<ShoppingCart> findRepoByOwner(User owner){
+        if (owner == null){
+            return new ArrayList<>();
+        }
         List<ShoppingCart> carts = new ArrayList<>();
         carts = repository.findRepoByOwner(owner);
         return carts;
