@@ -12,6 +12,9 @@ import co.unicauca.openmarket.commons.domain.StateProduct;
 public class StateProductRepository implements IStateProductRepository {
     protected Connection conn;
 
+    /**
+     * Constructor por defecto
+     */
     public StateProductRepository() {
         conn = DatabaseConnection.getInstance().getConnection();
     }

@@ -13,6 +13,9 @@ public class CategoryRepository implements ICategoryRepository {
 
     protected Connection conn;
 
+    /**
+     * Constructor por defecto
+     */
     public CategoryRepository() {
         conn = DatabaseConnection.getInstance().getConnection();
     }
