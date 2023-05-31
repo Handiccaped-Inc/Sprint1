@@ -32,8 +32,8 @@ public class DeliveryService implements IDeliveryService{
 
         }
 
-        boolean response = myDeliverRepository.save(newDelivery);
-        return response ? "ok" : "!error";
+        
+        return myDeliverRepository.save(newDelivery) ? "ok" : "!error";
     }
 
     @Override
@@ -51,8 +51,7 @@ public class DeliveryService implements IDeliveryService{
 
         }
 
-        boolean response = myDeliverRepository.update(newDelivery);
-        return response ? "ok" : "!error";
+        return myDeliverRepository.update(newDelivery) ? "ok" : "!error";
         
     }
     
