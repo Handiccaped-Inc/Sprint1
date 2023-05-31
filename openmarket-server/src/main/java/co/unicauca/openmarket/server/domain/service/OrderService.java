@@ -31,8 +31,7 @@ public class OrderService implements IOrderService {
             return errorsJson;
         }
 
-        boolean response = orderRepository.save(newOrder);
-        return response ? "ok" : "!error";
+        return orderRepository.save(newOrder) ? "ok" : "!error";
     }
 
     @Override
@@ -51,8 +50,7 @@ public class OrderService implements IOrderService {
             return errorsJson;
         }
 
-        boolean response = orderRepository.update(updatedOrder);
-        return response ? "ok" : "!error";
+        return orderRepository.update(updatedOrder) ? "ok" : "!error";
     }
 
     @Override
