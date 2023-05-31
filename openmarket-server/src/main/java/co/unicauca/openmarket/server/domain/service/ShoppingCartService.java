@@ -34,8 +34,8 @@ public class ShoppingCartService implements IShoppingCartService{
 
         }
 
-        boolean response = repository.save(newCart);
-        return response ? "ok" : "!error";
+        
+        return repository.save(newCart) ? "ok" : "!error";
     }
 
     @Override
@@ -72,7 +72,6 @@ public class ShoppingCartService implements IShoppingCartService{
             return errosJson;
         }
 
-        boolean response = repository.delete(owner);
-        return response ? "ok" : "!error";
+        return repository.delete(owner) ? "ok" : "!error";
     }
 }
