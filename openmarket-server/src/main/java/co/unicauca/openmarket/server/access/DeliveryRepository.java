@@ -12,7 +12,7 @@ import co.unicauca.openmarket.commons.domain.Delivery;
 /**
  * Clase que maneja los pedidos a nivel de la base de datos
  */
-public class DeliveryRepository implements IDeliveryRespository {
+public class DeliveryRepository implements IDeliveryRepository {
 
     protected Connection conn;
 
