@@ -26,6 +26,9 @@ public class Product {
         this.longitude = longitude;
     }
 
+    public Product() {
+    }
+
     public Long getId() {
         return id;
     }
