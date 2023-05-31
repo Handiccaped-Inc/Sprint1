@@ -13,11 +13,17 @@ public class UserService implements IUserService {
 
     @Override
     public User findByEmailAndPassword(String email, String password) {
+        if (email == null || password == null){
+            return null;
+        }
         return repository.findByEmailAndPassword(email, password);
     }
 
     @Override
     public User findById(Long userId) {
+        if (userId == null){
+            return null;
+        }
         return repository.findById(userId);
     }
 
