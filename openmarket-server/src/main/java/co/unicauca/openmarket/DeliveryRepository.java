@@ -17,11 +17,6 @@ public class DeliveryRepository implements IDeliveryRespository{
 
     DatabaseConnection myConnection = DatabaseConnection.getInstance();
 
-      /**
-     * Metodo que maneja el guardar un nuevo pedido
-     * @param newDelivery objeto que contiene los datos de un pedido
-     * @return boolean dependiendo del exito de la operación 
-     */
     @Override
     public boolean save(Delivery newDelivery) {
         try {
@@ -46,11 +41,7 @@ public class DeliveryRepository implements IDeliveryRespository{
         return false;
     }
 
-    /**
-     * Metodo que maneja el actualizar un pedido
-     * @param newDelivery objeto que cotiene los datos de un pedido
-     * @return boolean dependiendo del exito de la operación
-     */
+   
     @Override
     public boolean update(Delivery newDelivery) {
         try {
