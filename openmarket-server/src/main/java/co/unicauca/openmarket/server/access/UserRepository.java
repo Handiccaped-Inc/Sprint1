@@ -9,6 +9,7 @@ import java.util.logging.Level;
 import java.util.Date;
 
 import co.unicauca.openmarket.commons.domain.User;
+import co.unicauca.openmarket.server.infra.Hashing;
 import co.unicauca.openmarket.commons.domain.Rol;
 
 /**
@@ -34,11 +35,11 @@ public class UserRepository implements IUserRepository {
     public User findByEmailAndPassword(String email, String password) {
         User user = null;
         Rol user_rol = null;
-
+        String hashedPassword = Hashing.getSHA256Hash(password);
         String sql = "SELECT * FROM user WHERE user_email = ? AND user_password = ?";
         try (PreparedStatement statement = conn.prepareStatement(sql)) {
             statement.setString(1, email);
-            statement.setString(2, password);
+            statement.setString(2, hashedPassword);
             ResultSet res = statement.executeQuery();
             if (res.next()) {
                 Long user_Id = res.getLong("user_id");
