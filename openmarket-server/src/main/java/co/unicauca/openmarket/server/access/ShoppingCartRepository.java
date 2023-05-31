@@ -37,9 +37,8 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
             pstmt.setLong(1, newCart.getOwner().getId());
             pstmt.setLong(2, newCart.getProduct().getId());
             pstmt.setLong(3, newCart.getQuantity());
-            pstmt.executeUpdate();
+            return pstmt.executeUpdate() > 0;
             // this.disconnect();
-            return true;
         } catch (SQLException ex) {
             Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -144,9 +143,8 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, owner.getId());
-            pstmt.executeUpdate();
+            return pstmt.executeUpdate() > 0;
             // this.disconnect();
-            return true;
         } catch (SQLException ex) {
             Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
         }

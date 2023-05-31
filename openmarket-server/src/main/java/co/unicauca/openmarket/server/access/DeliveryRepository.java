@@ -35,8 +35,8 @@ public class DeliveryRepository implements IDeliveryRespository {
             pstm.setLong(2, newDelivery.getDeliveryMan().getId());
             pstm.setString(3, newDelivery.getReceiver().getRealName());
             pstm.setDate(4, (Date) newDelivery.getDate());
-            pstm.executeUpdate();
-            return true;
+
+            return pstm.executeUpdate() > 0;
 
         } catch (SQLException ex) {
             Logger.getLogger(DeliveryRepository.class.getName()).log(Level.SEVERE, null, ex);
@@ -60,8 +60,7 @@ public class DeliveryRepository implements IDeliveryRespository {
             pstm.setString(3, newDelivery.getReceiver().getRealName());
             pstm.setDate(4, (Date) newDelivery.getDate());
             pstm.setLong(5, newDelivery.getId());
-            pstm.executeUpdate();
-            return true;
+            return pstm.executeUpdate() > 0;
 
         } catch (SQLException ex) {
             Logger.getLogger(DeliveryRepository.class.getName()).log(Level.SEVERE, null, ex);

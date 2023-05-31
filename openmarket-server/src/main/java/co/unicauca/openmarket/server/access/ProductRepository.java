@@ -41,9 +41,8 @@ public class ProductRepository implements IProductRepository {
             pstmt.setDouble(8, newProduct.getLatitude());
             pstmt.setDouble(9, newProduct.getLongitude());
 
-            pstmt.executeUpdate();
             // this.disconnect();
-            return true;
+            return pstmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -73,9 +72,8 @@ public class ProductRepository implements IProductRepository {
             pstmt.setDouble(9, newProduct.getLongitude());
             pstmt.setLong(10, newProduct.getId());
 
-            pstmt.executeUpdate();
             // this.disconnect();
-            return true;
+            return pstmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
