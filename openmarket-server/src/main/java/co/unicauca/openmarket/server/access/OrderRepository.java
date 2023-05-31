@@ -17,6 +17,12 @@ import co.unicauca.openmarket.commons.domain.User;
 
 public class OrderRepository implements IOrderRepository {
 
+    protected Connection connection;
+
+    public OrderRepository() {
+        connection = DatabaseConnection.getInstance().getConnection();
+    }
+
     @Override
     public boolean save(Order newOrder) {
         try {
@@ -24,10 +30,6 @@ public class OrderRepository implements IOrderRepository {
             if (newOrder == null || newOrder.getPrice().equals(null)) {
                 return false;
             }
-
-            DatabaseConnection dbConnection = DatabaseConnection.getInstance();
-
-            Connection connection = dbConnection.getConnection();
 
             String sql = "INSERT INTO orders (user_id, product_id, order_status_id, orders_price, orders_qualification, orders_date) "
                     + "VALUES (?, ?, ?, ?, ?, ?)";
@@ -55,9 +57,6 @@ public class OrderRepository implements IOrderRepository {
                 return false;
             }
 
-            DatabaseConnection dbConnection = DatabaseConnection.getInstance();
-            Connection connection = dbConnection.getConnection();
-
             String sql = "UPDATE orders SET user_id = ?, product_id = ?, order_status_id = ?, orders_price = ?, "
                     + "orders_qualification = ?, orders_date = ? WHERE order_id = ?";
 
@@ -82,8 +81,6 @@ public class OrderRepository implements IOrderRepository {
     public List<Order> findByState(StatusOrder status) {
         List<Order> orders = new ArrayList<>();
         try {
-            DatabaseConnection dbConnection = DatabaseConnection.getInstance();
-            Connection connection = dbConnection.getConnection();
 
             String sql = "SELECT * FROM orders WHERE order_status_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
@@ -125,8 +122,6 @@ public class OrderRepository implements IOrderRepository {
     public List<Order> findByUser(Integer userId) {
         List<Order> orders = new ArrayList<>();
         try {
-            DatabaseConnection dbConnection = DatabaseConnection.getInstance();
-            Connection connection = dbConnection.getConnection();
 
             String sql = "SELECT * FROM orders WHERE user_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
