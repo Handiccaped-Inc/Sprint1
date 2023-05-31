@@ -83,8 +83,8 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 ShoppingCart newCart = new ShoppingCart(
-                    UserService.findUserById(rs.getLong("user_id")),
-                    ProductService.findProductbyId(rs.getLong("product_id")),
+                    new UserRepository().findById(rs.getLong("user_id")),
+                    new ProductRepository().findById(rs.getLong("product_id")),
                     rs.getLong("shopping_cart_id"),
                     rs.getLong("shopping_cart_quantity")
                 );
@@ -111,8 +111,8 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 ShoppingCart newCart = new ShoppingCart(
-                    UserService.findUserById(rs.getLong("user_id")),
-                    ProductService.findProductbyId(rs.getLong("product_id")),
+                    new UserRepository().findById(rs.getLong("user_id")),
+                    new ProductRepository().findById(rs.getLong("product_id")),
                     rs.getLong("shopping_cart_id"),
                     rs.getLong("shopping_cart_quantity")
                 );
@@ -140,10 +140,10 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
                 Product newProduct = new Product(
-                rs.getLong("Product_id"), 
-                UserService.findUserById(rs.getLong("user_id")), 
-                CategoryService.findCategoryById(rs.getLong("category_id")), 
-                StateService.findStateById(rs.getString("product_state")), 
+                rs.getLong("product_id"), 
+                new UserRepository().findById(rs.getLong("user_id")), 
+                new CategoryRepository().findById(rs.getLong("category_id")), 
+                new StateProductRepository().findById(rs.getLong("state_product_id")), 
                 rs.getString("product_name"), 
                 rs.getString("product_description"), 
                 rs.getDouble("product_price"), 
