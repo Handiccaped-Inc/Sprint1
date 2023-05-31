@@ -28,6 +28,10 @@ public class User {
         this.address = address;
     }
 
+    public User() {
+
+    }
+
     public Integer getId() {
         return id;
     }
