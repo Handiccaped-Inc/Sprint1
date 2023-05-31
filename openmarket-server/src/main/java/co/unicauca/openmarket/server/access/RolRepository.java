@@ -34,9 +34,9 @@ public class RolRepository implements IRolRepository{
             pstmt.setLong(1, id);
             ResultSet res = pstmt.executeQuery();
             if (res.next()) {
-                Rol rol = null;
-                long rol_id = res.getLong("category_id");
-                String rol_name = res.getString("category_name");
+                long rol_id = res.getLong("rol_id");
+                String rol_name = res.getString("rol_name");
+                rol = new Rol(rol_id, rol_name);
                 return rol;
             } else {
                 return null;
