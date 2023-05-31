@@ -41,8 +41,7 @@ public class OrderRepository implements IOrderRepository {
             pstmt.setDouble(4, newOrder.getPrice());
             pstmt.setDouble(5, newOrder.getQualification());
             pstmt.setDate(6, (Date) newOrder.getDate());
-            pstmt.executeUpdate();
-            return true;
+            return pstmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             Logger.getLogger(OrderRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
