@@ -17,35 +17,10 @@ import java.util.logging.Logger;
 
 public class ShoppingCartRepository implements IShoppingCartRepository {
     
-    protected Connection conn; //< Variable de conexion
+    protected Connection conn;
 
     public ShoppingCartRepository() {
         conn = DatabaseConnection.getInstance().getConnection();
-    }
-
-    public void connect() {
-        // SQLite connection string
-        //String url = "jdbc:sqlite:./myDatabase.db"; //Para Linux/Mac
-        //String url = "jdbc:sqlite:C:/sqlite/db/myDatabase.db"; //Para Windows
-        String url = "jdbc:sqlite::memory:";
-
-        try {
-            conn = DriverManager.getConnection(url);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    public void disconnect() {
-        try {
-            if (conn != null) {
-                conn.close();
-            }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-
     }
 
     @Override
