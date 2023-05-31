@@ -112,13 +112,14 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public List<Product> findByNameAndDescription(String name, String description) {
+        List<Product> products = new ArrayList<>();
+
         try {
             String sql = "SELECT * FROM product WHERE product_name like %?% OR product_description like %?%";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, name);
             pstmt.setString(2, description);
             ResultSet result = pstmt.executeQuery();
-            List<Product> products = new ArrayList<>();
             while (result.next()) {
                 Product newProduct = new Product();
                 newProduct.setId(result.getLong("product_id"));
@@ -137,6 +138,7 @@ public class ProductRepository implements IProductRepository {
         } catch (SQLException ex) {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return products;
     }
 
     @Override

@@ -13,7 +13,7 @@ import co.unicauca.openmarket.commons.domain.Rol;
  *
  * @author Arturo
  */
-public class RolRepository implements IRolRepository{
+public class RolRepository implements IRolRepository {
     protected Connection conn;
 
     /**
@@ -22,12 +22,12 @@ public class RolRepository implements IRolRepository{
     public RolRepository() {
         conn = DatabaseConnection.getInstance().getConnection();
     }
-    
+
     /**
-    * Implementacion del metodo "findById"
-    */
+     * Implementacion del metodo "findById"
+     */
     @Override
-    public Rol findById(long id){
+    public Rol findById(long id) {
         try {
             String sql = "SELECT * FROM rol WHERE rol_id=?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -36,7 +36,7 @@ public class RolRepository implements IRolRepository{
             if (res.next()) {
                 long rol_id = res.getLong("rol_id");
                 String rol_name = res.getString("rol_name");
-                rol = new Rol(rol_id, rol_name);
+                Rol rol = new Rol(rol_id, rol_name);
                 return rol;
             } else {
                 return null;
