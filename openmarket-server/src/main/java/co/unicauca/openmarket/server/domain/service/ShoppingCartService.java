@@ -12,6 +12,7 @@ import co.unicauca.openmarket.commons.infra.JsonError;
 import co.unicauca.openmarket.server.access.IShoppingCartRepository;
 
 
+public class ShoppingCartService implements IShoppingCartService {
 
     private IShoppingCartRepository repository;
 
