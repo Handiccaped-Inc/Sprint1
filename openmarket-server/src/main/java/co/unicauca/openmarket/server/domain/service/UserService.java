@@ -7,7 +7,7 @@ public class UserService implements IUserService {
 
     private IUserRepository repository;
 
-    public UserService(IUserRepository repository){
+    public UserService(IUserRepository repository) {
         this.repository = repository;
     }
 
@@ -26,5 +26,5 @@ public class UserService implements IUserService {
         }
         return repository.findById(userId);
     }
-    
+
 }

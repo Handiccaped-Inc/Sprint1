@@ -11,33 +11,36 @@ import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.commons.infra.JsonError;
 import co.unicauca.openmarket.server.access.IShoppingCartRepository;
 
-public class ShoppingCartService implements IShoppingCartService{
-    
+
+
     private IShoppingCartRepository repository;
 
-    public ShoppingCartService(IShoppingCartRepository repository){
+    public ShoppingCartService(IShoppingCartRepository repository) {
         this.repository = repository;
     }
 
     @Override
-    public String saveShoppingCart(ShoppingCart newCart){ 
+    public String saveShoppingCart(ShoppingCart newCart) {
         List<JsonError> errors = new ArrayList<>();
         if (newCart.getOwner() == null || newCart.getProduct() == null || newCart.getQuantity() == 0L) {
-            errors.add(new JsonError("400","BAD_REQUEST","El dueño, el producto y la cantidad son campos obligatorios"));
-            
+            errors.add(
+                    new JsonError("400", "BAD_REQUEST", "El dueño, el producto y la cantidad son campos obligatorios"));
+
         }
 
-        if(!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             Gson gson = new Gson();
             String errosJson = gson.toJson(errors);
             return errosJson;
 
         }
+
         return repository.save(newCart) ? "ok" : "!error";
     }
 
     @Override
-    public List<Product> findByOwner(User owner){
+
+    public List<Product> findByOwner(User owner) {
         if (owner == null){
             return new ArrayList<>();
         }
@@ -47,7 +50,7 @@ public class ShoppingCartService implements IShoppingCartService{
     }
 
     @Override
-    public List<ShoppingCart> findAll(){
+    public List<ShoppingCart> findAll() {
         List<ShoppingCart> carts = new ArrayList<>();
         carts = repository.findAll();
         return carts;
@@ -64,13 +67,13 @@ public class ShoppingCartService implements IShoppingCartService{
     }
 
     @Override
-    public String delete(User owner){
+    public String delete(User owner) {
         List<JsonError> errors = new ArrayList<>();
         if (owner == null) {
-            errors.add(new JsonError("400","BAD_REQUEST","El dueño es un campo obligatorio"));
+            errors.add(new JsonError("400", "BAD_REQUEST", "El dueño es un campo obligatorio"));
         }
 
-        if(!errors.isEmpty()){
+        if (!errors.isEmpty()) {
             Gson gson = new Gson();
             String errosJson = gson.toJson(errors);
             return errosJson;

@@ -11,9 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import co.unicauca.openmarket.commons.domain.Order;
-import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.StatusOrder;
-import co.unicauca.openmarket.commons.domain.User;
 
 public class OrderRepository implements IOrderRepository {
 
