@@ -4,11 +4,15 @@ public class ShoppingCart {
     private Long id;
     private User owner;
     Product product;// Productos y su cantidad
+    private Long quantity;
 
-    public ShoppingCart(Long id, User owner, Product product) {
+    public ShoppingCart(){};
+
+    public ShoppingCart(Long id, User owner, Product product, Long quantity) {
         this.id = id;
         this.owner = owner;
         this.product = product;
+        this.quantity = quantity;
     }
 
     public Long getId() {
@@ -35,4 +39,11 @@ public class ShoppingCart {
         this.product = product;
     }
 
+    public Long getQuantity(){
+        return this.quantity;
+    }
+
+    public void setQuantity(Long quantity){
+        this.quantity = quantity;
+    }
 }
