@@ -1,5 +1,6 @@
-package co.unicauca.openmarket;
+package co.unicauca.openmarket.server.access;
 
+import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -7,15 +8,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import co.unicauca.openmarket.commons.domain.Delivery;
-import co.unicauca.openmarket.server.access.DatabaseConnection;
-import co.unicauca.openmarket.server.access.IDeliveryRespository;
 
 /**
  * Clase que maneja los pedidos a nivel de la base de datos
  */
 public class DeliveryRepository implements IDeliveryRespository{
 
-    DatabaseConnection myConnection = DatabaseConnection.getInstance();
+    protected Connection conn;
+
+
+    public DeliveryRepository(){
+        conn = DatabaseConnection.getInstance().getConnection();
+    }
 
     @Override
     public boolean save(Delivery newDelivery) {
@@ -27,7 +31,7 @@ public class DeliveryRepository implements IDeliveryRespository{
 
             String sql = "INSERT INTO delivery(orders_id,deliveryman_id,delivery_receiver,delivery_date)"
                                                 +"VALUES(?,?,?,?)";
-            PreparedStatement pstm = myConnection.getConnection().prepareStatement(sql);
+            PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setLong(1,newDelivery.getOrder().getId());
             pstm.setLong(2,newDelivery.getDeliveryMan().getId());
             pstm.setString(3,Integer.toString(newDelivery.getReceiver().getId()));
@@ -52,7 +56,7 @@ public class DeliveryRepository implements IDeliveryRespository{
 
             String sql = "UPDATE delivery set orders_id = ?, deliveryman_id = ?, delivery_id = ?, delivery_reciver = ?, delivery_date = ? WHERE delivery_id = ?";
 
-            PreparedStatement pstm = myConnection.getConnection().prepareStatement(sql);
+            PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setLong(1,newDelivery.getOrder().getId());
             pstm.setLong(2,newDelivery.getDeliveryMan().getId());
             pstm.setString(3,Integer.toString(newDelivery.getReceiver().getId()));
