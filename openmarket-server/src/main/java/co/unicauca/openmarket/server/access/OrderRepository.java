@@ -88,25 +88,13 @@ public class OrderRepository implements IOrderRepository {
             ResultSet rs = pstmt.executeQuery();
 
             while (rs.next()) {
-                Long id = rs.getLong("order_id");
-                Double price = rs.getDouble("orders_price");
-                Double qualification = rs.getDouble("orders_qualification");
-                Date date = rs.getDate("orders_date");
-
-                // Set customer, product, and status for the order
-                User customer = new User();
-                customer.setId(rs.getInt("user_id"));
-                // Set other customer properties
-
-                Product product = new Product();
-                product.setId(rs.getLong("product_id"));
-                // Set other product properties
-
-                StatusOrder orderStatus = new StatusOrder();
-                orderStatus.setId(rs.getLong("order_status_id"));
-                // Set other status properties
-
-                Order order = new Order(id, customer, product, orderStatus, price, date, qualification);
+                Order order = new Order();
+                order.setCustomer(new UserRepository().findById(rs.getInt("user_id")));
+                order.setProduct(new ProductRepository().findById(rs.getLong("product_id")));
+                order.setStatus(new StatusOrderRepository().findById(rs.getLong("order_status_id")));
+                order.setPrice(rs.getDouble("orders_price"));
+                order.setQualification(rs.getDouble("orders_qualification"));
+                order.setDate(rs.getDate("orders_date"));
                 orders.add(order);
             }
 
@@ -127,30 +115,14 @@ public class OrderRepository implements IOrderRepository {
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setInt(1, userId);
             ResultSet rs = pstmt.executeQuery();
-
             while (rs.next()) {
                 Order order = new Order();
-                order.setId(rs.getLong("order_id"));
+                order.setCustomer(new UserRepository().findById(rs.getInt("user_id")));
+                order.setProduct(new ProductRepository().findById(rs.getLong("product_id")));
+                order.setStatus(new StatusOrderRepository().findById(rs.getLong("order_status_id")));
                 order.setPrice(rs.getDouble("orders_price"));
                 order.setQualification(rs.getDouble("orders_qualification"));
                 order.setDate(rs.getDate("orders_date"));
-
-                // Set user, product, and status for the order
-                User user = new User();
-                user.setId(rs.getInt("user_id"));
-                // Set other user properties
-                order.setCustomer(user);
-
-                Product product = new Product();
-                product.setId(rs.getLong("product_id"));
-                // Set other product properties
-                order.setProduct(product);
-
-                StatusOrder orderStatus = new StatusOrder();
-                orderStatus.setId(rs.getLong("order_status_id"));
-                // Set other status properties
-                order.setStatus(orderStatus);
-
                 orders.add(order);
             }
 
