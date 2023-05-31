@@ -5,7 +5,6 @@ import co.unicauca.openmarket.commons.domain.ShoppingCart;
 import co.unicauca.openmarket.commons.domain.User;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -63,6 +62,7 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
                         new UserRepository().findById(rs.getLong("user_id")),
                         new ProductRepository().findById(rs.getLong("product_id")),
                         rs.getLong("shopping_cart_quantity"));
+                carts.add(newCart);
             }
             // this.disconnect();
 
@@ -138,10 +138,6 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
     @Override
     public boolean delete(User owner) {
         try {
-            // Validate product
-            if (owner != null) {
-                return false;
-            }
             // this.connect();
 
             String sql = "DELETE FROM shopping_cart WHERE user_id = ?";
