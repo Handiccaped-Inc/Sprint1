@@ -13,13 +13,13 @@ public interface IShoppingCartRepository {
      * @param newCart Carrito a guardar
      * @param quantity Cantidad que se esta comprando del producto
      */
-    boolean save(ShoppingCart cart);
+    public boolean save(ShoppingCart cart);
 
     /**
      * @brief Busca los carritos en la base de datos
      * @return Lista de todos los carritos de compra
      */
-    List<ShoppingCart> findAll();
+    public List<ShoppingCart> findAll();
 
     /**
      * @brief Elimina el carrito del usuario

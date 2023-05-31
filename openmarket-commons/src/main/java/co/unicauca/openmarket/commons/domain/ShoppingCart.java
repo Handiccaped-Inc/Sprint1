@@ -3,7 +3,7 @@ package co.unicauca.openmarket.commons.domain;
 public class ShoppingCart {
     private Long id;
     private User owner;
-    Product product;// Productos y su cantidad
+    Product product;
     private Long quantity;
 
     public ShoppingCart(Long id, User owner, Product product, Long quantity) {
@@ -12,6 +12,8 @@ public class ShoppingCart {
         this.product = product;
         this.quantity = quantity;
     }
+
+    public ShoppingCart(){};
 
     public Long getId() {
         return id;
