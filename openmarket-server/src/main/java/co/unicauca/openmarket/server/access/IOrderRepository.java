@@ -26,13 +26,13 @@ public interface IOrderRepository {
      * @return lista de objetos entcontrados
      */
 
-    public List<Order> finByState(StatusOrder status);
+    public List<Order> findByState(StatusOrder status);
 
     /**
      * @brief Metodo que encuentra la orden el id del usuario
      * @param UserId id del usuario
      * @return lista de objetos entcontrados
      */
-    public List<Order> finByUser(Integer UserId);
+    public List<Order> findByUser(Integer UserId);
 
 }
