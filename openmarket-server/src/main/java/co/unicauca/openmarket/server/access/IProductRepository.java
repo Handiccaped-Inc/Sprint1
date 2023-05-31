@@ -34,4 +34,11 @@ public interface IProductRepository {
      * @return lista de objetos entcontrados
      */
     public List<Product> findByNameAndDescription(String name, String description);
+
+    /**
+     * @brief Metodo que encuentra un producto por su id
+     * @param id identificador del producto
+     * @return objeto entcontrado
+     */
+    public Product findById(Long id);
 }
