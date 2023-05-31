@@ -89,6 +89,7 @@ public class OrderRepository implements IOrderRepository {
 
             while (rs.next()) {
                 Order order = new Order();
+                order.setId(rs.getLong("order_id"));
                 order.setCustomer(new UserRepository().findById(rs.getInt("user_id")));
                 order.setProduct(new ProductRepository().findById(rs.getLong("product_id")));
                 order.setStatus(new StatusOrderRepository().findById(rs.getLong("order_status_id")));
@@ -117,6 +118,7 @@ public class OrderRepository implements IOrderRepository {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Order order = new Order();
+                order.setId(rs.getLong("order_id"));
                 order.setCustomer(new UserRepository().findById(rs.getInt("user_id")));
                 order.setProduct(new ProductRepository().findById(rs.getLong("product_id")));
                 order.setStatus(new StatusOrderRepository().findById(rs.getLong("order_status_id")));
