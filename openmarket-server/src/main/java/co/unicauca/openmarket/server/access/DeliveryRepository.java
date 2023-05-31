@@ -12,12 +12,11 @@ import co.unicauca.openmarket.commons.domain.Delivery;
 /**
  * Clase que maneja los pedidos a nivel de la base de datos
  */
-public class DeliveryRepository implements IDeliveryRespository{
+public class DeliveryRepository implements IDeliveryRespository {
 
     protected Connection conn;
 
-
-    public DeliveryRepository(){
+    public DeliveryRepository() {
         conn = DatabaseConnection.getInstance().getConnection();
     }
 
@@ -25,51 +24,50 @@ public class DeliveryRepository implements IDeliveryRespository{
     public boolean save(Delivery newDelivery) {
         try {
 
-            if(newDelivery == null ){
+            if (newDelivery == null) {
                 return false;
             }
 
             String sql = "INSERT INTO delivery(orders_id,deliveryman_id,delivery_receiver,delivery_date)"
-                                                +"VALUES(?,?,?,?)";
+                    + "VALUES(?,?,?,?)";
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setLong(1,newDelivery.getOrder().getId());
-            pstm.setLong(2,newDelivery.getDeliveryMan().getId());
-            pstm.setString(3,Integer.toString(newDelivery.getReceiver().getId()));
-            pstm.setDate(4,(Date) newDelivery.getDate());
+            pstm.setLong(1, newDelivery.getOrder().getId());
+            pstm.setLong(2, newDelivery.getDeliveryMan().getId());
+            pstm.setString(3, newDelivery.getReceiver().getRealName());
+            pstm.setDate(4, (Date) newDelivery.getDate());
             pstm.executeUpdate();
             return true;
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DeliveryRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-   
     @Override
     public boolean update(Delivery newDelivery) {
         try {
 
-            if(newDelivery == null ){
+            if (newDelivery == null) {
                 return false;
             }
 
             String sql = "UPDATE delivery set orders_id = ?, deliveryman_id = ?, delivery_id = ?, delivery_reciver = ?, delivery_date = ? WHERE delivery_id = ?";
 
             PreparedStatement pstm = conn.prepareStatement(sql);
-            pstm.setLong(1,newDelivery.getOrder().getId());
-            pstm.setLong(2,newDelivery.getDeliveryMan().getId());
-            pstm.setString(3,Integer.toString(newDelivery.getReceiver().getId()));
-            pstm.setDate(4,(Date) newDelivery.getDate());
+            pstm.setLong(1, newDelivery.getOrder().getId());
+            pstm.setLong(2, newDelivery.getDeliveryMan().getId());
+            pstm.setString(3, newDelivery.getReceiver().getRealName());
+            pstm.setDate(4, (Date) newDelivery.getDate());
             pstm.setLong(5, newDelivery.getId());
             pstm.executeUpdate();
             return true;
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(DeliveryRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return false;
     }
-    
+
 }

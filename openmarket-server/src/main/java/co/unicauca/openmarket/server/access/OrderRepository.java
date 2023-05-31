@@ -35,7 +35,7 @@ public class OrderRepository implements IOrderRepository {
                     + "VALUES (?, ?, ?, ?, ?, ?)";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setInt(1, newOrder.getCustomer().getId());
+            pstmt.setLong(1, newOrder.getCustomer().getId());
             pstmt.setLong(2, newOrder.getProduct().getId());
             pstmt.setLong(3, newOrder.getStatus().getId());
             pstmt.setDouble(4, newOrder.getPrice());
@@ -61,7 +61,7 @@ public class OrderRepository implements IOrderRepository {
                     + "orders_qualification = ?, orders_date = ? WHERE order_id = ?";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setInt(1, newOrder.getCustomer().getId());
+            pstmt.setLong(1, newOrder.getCustomer().getId());
             pstmt.setLong(2, newOrder.getProduct().getId());
             pstmt.setLong(3, newOrder.getStatus().getId());
             pstmt.setDouble(4, newOrder.getPrice());
@@ -90,7 +90,7 @@ public class OrderRepository implements IOrderRepository {
             while (rs.next()) {
                 Order order = new Order();
                 order.setId(rs.getLong("order_id"));
-                order.setCustomer(new UserRepository().findById(rs.getInt("user_id")));
+                order.setCustomer(new UserRepository().findById(rs.getLong("user_id")));
                 order.setProduct(new ProductRepository().findById(rs.getLong("product_id")));
                 order.setStatus(new StatusOrderRepository().findById(rs.getLong("order_status_id")));
                 order.setPrice(rs.getDouble("orders_price"));
@@ -119,7 +119,7 @@ public class OrderRepository implements IOrderRepository {
             while (rs.next()) {
                 Order order = new Order();
                 order.setId(rs.getLong("order_id"));
-                order.setCustomer(new UserRepository().findById(rs.getInt("user_id")));
+                order.setCustomer(new UserRepository().findById(rs.getLong("user_id")));
                 order.setProduct(new ProductRepository().findById(rs.getLong("product_id")));
                 order.setStatus(new StatusOrderRepository().findById(rs.getLong("order_status_id")));
                 order.setPrice(rs.getDouble("orders_price"));

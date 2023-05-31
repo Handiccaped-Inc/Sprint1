@@ -3,7 +3,7 @@ package co.unicauca.openmarket.commons.domain;
 import java.util.Date;
 
 public class User {
-    private Integer id;
+    private Long id;
     private Rol rol;
     private Date birthDate;
     private String email;
@@ -14,7 +14,7 @@ public class User {
     private String password;
     private String address;
 
-    public User(Integer id, Rol rol, Date birthDate, String email, String phone, String card, String realName,
+    public User(Long id, Rol rol, Date birthDate, String email, String phone, String card, String realName,
             String userName, String password, String address) {
         this.id = id;
         this.rol = rol;
@@ -32,11 +32,11 @@ public class User {
 
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
