@@ -17,9 +17,10 @@ import java.util.logging.Logger;
 
 public class ShoppingCartRepository implements IShoppingCartRepository {
     
-    private Connection conn;
+    protected Connection conn; //< Variable de conexion
 
-    public ShoppingCartRepository(){
+    public ShoppingCartRepository() {
+        conn = DatabaseConnection.getInstance().getConnection();
     }
 
     public void connect() {
