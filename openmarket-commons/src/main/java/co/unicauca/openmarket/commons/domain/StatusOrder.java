@@ -9,6 +9,9 @@ public class StatusOrder {
         this.name = name;
     }
 
+    public StatusOrder() {
+    }
+
     public Long getId() {
         return id;
     }

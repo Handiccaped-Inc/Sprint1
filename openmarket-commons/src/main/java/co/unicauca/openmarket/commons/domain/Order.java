@@ -22,6 +22,9 @@ public class Order {
         this.qualification = qualification;
     }
 
+    public Order() {
+    }
+
     public Long getId() {
         return id;
     }
