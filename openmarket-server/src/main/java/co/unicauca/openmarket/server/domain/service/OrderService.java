@@ -18,7 +18,6 @@ public class OrderService implements IOrderService {
     @Override
     public String save(Order newOrder) {
         List<JsonError> errors = new ArrayList<>();
-        String response;
 
         if (newOrder == null || newOrder.getPrice() == null || newOrder.getDate() == null
                 || newOrder.getCustomer().getId() == null ||
@@ -32,19 +31,13 @@ public class OrderService implements IOrderService {
             return errorsJson;
         }
 
-        if (orderRepository.save(newOrder)) {
-            response = "OK";
-        } else {
-            response = "Error";
-        }
-
-        return response;
+        boolean response = orderRepository.save(newOrder);
+        return response ? "ok" : "!error";
     }
 
     @Override
     public String update(Order updatedOrder) {
         List<JsonError> errors = new ArrayList<>();
-        String response;
 
         if (updatedOrder == null || updatedOrder.getPrice() == null || updatedOrder.getDate() == null
                 || updatedOrder.getCustomer().getId() == null ||
@@ -58,13 +51,8 @@ public class OrderService implements IOrderService {
             return errorsJson;
         }
 
-        if (orderRepository.update(updatedOrder)) {
-            response = "OK";
-        } else {
-            response = "Error";
-        }
-
-        return response;
+        boolean response = orderRepository.update(updatedOrder);
+        return response ? "ok" : "!error";
     }
 
     @Override
