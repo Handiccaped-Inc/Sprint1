@@ -1,5 +1,6 @@
-package co.unicauca.openmarket.commons.access;
+package co.unicauca.openmarket.server.access;
 
+import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.ShoppingCart;
 import co.unicauca.openmarket.commons.domain.User;
 
@@ -96,37 +97,8 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
         return carts;
     }
 
-    /*@Override
-    public ShoppingCart findById(Long id) {
-        try {
-
-            String sql = "SELECT * FROM shopping_cart WHERE shopping_cart_id = ?";
-
-            PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setLong(1, id);
-
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                ShoppingCart newCart = new ShoppingCart();
-                newCart.setOwner(UserService.findUserById(rs.getLong("user_id")));
-                newCart.setProduct(ProductService.findProductbyId(rs.getLong("product_id")));
-                newCart.setId(rs.getLong("shopping_cart_id"));
-                newCart.setQuantity(rs.getLong("shopping_cart_quantity"));
-                return newCart;
-            } else {
-                return null;
-            }
-            //this.disconnect();
-
-        } catch (SQLException ex) {
-            Logger.getLogger(ShoppingCartRepository.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }*/
-
     @Override
-    public List<ShoppingCart> findByOwner(User owner) {
+    public List<ShoppingCart> findRepoByOwner(User owner) {
         List<ShoppingCart> carts = new ArrayList<>();
         try {
 
@@ -138,11 +110,12 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery(sql);
             while (rs.next()) {
-                ShoppingCart newCart = new ShoppingCart();
-                newCart.setOwner(UserService.findUserById(rs.getLong("user_id")));
-                newCart.setProduct(ProductService.findProductbyId(rs.getLong("product_id")));
-                newCart.setId(rs.getLong("shopping_cart_id"));
-                newCart.setQuantity(rs.getLong("shopping_cart_quantity"));
+                ShoppingCart newCart = new ShoppingCart(
+                    UserService.findUserById(rs.getLong("user_id")),
+                    ProductService.findProductbyId(rs.getLong("product_id")),
+                    rs.getLong("shopping_cart_id"),
+                    rs.getLong("shopping_cart_quantity")
+                );
                 carts.add(newCart);
             }
             //this.disconnect();
@@ -153,58 +126,42 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
         return carts;
     }
 
-    /*@Override
-    public ShoppingCart findByOwner(User owner) {
+    @Override
+    public List<Product> findByOwner(User owner) {
+        List<Product> Products = new ArrayList<>();
         try {
 
-            String sql = "SELECT * FROM shopping_cart WHERE user_id = ?";
-
+            String sql = "SELECT * FROM shopping_cart JOIN product ON shopping_cart.product_id = product.product_id WHERE user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, owner.getId());
+            //this.connect();
 
-            ResultSet rs = pstmt.executeQuery();
-
-            if (rs.next()) {
-                ShoppingCart newCart = new ShoppingCart();
-                newCart.setOwner(UserService.findUserById(rs.getLong("user_id")));
-                newCart.setProduct(ProductService.findProductbyId(rs.getLong("product_id")));
-                newCart.setId(rs.getLong("shopping_cart_id"));
-                newCart.setQuantity(rs.getLong("shopping_cart_quantity"));
-                return newCart;
-            } else {
-                return null;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+            while (rs.next()) {
+                Product newProduct = new Product(
+                rs.getLong("Product_id"), 
+                UserService.findUserById(rs.getLong("user_id")), 
+                CategoryService.findCategoryById(rs.getLong("category_id")), 
+                StateService.findStateById(rs.getString("product_state")), 
+                rs.getString("product_name"), 
+                rs.getString("product_description"), 
+                rs.getDouble("product_price"), 
+                rs.getLong("product_stock"), 
+                rs.getDouble("product_latitude"), 
+                rs.getDouble("product_longitude")
+                );
+                Products.add(newProduct);
             }
+
             //this.disconnect();
 
         } catch (SQLException ex) {
-            Logger.getLogger(ShoppingCartRepository.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
-    }*/
-
-    /*@Override
-    public boolean edit(User owner, ShoppingCart cart) {
-    try {
-        // Validate product
-        if (owner == null || cart == null) {
-            return false;
-        }
-        // this.connect();
-
-        String sql = "UPDATE shopping_cart SET product_id=?, shopping_cart=? WHERE user_id=?";
-
-        PreparedStatement pstmt = conn.prepareStatement(sql);
-        pstmt.setLong(1, cart.getProduct().getId());
-        pstmt.setLong(2, cart.getQuantity());
-        pstmt.setLong(3, owner.getId());
-        pstmt.executeUpdate();
-        // this.disconnect();
-        return true;
-    } catch (SQLException ex) {
-        Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+        return Products;
     }
-    return false;
-    }*/
+
 
     @Override
     public boolean delete(User owner) {

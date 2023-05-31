@@ -6,8 +6,6 @@ public class ShoppingCart {
     Product product;// Productos y su cantidad
     private Long quantity;
 
-    public ShoppingCart(){};
-
     public ShoppingCart(Long id, User owner, Product product, Long quantity) {
         this.id = id;
         this.owner = owner;
