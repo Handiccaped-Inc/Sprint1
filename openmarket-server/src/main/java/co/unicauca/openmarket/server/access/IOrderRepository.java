@@ -9,13 +9,14 @@ public interface IOrderRepository {
     /**
      * @brief Metodo para guardar una orden
      * @param NewOrder objeto de esquema de una orden
-     * @retunr boolean deacuerdo a resulado
+     * @return boolean deacuerdo a resulado
      */
     public boolean save(Order newOrder);
+
     /**
      * @brief Metodo para actualizar una orden
      * @param NewOrder objeto de esquema de una orden
-     * @retunr boolean deacuerdo a resulado
+     * @return boolean deacuerdo a resulado
      */
 
     public boolean update(Order newOrder);
