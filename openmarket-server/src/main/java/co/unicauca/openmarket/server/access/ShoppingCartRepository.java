@@ -131,7 +131,7 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
         List<Product> Products = new ArrayList<>();
         try {
 
-            String sql = "SELECT * FROM shopping_cart JOIN product ON shopping_cart.product_id = product.product_id WHERE user_id = ?";
+            String sql = "SELECT * FROM shopping_cart JOIN product ON shopping_cart.product_id = product.product_id WHERE shopping_cart.user_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, owner.getId());
             //this.connect();
