@@ -20,12 +20,12 @@ import co.unicauca.payment.domain.Transaction;
 import co.unicauca.payment.domain.service.AccountService;
 import co.unicauca.payment.domain.service.TransactionService;
 
-public class transactionServiceTest {
+public class TransactionServiceTest {
 
     private ITransactionRepository repo;
     private TransactionService service;
 
-    public transactionServiceTest(){
+    public TransactionServiceTest(){
         repo = new mockTransactionRepository();
         service = new TransactionService(repo);
     }

@@ -15,13 +15,15 @@ import co.unicauca.payment.access.IAccountRepository;
 import co.unicauca.payment.domain.Account;
 import co.unicauca.payment.domain.service.AccountService;
 
-
-public class accountServiceTest {
+/*
+ * Pruebas unitarias para la clase AccountService
+ */
+public class AccountServiceTest {
 
     private IAccountRepository repo;
     private AccountService service;
 
-    accountServiceTest(){
+    AccountServiceTest(){
         repo = new mockAccountRepository();
         service = new AccountService(repo);
     }
