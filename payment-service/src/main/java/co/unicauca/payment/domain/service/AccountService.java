@@ -22,7 +22,9 @@ public class AccountService {
      * @return True si la cuenta fue actualizada, false de lo contrario
      */
     public boolean update(Account account) {
-        if (account.getCard().isEmpty() || account.getAvailableMoney() <= 0) {
+        if(account == null){
+            return false;
+        }else if (account.getCard().isEmpty() || account.getAvailableMoney() <= 0) {
             return false;
         }
         return accountRepository.update(account);
