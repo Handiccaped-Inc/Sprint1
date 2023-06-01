@@ -9,6 +9,9 @@ public class Transaction {
     private Account sender;
     private Account receiver;
 
+    public Transaction() {
+    }
+
     public Transaction(Long id, Date date, Long ammount, Account sender, Account receiver) {
         this.id = id;
         this.date = date;
