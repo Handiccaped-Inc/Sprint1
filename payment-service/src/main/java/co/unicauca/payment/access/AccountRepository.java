@@ -20,7 +20,7 @@ public class AccountRepository implements IAccountRepository {
     @Override
     public Account findByCard(String cardNumber) {
         try {
-            String sql = "SELECT * FROM accounts WHERE account_card = ?";
+            String sql = "SELECT * FROM account WHERE account_card = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, cardNumber);
             ResultSet res = pstmt.executeQuery();
@@ -40,7 +40,7 @@ public class AccountRepository implements IAccountRepository {
     @Override
     public boolean update(Account account) {
         try {
-            String sql = "UPDATE accounts SET account_available_money = ? WHERE account_id = ?";
+            String sql = "UPDATE account SET account_available_money = ? WHERE account_id = ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, account.getAvailableMoney());
             pstmt.setLong(2, account.getId());
