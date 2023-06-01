@@ -14,8 +14,8 @@ public class PaymentFacade {
     /**
      * Constructor parametrizado
      * 
-     * @param accountRepository     The repository to be used
-     * @param transactionRepository The repository to be used
+     * @param accountRepository     El repositorio a ser usado
+     * @param transactionRepository El repositorio a ser usado
      */
     public PaymentFacade(IAccountRepository accountRepository, ITransactionRepository transactionRepository) {
         accountService = new AccountService(accountRepository);
@@ -23,19 +23,19 @@ public class PaymentFacade {
     }
 
     /**
-     * Process a payment
+     * Procesa un pago
      * 
-     * @param sender   The account that will send the money
-     * @param receiver The account that will receive the money
-     * @param amount   The amount of money to be sent
-     * @return true if the payment was successful, false otherwise
+     * @param sender   La cuenta que envia el dinero
+     * @param receiver La cuenta que recibe el dinero
+     * @param amount   El monto a ser enviado
+     * @return True si el pago fue exitoso, false de lo contrario
      */
     public synchronized boolean processPayment(Account sender, Account receiver, Long amount) {
-        // Check if the accounts are valid
+        // Verificar que los datos sean validos
         if (sender.getCard().isEmpty() || receiver.getCard().isEmpty() || amount <= 0) {
             return false;
         }
-        // Check if the accounts exist
+        // Verificar que las cuentas existan
         Account senderAccount = accountService.findByCard(sender.getCard());
         Account receiverAccount = accountService.findByCard(receiver.getCard());
         if (senderAccount == null) {
@@ -44,29 +44,29 @@ public class PaymentFacade {
         if (receiverAccount == null) {
             return false;
         }
-        // Check if the sender has enough money
+        // Verificar que el monto a enviar no supere el disponible
         if (senderAccount.getAvailableMoney() < amount) {
             return false;
         }
-        // Create the transaction
+        // Crear la transaccion
         Transaction transaction = new Transaction();
         transaction.setAmmount(amount);
         transaction.setSender(senderAccount);
         transaction.setReceiver(receiverAccount);
         transaction.setDate(Calendar.getInstance().getTime());
 
-        // Save the transaction
+        // Guardar la transaccion
         boolean resultTransaction = transactionService.save(transaction);
         if (!resultTransaction) {
             return false;
         }
-        // Update the sender account
+        // Actualizar la cuenta del emisor
         sender.setAvailableMoney(sender.getAvailableMoney() - amount);
         boolean resultSender = accountService.update(sender);
-        // Update the receiver account
+        // Actualizar la cuenta del receptor
         receiver.setAvailableMoney(receiver.getAvailableMoney() + amount);
         boolean resultReceiver = accountService.update(receiver);
-        // Check if the update was successful
+        // Verificar que ambas cuentas se actualizaron correctamente
         if (resultSender && resultReceiver) {
             return true;
         }
