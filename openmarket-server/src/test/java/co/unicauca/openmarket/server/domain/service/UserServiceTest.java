@@ -12,6 +12,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import co.unicauca.openmarket.commons.domain.Rol;
 import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.server.access.IUserRepository;
+/*
+ * Pruebas unitarias del servicio de usuarios
+ *
+ */
 
 public class UserServiceTest {
 
@@ -23,6 +27,11 @@ public class UserServiceTest {
         service = new UserService(repository);
     }
 
+    /*
+     * Prueba para encontrar un usuario por su email and password
+     *     
+     */
+
     @Test
     public void testFindbyemailandpasswordSucces() {
         User user = service.findByEmailAndPassword("example@example.com", "password123");
@@ -30,12 +39,19 @@ public class UserServiceTest {
         assertEquals(1l, user.getId());
     }
 
+    /*
+     * Prueba de fallo para encontrar un usuario por su email and password
+     */
+
     @Test
     public void testFindbyemailandpasswordFaildEmail() {
         User user = service.findByEmailAndPassword("", "password123");
         assertNull(user);
     }
 
+    /*
+     * Prueba de fallo para encontrar un usuario por su email and password
+     */
     @Test
     public void testFindbyemailandpasswordFaildPassword() {
         User user = service.findByEmailAndPassword("example2@example2.com", "");

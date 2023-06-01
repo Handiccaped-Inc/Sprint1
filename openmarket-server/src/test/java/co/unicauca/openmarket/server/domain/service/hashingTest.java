@@ -4,10 +4,15 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 import co.unicauca.openmarket.server.infra.Hashing;
+/*
+ * Pruebas unitarias del servicio de hashing
+ */
 public class hashingTest {
 
     
-
+    /*
+     * prueba para hashear una frase con minusculas y mayusculas
+     */
     @Test
     public void HashTestConMinuMayus(){
         String hashfrase = Hashing.getSHA256Hash("HolaComoEstas");
@@ -15,6 +20,9 @@ public class hashingTest {
         assertEquals(hashfrase,fraseHasheada);
     }
 
+    /*
+     * pruebas para hashear una frase con minusculas, mayusculas y numeros
+     */
     @Test
     public void hashtTestconMinMayusNums(){
         String hashfrase = Hashing.getSHA256Hash("HolaC0moEst4s");
@@ -22,6 +30,9 @@ public class hashingTest {
         assertEquals(hashfrase,fraseHasheada);
     }
 
+    /*
+     * pruebas para hashear una frase con minusculas, mayusculas, numeros y simbolos
+     */
     @Test
     public void hastTestConMinMayusNumsSibols(){
         String hashfrase = Hashing.getSHA256Hash("!HolaC0moEst4s*");
@@ -30,6 +41,9 @@ public class hashingTest {
 
     }
 
+    /*
+     * pruebas de fallo para hashear una frase con minusculas, mayusculas, numeros y simbolos
+     */
     @Test
     public void hastTestfaildConMinMayusNumsSibols(){
         String hashfrase = Hashing.getSHA256Hash("!HolaC0moEst4s*");
