@@ -42,7 +42,7 @@ public class PaymentFacade {
      * @param amount   The amount of money to be sent
      * @return true if the payment was successful, false otherwise
      */
-    public boolean processPayment(Account sender, Account receiver, Long amount) {
+    public synchronized boolean processPayment(Account sender, Account receiver, Long amount) {
         // Check if the accounts are valid
         if (sender.getCard().isEmpty() || receiver.getCard().isEmpty() || amount <= 0) {
             return false;
