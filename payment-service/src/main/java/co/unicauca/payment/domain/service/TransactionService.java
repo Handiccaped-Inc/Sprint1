@@ -11,7 +11,9 @@ public class TransactionService {
     }
 
     public boolean save(Transaction newTransaction) {
-        if (newTransaction.getDate() == null || newTransaction.getAmmount() <= 0
+        if (newTransaction == null) {
+            return false;
+        } else if (newTransaction.getDate() == null || newTransaction.getAmmount() <= 0
                 || newTransaction.getSender() == null || newTransaction.getReceiver() == null) {
             return false;
         }
