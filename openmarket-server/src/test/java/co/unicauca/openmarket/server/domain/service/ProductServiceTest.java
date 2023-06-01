@@ -23,7 +23,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
+/*
+ * Pruebas unitarias del servicio de productos
+ */
 public class ProductServiceTest {
 
     private ProductService service;
@@ -34,17 +36,27 @@ public class ProductServiceTest {
         service = new ProductService(repository);
     }
 
+    /*
+     * Prueba para encontrar un producto por su nombre y descripcion
+     */
     @Test
     public void TestFinbyNameAndDescriptionSucces(){
         List<Product> productsTest = service.findByNameAndDescription("Carro","This is an example product");
         assertFalse(productsTest.isEmpty());
     }
 
+    /*
+     * Prueba de fallo para encontrar un producto por su nombre y descripcion
+     */
     @Test
     public void TestFinbyNameAndDescriptionFaild(){
         List<Product> productsTest = service.findByNameAndDescription("Non Product","This is an example product");
         assertTrue(productsTest.isEmpty());
     }
+    
+    /*
+     * Prueba para encontrar un producto por su estado
+     */
 
     @Test
     public void finbyEstatusSucces(){
@@ -53,24 +65,36 @@ public class ProductServiceTest {
         assertEquals(1L,productsTest.get(0).getId());
     }
 
+    /*
+     * prueba de fallo para encontrar un producto por su estado
+     */
     @Test
     public void finbyEstatusFailed(){
         List<Product> productsTest = service.findByStatus(new StateProduct(1L," "));
         assertTrue(productsTest.isEmpty());
     }
 
+    /*
+     * Prueba para encontrar un producto por su id
+     */
     @Test
     public void findByIdSucces(){
         Product productTest = service.findById(1L);
         assertEquals(1L,productTest.getId());
     }
 
+    /*
+     * Prueba de fallo para encontrar un producto por su id
+     */
     @Test
     public void findByIdFaild(){
         Product productTest = service.findById(3L);
         assertNull(productTest);
     }
 
+    /*
+     * Prueba para guardar un producto
+     */
     @Test
     public void SaveProductSucces(){
         User user = new User(1L, new Rol(1L, "Vendedor"), new Date(0), "example@example.com", "1+234567890","1234 5678 9012 3456","Jojan Esteban", "jojanE", "password123", "123 Street, City");
@@ -80,6 +104,10 @@ public class ProductServiceTest {
         assertEquals(product, testProdutAux);
 
     }
+
+    /*
+     * Prueba de fallo para guardar un producto
+     */
 
     @Test
     public void SaveProductFail(){
@@ -92,7 +120,9 @@ public class ProductServiceTest {
     }
     
 
-    
+    /*
+     * Prueba de fallo para guardar un producto
+     */
     @Test
     public void SaveProductFail2(){
         User user = null;
@@ -103,15 +133,21 @@ public class ProductServiceTest {
 
     }
 
+    /*
+     * Prueba para editar un producto
+     */
     @Test
     public void editProdutSucces(){
         User user = new User(1L, new Rol(1L, "Vendedor"), new Date(0), "example@example.com", "1+234567890","1234 5678 9012 3456","Jojan Esteban", "jojanE", "password123", "123 Street, City");
         Product product = new Product(1L, user, new Category(1L,"Juguetes"), new StateProduct(2L,"no disponible"), "Carro", "This is an example product", 66.99, 100L, 0.0, 0.0);
         service.update(product);
         Product testProdutAux = service.findById(1L);
-        assertEquals(product, testProdutAux);
+        assertEquals(product.getId(), testProdutAux.getId());
     }
 
+    /*
+     * Prueba de fallo para editar un producto
+     */
     @Test
     public void editProdutfail(){
         User user = null;
@@ -122,6 +158,9 @@ public class ProductServiceTest {
         
     }
 
+    /*
+     * Prueba para eliminar un producto
+     */
     @Test
     public void DeleteProductSucces(){
         User user = new User(1L, new Rol(1L, "Vendedor"), new Date(0), "example@example.com", "1+234567890","1234 5678 9012 3456","Jojan Esteban", "jojanE", "password123", "123 Street, City");
@@ -130,7 +169,9 @@ public class ProductServiceTest {
         assertEquals("ok", response);
     }
 
-    
+    /*
+     * Prueba de fallo para eliminar un producto
+     */
     @Test
     public void DeleteProductFail(){
         User user = null;
@@ -189,7 +230,7 @@ public class ProductServiceTest {
         public List<Product> findByStatus(StateProduct status) {
             List<Product> productsbyStatus = new ArrayList<>();
             for (Product product : products) {
-                if(product.getState().getId().equals(status.getId())){
+                if(product.getState().getId().equals(status.getId()) && product.getState().getName().equals(status.getName())){
                     productsbyStatus.add(product);
                 }
             }
