@@ -11,7 +11,9 @@ public class AccountService {
     }
 
     public boolean update(Account account) {
-        if (account.getCard().isEmpty() || account.getAvailableMoney() <= 0) {
+        if(account == null){
+            return false;
+        }else if (account.getCard().isEmpty() || account.getAvailableMoney() <= 0) {
             return false;
         }
         return accountRepository.update(account);
