@@ -20,6 +20,19 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             System.out.println("Error establishing database connection: " + e.getMessage());
         }
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            @Override
+            public void run() {
+                try {
+                    connection.close();
+                    System.out.println("Database Connection closed.");
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     /**
@@ -43,6 +56,17 @@ public class DatabaseConnection {
      * @throws java.sql.SQLException
      */
     public Connection getConnection() {
+        try {
+            if (connection.isClosed()) {
+                try {
+                    connection = DriverManager.getConnection(url);
+                } catch (SQLException e) {
+                    System.out.println("Error establishing database connection: " + e.getMessage());
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return connection;
     }
 
