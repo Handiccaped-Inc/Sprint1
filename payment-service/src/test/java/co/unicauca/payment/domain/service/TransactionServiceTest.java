@@ -1,4 +1,4 @@
-package co.unicauca.payment;
+package co.unicauca.payment.domain.service;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,6 +20,9 @@ import co.unicauca.payment.domain.Transaction;
 import co.unicauca.payment.domain.service.AccountService;
 import co.unicauca.payment.domain.service.TransactionService;
 
+/*
+ * Pruebas unitarias para la clase TransactionService
+ */
 public class TransactionServiceTest {
 
     private ITransactionRepository repo;
@@ -30,6 +33,9 @@ public class TransactionServiceTest {
         service = new TransactionService(repo);
     }
 
+    /*
+     * Prueba para guardar una transaccion
+     */
     @Test
     public void saveTransactionSucces(){
         Transaction transaction = new Transaction(1L, new Date(0), 20000L,new Account(1L, "12345", 100000L), new Account(2L, "12345", 100000L));
@@ -37,6 +43,9 @@ public class TransactionServiceTest {
         assertTrue(result);
     }
 
+    /*
+     * pruba para guardar una transaccion fallida
+     */
     @Test
     public void saveTransactionFaild(){
         Transaction transaction = null;
@@ -44,6 +53,9 @@ public class TransactionServiceTest {
         assertFalse(result);
     }
 
+     /*
+     * pruba para guardar una transaccion fallida
+     */
     @Test
     public void saveTransactionFaild2(){
         Transaction transaction = new Transaction(1L, new Date(0), 20000L,null, new Account(2L, "12345", 100000L));
@@ -51,6 +63,9 @@ public class TransactionServiceTest {
         assertFalse(result);
     }
 
+     /*
+     * pruba para guardar una transaccion fallida
+     */
     @Test
     public void saveTransactionFaild3(){
         Transaction transaction = new Transaction(1L, new Date(0), 0L,new Account(1L, "12345", 100000L), new Account(2L, "12345", 100000L));
@@ -58,6 +73,9 @@ public class TransactionServiceTest {
         assertFalse(result);
     }
 
+     /*
+     * pruba para guardar una transaccion fallida
+     */
     @Test
     public void saveTransactionFaild4(){
         Transaction transaction = new Transaction(1L, null, 20000L,new Account(1L, "12345", 100000L), new Account(2L, "12345", 100000L));

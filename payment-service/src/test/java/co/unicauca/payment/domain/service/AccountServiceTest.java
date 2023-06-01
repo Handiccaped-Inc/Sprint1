@@ -1,4 +1,4 @@
-package co.unicauca.payment;
+package co.unicauca.payment.domain.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -23,11 +23,15 @@ public class AccountServiceTest {
     private IAccountRepository repo;
     private AccountService service;
 
+
     AccountServiceTest(){
         repo = new mockAccountRepository();
         service = new AccountService(repo);
     }
 
+    /* 
+     * Prueba para encontrar una cuenta por su numero de tarjeta
+     */
     @Test
     public void testfindAccountByCardSucces(){
         Account account = service.findByCard("12345");
@@ -35,11 +39,19 @@ public class AccountServiceTest {
         assertEquals(1L,account.getId());
     }
 
+
+    /*
+     * Prueba de erorro para encontrar una cuenta por su numero de tarjeta
+     */
     @Test
     public void testfindAccountByCardFaild(){
         Account account = service.findByCard("1233");
         assertNull(account);
     }
+
+    /*
+     * Prueba para actualizar una cuenta p
+     */
 
     @Test
     public void updateAcountSucces(){
@@ -48,6 +60,9 @@ public class AccountServiceTest {
         assertTrue(result);
     }
 
+    /*
+     * prueba de error para actualizar una cuenta
+     */
     @Test
     public void updateAcountFaild(){
         Account account = null;
@@ -55,6 +70,10 @@ public class AccountServiceTest {
         assertFalse(result);
     }
 
+
+    /*
+     * prueba de error para actualizar una cuenta
+     */
     @Test
     public void updateAcountFaild2(){
         Account account = new Account(1L, "", 0000L);
@@ -62,6 +81,10 @@ public class AccountServiceTest {
         assertFalse(result);
     }
 
+    
+    /*
+     * prueba de error para actualizar una cuenta
+     */
     @Test
     public void updateAcountFaild3(){
         Account account = new Account(5L, "", 0000L);
