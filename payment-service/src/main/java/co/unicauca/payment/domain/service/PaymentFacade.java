@@ -1,13 +1,9 @@
 package co.unicauca.payment.domain.service;
 
-import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Date;
 
-import co.unicauca.payment.access.AccountRepository;
 import co.unicauca.payment.access.IAccountRepository;
 import co.unicauca.payment.access.ITransactionRepository;
-import co.unicauca.payment.access.TransactionRepository;
 import co.unicauca.payment.domain.Account;
 import co.unicauca.payment.domain.Transaction;
 
@@ -24,14 +20,6 @@ public class PaymentFacade {
     public PaymentFacade(IAccountRepository accountRepository, ITransactionRepository transactionRepository) {
         accountService = new AccountService(accountRepository);
         transactionService = new TransactionService(transactionRepository);
-    }
-
-    /**
-     * Default constructor
-     */
-    public PaymentFacade() {
-        accountService = new AccountService(new AccountRepository());
-        transactionService = new TransactionService(new TransactionRepository());
     }
 
     /**
