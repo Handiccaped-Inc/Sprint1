@@ -26,7 +26,7 @@ public class ShoppingCartServiceTest {
      * Test para comprobar el resultado de guardar un carrito
      */
     @Test
-    public void testSaveShoppingCartSuccess() {
+    public void testSave() {
         ShoppingCart cart = new ShoppingCart(1L, new User(), new Product(), 1L);
         //Guarda el carrito y toma el resultado
         String result = service.saveShoppingCart(cart);
@@ -38,7 +38,7 @@ public class ShoppingCartServiceTest {
      * Test para comprobar el resultado de guardar un carrito sin parametros o nulo
      */
     @Test
-    public void testSaveShoppingCartMissingFields() {
+    public void testSaveUnsuccess() {
         ShoppingCart cart = new ShoppingCart();
         //Trata de guardar el carrito
         String result = service.saveShoppingCart(cart);
@@ -66,7 +66,7 @@ public class ShoppingCartServiceTest {
      * Test para comprobar el resultado de buscar los productos del carrito por su dueño nulo o sin carrito
      */
     @Test
-    public void testFindByOwnerWithNullOwner() {
+    public void testFindByOwnerUnsuccess() {
         //Trata de buscar los productos del carrito usando un nulo
         List<Product> products = service.findByOwner(null);
         //products toma el valor de []
@@ -101,7 +101,7 @@ public class ShoppingCartServiceTest {
      * Test para comprobar el resultado de buscar un owner inexistente o nulo
      */
     @Test
-    public void testFindRepoByOwnerWithNullOwner() {
+    public void testFindRepoByOwnerUnsuccess() {
         //Busca y devuelve un carrito segun su dueño
         List<ShoppingCart> carts = service.findRepoByOwner(null);
         //Verifica que carts tenga el valor retornado que es []
@@ -126,7 +126,7 @@ public class ShoppingCartServiceTest {
      * Test para comprobar el resultado de hacer un delete sin owner
      */
     @Test
-    public void testDeleteWithNullOwner() {
+    public void testDeleteUnsuccess() {
         //Trata de eliminar un carrito de un owner inexistente o nulo
         String result = service.delete(null);
         //Se verifica que result devuelva algo
