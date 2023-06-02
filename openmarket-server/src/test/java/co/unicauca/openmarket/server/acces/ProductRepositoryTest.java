@@ -22,6 +22,9 @@ import co.unicauca.openmarket.server.access.ProductRepository;
 
 /**
  * Test de la clase ProductRepository
+ * usar la siguiente linea para volver a la base de datos a su estado original 
+ *  * UPDATE product SET user_id = 1, category_id = 1, state_product_id = 1, product_name = 'Producto 1',product_description = 'Descripción del producto 1',product_price = 10.99, product_stock = 50,product_latitude = 123.456,product_longitude = 789.01 WHERE product_id = 1;
+ * ademas de correr el caso de prubea testDeleteSuccess el producto con id = 4 si fue usado el testSaveSucces
  */
 public class ProductRepositoryTest{
 
@@ -34,7 +37,7 @@ public class ProductRepositoryTest{
      * de lo contrario cambiar el assert a 1
      */
     @Test
-    public void testFindByStatusSucces() {
+    public void testFindByStatusSuccess() {
         List<Product> products = repository.findByStatus(new StateProduct(1L,"disponible"));
         assertEquals(2, products.size()); // Espera como resultado 2 que nos indica que se encontraron 2 productos
     }
