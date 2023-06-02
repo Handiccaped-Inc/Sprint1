@@ -19,7 +19,7 @@ public class StatusOrderRepository implements IStatusOrderRepository {
     @Override
     public StatusOrder findById(Long id) {
         try {
-            String sql = "SELECT * FROM status_order WHERE order_status_id = ?";
+            String sql = "SELECT * FROM order_status WHERE order_status_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, id);
             ResultSet res = pstmt.executeQuery();
