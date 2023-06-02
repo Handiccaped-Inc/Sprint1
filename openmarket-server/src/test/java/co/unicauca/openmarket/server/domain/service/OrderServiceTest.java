@@ -63,64 +63,64 @@ public class OrderServiceTest {
      *  Prueba para actualizar una orden
      */
     @Test
-    public void testupdateSucces(){
+    public void testupdateSuccess(){
         User usuario2 = new User(2L, new Rol(1L,"Vendedor"), new Date(0), "Example2@Email.com","2345","12345","TestName2", "TestUsername2", "1234", "cr-1");
         User usuario3 = new User(3L, new Rol(1L,"Comprador"), new Date(0), "Example3@emai.com","3456","12345","TestName3", "TestUsername3", "1234", "cr-2");
         Product product1 = new Product(1L, usuario2, new Category(1L,"Juguetes"), new StateProduct(1L,"Disponible"), "Carro", "Es un carro", 1000L, 3L, 0, 0);
         Order orden2 = new Order(2L, usuario3, product1, new StatusOrder(2L,"Entregado"), (double) 100L,new Date(0), 3.0);
         String responde = service.update(orden2);
-        assertEquals(responde, "ok");
-        assertEquals(service.findByUser(3L).get(0).getStatus().getName(),"Entregado");
+        assertEquals(responde, "ok"); // se espera que la orden se actualice
+        assertEquals(service.findByUser(3L).get(0).getStatus().getName(),"Entregado"); // se espera que el estado de la orden encontrada sea "Entregado"
     }
 
-    /*
+    /**
      * Prueba para actualizar una orden fallida
      */
     @Test
-    public void TestupdateFailed(){
+    public void testupdateFailed(){
         User usuario2 = new User(2L, new Rol(1L,"Vendedor"), new Date(0), "Example2@Email.com","2345","12345","TestName2", "TestUsername2", "1234", "cr-1");
         User usuario3 = null;
         Product product1 = new Product(1L, usuario2, new Category(1L,"Juguetes"), new StateProduct(1L,"Disponible"), "Carro", "Es un carro", 1000L, 3L, 0, 0);
         Order orden2 = new Order(2L, usuario3, product1, new StatusOrder(2L,"Entregado"), (double) 100L,new Date(0), 3.0);
         String responde = service.update(orden2);
-        assertTrue(responde.length() > 3);
-        assertEquals(service.findByUser(3L).get(0).getStatus().getName(),"Devuelto");
+        assertTrue(responde.length() > 3); // se espera que la orden no se actualice
+        assertEquals(service.findByUser(3L).get(0).getStatus().getName(),"Devuelto"); // se espera que el estado de la orden encontrada sea "Devuelto"
     }
 
-    /*
+    /**
      * Prueba para encontrar una orden por su estado
      */
     @Test
-    public void FinbyStateTestSucces(){
+    public void finbyStateTestSuccess(){
         List<Order> orderFindByState = service.findByState(new StatusOrder(1L,"Enviado"));
-        assertEquals(orderFindByState.size(), 1);
+        assertEquals(orderFindByState.size(), 1); // se espera que el tamaño del arreglo de regreso sea 1
     }
 
-    /* 
+    /**
      * Prueba para encontrar una orden por su estado fallida
      */
     @Test
-    public void FinbyStateFailed(){
+    public void finbyStateFailed(){
         List<Order> orderFindByState = service.findByState(new StatusOrder(3L,"Recibido"));
-        assertTrue(orderFindByState.isEmpty());
+        assertTrue(orderFindByState.isEmpty()); // se espera que el arreglo de regreso este vacio
     }
 
-    /*
+    /**
      * Prueba para encontrar una orden por su usuario
      */
     @Test
-    public void findByUserSucces(){
+    public void findByUserSuccess(){
         List<Order> orderFindByUser = service.findByUser(1L);
-        assertEquals(orderFindByUser.size(), 1);
+        assertEquals(orderFindByUser.size(), 1); // se espera que el tamaño del arreglo de regreso sea 1
     }
 
-    /*
+    /**
      * Prueba para encontrar una orden por su usuario fallida
      */
     @Test
     public void findByUserFailed(){
         List<Order> orderFindByUser = service.findByUser(6L);
-        assertTrue(orderFindByUser.isEmpty());
+        assertTrue(orderFindByUser.isEmpty()); // se espera que el arreglo de regreso este vacio
     }
 
     

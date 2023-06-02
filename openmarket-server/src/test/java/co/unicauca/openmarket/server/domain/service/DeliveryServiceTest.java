@@ -33,46 +33,46 @@ public class DeliveryServiceTest {
         service = new DeliveryService(repository);
     }
 
-    /*
+    /**
      * Prueba para guardar un delivery
      */
     @Test
-    public void TestSaveSucces(){
+    public void testSaveSucces(){
             User usuario = new User(2L, new Rol(1L, "Comprador"), new Date(0), "Example2@email.com", "123454678", "1234567890", "nombre2", "usuarioDePrueba2", "12345", "calle-1");
             Product product = new Product(2L, usuario, new Category(1L, "Juguetes"), new StateProduct(1L, "Disponible"), "Carro", "Es un carro", 1000L, 3L, 0, 0);
             Order order = new Order(1L, usuario, product, new StatusOrder(1L,"Enviado"), (double) 100L,new Date(0), 3.0);
             Delivery delivery = new Delivery(1l, order, usuario, usuario, new Date(0));
             String responde = service.save(delivery);
-            assertEquals(responde, "ok");
+            assertEquals(responde, "ok"); // se espera que el delivery se guarde
     } 
 
-    /*
+    /**
      * Prueba para guardar un delivery fallido
      */
     @Test
-    public void TestsaveFailed(){
+    public void testsaveFailed(){
             User usuario = new User(2L, new Rol(1L, "Comprador"), new Date(0), "Example2@email.com", "123454678", "1234567890", "nombre2", "usuarioDePrueba2", "12345", "calle-1");
             Order order = null;
             Delivery delivery = new Delivery(1l, order, usuario, usuario, new Date(0));
             String responde = service.save(delivery);
-            assertTrue(responde.length() > 3);
+            assertTrue(responde.length() > 3); // se espera que el delivery no se guarde
     } 
 
-    /*
+    /**
      * Prueba para actualizar un delivery
      */
     @Test
-    public void UpdateDeliverySucces(){
+    public void updateDeliverySucces(){
             User usuario = new User(1L, new Rol(1L, "Comprador"), new Date(0), "Example@email.com", "123454678", "1234567890", "nombre", "usuarioDePrueba", "12345", "calle-1");
             Product product = new Product(2L, usuario, new Category(1L, "Juguetes"), new StateProduct(1L, "Disponible"), "Carro", "Es un carro", 1000L, 3L, 0, 0);
             Order order = new Order(3L, usuario, product, new StatusOrder(1L,"Devuelto"), (double) 100L,new Date(0), 3.0);
             Delivery delivery = new Delivery(1l, order, usuario, usuario, new Date(0));
             String responde = service.update(delivery);
-            assertEquals(responde, "ok");
+            assertEquals(responde, "ok"); // se espera que el delivery se actualice
         
         }
 
-        /*
+        /**
          * Prueba para actualizar un delivery fallido
          */
         @Test
@@ -82,7 +82,7 @@ public class DeliveryServiceTest {
             Order order = new Order(3L, usuario, product, new StatusOrder(1L,"Devuelto"), (double) 100L,new Date(0), 3.0);
             Delivery delivery = new Delivery(1l, order, usuario, usuario, new Date(0));
             String responde = service.update(delivery);
-            assertTrue(responde.length() > 3);
+            assertTrue(responde.length() > 3); // se espera que el delivery no se actualice
         
         }
 

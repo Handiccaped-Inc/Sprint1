@@ -12,7 +12,7 @@ import co.unicauca.payment.access.AccountRepository;
 import co.unicauca.payment.access.IAccountRepository;
 import co.unicauca.payment.domain.Account;
 
-/*
+/**
  * Pruebas unitarias para la clase AccountRepository
  */
 public class AccountRepositoryTest {

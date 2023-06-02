@@ -22,8 +22,8 @@ public class UserRepositoryTest {
     @Test
     public void TestFindByEmailAndPasswordSucces() {
         User userTest = repository.findByEmailAndPassword("usuario10@example.com","1");
-        assertEquals(4, userTest.getId());
-        assertNotNull(userTest);
+        assertEquals(4, userTest.getId()); // se espera que el id del usuario encontrado sea 4
+        assertNotNull(userTest); // se espera que el usuario encontrado no sea nulo
     }
 
     /**
@@ -32,7 +32,7 @@ public class UserRepositoryTest {
     @Test 
     public void TestFindByEmailAnddPasswordFailed() {
         User userTest = repository.findByEmailAndPassword("","");
-        assertEquals(null, userTest); //No se encuentra el usuario
+        assertEquals(null, userTest);  //se espera que el usuario no se encuentre
     }
 
     /**
@@ -41,11 +41,11 @@ public class UserRepositoryTest {
     @Test
     public void TestFindByIdSucces(){
         User userTest = repository.findById(1L);
-        assertEquals(1, userTest.getId());
+        assertEquals(1, userTest.getId()); // se espera que el id del usuario encontrado sea 1
 
     }
 
-    /*
+    /**
      * @displayName Prueba de error para encontrar un usuario por su id
      */
     @Test

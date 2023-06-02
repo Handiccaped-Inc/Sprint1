@@ -54,7 +54,7 @@ public class AccountServiceTest {
      */
 
     @Test
-    public void updateAcountSucces(){
+    public void updateAcountSuccess(){
         Account account = new Account(1L, "12345", 100000L);
         boolean result = service.update(account);
         assertTrue(result); // se espera que la cuenta se actualice
