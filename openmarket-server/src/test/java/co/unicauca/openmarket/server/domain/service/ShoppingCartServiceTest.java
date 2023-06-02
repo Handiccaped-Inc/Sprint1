@@ -29,7 +29,7 @@ public class ShoppingCartServiceTest {
     public void testSave() {
         ShoppingCart cart = new ShoppingCart(1L, new User(), new Product(), 1L);
         //Guarda el carrito y toma el resultado
-        String result = service.saveShoppingCart(cart);
+        String result = service.save(cart);
         //result debe ser 'ok' que indica que la operacion fue existosa
         assertEquals("ok", result);
     }
@@ -41,7 +41,7 @@ public class ShoppingCartServiceTest {
     public void testSaveUnsuccess() {
         ShoppingCart cart = new ShoppingCart();
         //Trata de guardar el carrito
-        String result = service.saveShoppingCart(cart);
+        String result = service.save(cart);
         //Se comprueba que result no sea nulo
         assertNotNull(result);
         //result tiene una longitud mayor a 20 debido a que se capto un error

@@ -13,7 +13,7 @@ public interface IShoppingCartService {
      * @param cart Carrito a guardar
      * @return true si la operacion se realiza correctamente
      */
-    public String saveShoppingCart(ShoppingCart cart);
+    public String save(ShoppingCart cart);
 
     /**
      * Encuentra los poductos del carrito de un usuario
