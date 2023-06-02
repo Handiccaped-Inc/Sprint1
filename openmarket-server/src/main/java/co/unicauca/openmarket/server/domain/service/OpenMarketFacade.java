@@ -137,7 +137,7 @@ public class OpenMarketFacade {
     /**
      * Obtien los productos del carrito de compras del solicitante
      * 
-     * @return
+     * @return lista de productos del carrito de compras
      */
     public List<ShoppingCart> getShoppingCart() {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
