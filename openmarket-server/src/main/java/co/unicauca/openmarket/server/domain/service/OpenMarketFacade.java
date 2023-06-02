@@ -5,6 +5,7 @@ import java.util.List;
 
 import co.unicauca.openmarket.commons.domain.Order;
 import co.unicauca.openmarket.commons.domain.Product;
+import co.unicauca.openmarket.commons.domain.ShoppingCart;
 import co.unicauca.openmarket.commons.domain.StateProduct;
 import co.unicauca.openmarket.commons.domain.StatusOrder;
 import co.unicauca.openmarket.commons.domain.User;
@@ -42,11 +43,16 @@ public class OpenMarketFacade {
         return productService.findByNameAndDescription(name, description);
     }
 
-    public String buyProduct(User user, Product product) {
-        if (userService.findByEmailAndPassword(user.getEmail(), user.getPassword()) != null) {
+    public String buyProduct(Product product) {
+        if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
+                requester.getPassword())) != null) {
             // encontrar el producto
             Product dbProduct = productService.findById(product.getId());
             if (dbProduct == null) {
+                return "!error";
+            }
+
+            if (dbProduct.getStock() == 0) {
                 return "!error";
             }
             // crear la orden
@@ -59,12 +65,82 @@ public class OpenMarketFacade {
             }
             // realizar el pago a la cuenta de openmarket
             if (paymentFacade.processPayment(
-                    new Account(0L, user.getCard(), 0l),
+                    new Account(0L, requester.getCard(), 0l),
                     new Account(0L, "openmarket", 0l),
                     order.getPrice().longValue())) {
                 return "ok";
             }
 
+            // Reducir la cantidad de productos disponibles
+            dbProduct.setStock(dbProduct.getStock() - 1);
+            productService.update(dbProduct);
+
+        }
+        return "!error";
+    }
+
+    public String addProductToTheShoppingCart(Product product, Long quantity) {
+        if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
+                requester.getPassword())) != null) {
+            // encontrar el producto
+            Product dbProduct = productService.findById(product.getId());
+
+            return shoppingCartService.save(new ShoppingCart(0l, requester, dbProduct, quantity));
+
+        }
+        return "!error";
+    }
+
+    public String buyShoppingCart() {
+        if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
+                requester.getPassword())) != null) {
+            // encontrar los productos del carrito
+            List<Product> products = shoppingCartService.findByOwner(requester);
+            if (products.isEmpty()) {
+                return "!error";
+            }
+            for (Product product : products) {
+                String result = buyProduct(product);
+                if (result.contains("error")) {
+                    return "!error";
+                }
+            }
+            return "ok";
+        }
+        return "!error";
+    }
+
+    public String deleteShoppingCart() {
+        if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
+                requester.getPassword())) != null) {
+            // encontrar los productos del carrito
+            List<Product> products = shoppingCartService.findByOwner(requester);
+            if (products.isEmpty()) {
+                return "!error";
+            }
+            return shoppingCartService.delete(requester);
+        }
+        return "!error";
+    }
+
+    public String confirmOrder(Order order) {
+        if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
+                requester.getPassword())) != null) {
+            order.setStatus(new StatusOrder(1l, "entregado"));
+            return orderService.update(order);
+
+        }
+        return "!error";
+    }
+
+    public String qualificateOrder(Order order, Long qualification) {
+        if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
+                requester.getPassword())) != null) {
+            if (order.getCustomer() == requester) {
+
+                order.setQualification(qualification.doubleValue());
+                return orderService.update(order);
+            }
         }
         return "!error";
     }
