@@ -4,13 +4,11 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.Date;
-
 
 import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.server.infra.Hashing;
@@ -66,7 +64,7 @@ public class UserRepository implements IUserRepository {
         } catch (SQLException e) {
             Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE,
                     "Error al consultar Customer de la base de datos", e);
-                    System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -106,7 +104,7 @@ public class UserRepository implements IUserRepository {
         } catch (SQLException e) {
             Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE,
                     "Error al consultar user de la base de datos", e);
-                    System.out.println(e.getMessage());
+            System.out.println(e.getMessage());
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

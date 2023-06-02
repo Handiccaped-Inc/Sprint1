@@ -113,7 +113,7 @@ public class ProductRepository implements IProductRepository {
         List<Product> products = new ArrayList<>();
 
         try {
-            String sql = "SELECT * FROM product WHERE product_name like ? OR product_description like ?";
+            String sql = "SELECT * FROM product WHERE state_product_id = 1 AND product_name like ? OR product_description like ?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, "%" + name + "%");
             pstmt.setString(2, "%" + description + "%");
