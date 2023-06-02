@@ -3,6 +3,9 @@ package co.unicauca.openmarket.server.domain.service;
 import java.util.Date;
 import java.util.List;
 
+import javax.sound.midi.Receiver;
+
+import co.unicauca.openmarket.commons.domain.Delivery;
 import co.unicauca.openmarket.commons.domain.Order;
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.ShoppingCart;
@@ -73,6 +76,9 @@ public class OpenMarketFacade {
 
             // Reducir la cantidad de productos disponibles
             dbProduct.setStock(dbProduct.getStock() - 1);
+            if (product.getStock() == 0) {
+                product.setState(new StateProduct(2L, "no disponible"));
+            }
             productService.update(dbProduct);
 
         }
@@ -89,6 +95,14 @@ public class OpenMarketFacade {
 
         }
         return "!error";
+    }
+
+    public List<ShoppingCart> getShoppingCart() {
+        if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
+                requester.getPassword())) != null) {
+            return shoppingCartService.findRepoByOwner(requester);
+        }
+        return null;
     }
 
     public String buyShoppingCart() {
@@ -123,11 +137,83 @@ public class OpenMarketFacade {
         return "!error";
     }
 
+    public String saveProduct(Product product) {
+        if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
+                requester.getPassword())) != null) {
+            if (requester.getRol().getName().equals("vendedor")) {
+                product.setOwner(requester);
+                if (product.getStock() <= 0) {
+                    return "!error";
+                }
+                product.setState(new StateProduct(1L, "disponible"));
+                return productService.save(product);
+            }
+        }
+        return "!error";
+    }
+
+    public String updateProduct(Product product) {
+        if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
+                requester.getPassword())) != null) {
+            if (requester.getRol().getName().equals("vendedor")) {
+                product.setOwner(requester);
+                if (product.getStock() <= 0) {
+                    return "!error";
+                }
+                return productService.update(product);
+            }
+        }
+        return "!error";
+    }
+
+    public List<Product> getOwnProducts() {
+        if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
+                requester.getPassword())) != null) {
+            if (requester.getRol().getName().equals("vendedor")) {
+                return productService.findByOwner(requester);
+            }
+        }
+        return null;
+    }
+
+    public List<Order> getOrders() {
+        if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
+                requester.getPassword())) != null) {
+            if (requester.getRol().getName().equals("repartidor")) {
+                orderService.findByState(new StatusOrder(3L, "en espera"));
+            } else {
+                return orderService.findByUser(requester.getId());
+            }
+        }
+        return null;
+    }
+
     public String confirmOrder(Order order) {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
             order.setStatus(new StatusOrder(1l, "entregado"));
-            return orderService.update(order);
+
+            // Actualizar el estado de la orden
+            if (orderService.update(order).contains("error")) {
+                return "!error";
+            }
+
+            User seller = productService.findById(order.getProduct().getId()).getOwner();
+            Long price = order.getPrice().longValue();
+
+            // Calcula la comision de openmarket es del 10%
+            Long openMarketComission = (long) (price * 0.1);
+
+            // realizar el pago a la cuenta del vendedor desde openmarket se paga desde
+            // openmarket a el vendedor
+            // se resta la comision
+            if (!paymentFacade.processPayment(
+                    new Account(0L, "openmarket", 0l),
+                    new Account(0L, seller.getCard(), 0l),
+                    price - openMarketComission)) {
+                return "!error";
+            }
+            return "ok";
 
         }
         return "!error";
@@ -141,6 +227,15 @@ public class OpenMarketFacade {
                 order.setQualification(qualification.doubleValue());
                 return orderService.update(order);
             }
+        }
+        return "!error";
+    }
+
+    public String registerDelivery(Delivery delivery) {
+        if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
+                requester.getPassword())) != null) {
+            delivery.setDate(new Date());
+            return deliveryService.save(delivery);
         }
         return "!error";
     }
