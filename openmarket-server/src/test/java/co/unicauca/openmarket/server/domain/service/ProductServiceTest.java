@@ -207,7 +207,15 @@ public class ProductServiceTest {
         public boolean update(Product newProduct) {
             for (Product product : products) {
                 if(product.getId() == newProduct.getId()){
-                    product = newProduct;
+                    product.setCategory(newProduct.getCategory());
+                    product.setDescription(newProduct.getDescription());
+                    product.setName(newProduct.getName());
+                    product.setOwner(newProduct.getOwner());
+                    product.setPrice(newProduct.getPrice());
+                    product.setState(newProduct.getState());
+                    product.setStock(newProduct.getStock());
+                    product.setLatitude(newProduct.getLatitude());
+                    product.setLongitude(newProduct.getLongitude());
                     return true;
                 }
             }

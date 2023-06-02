@@ -15,6 +15,9 @@ public class TransactionRepositoryTest {
 
     ITransactionRepository repository = new TransactionRepository();
 
+    /*
+     * Prueba para guardar una transaccion en la base de datos
+     */
     @Test
     public void saveTransaction() {
         Account accountSender = new Account(1L, "1234567890", 1000L);
