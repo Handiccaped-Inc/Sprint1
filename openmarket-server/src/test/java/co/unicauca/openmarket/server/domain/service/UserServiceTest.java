@@ -14,6 +14,7 @@ import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.server.access.IUserRepository;
 
 /**
+/**
  * Pruebas unitarias del servicio de usuarios
  *
  */
@@ -35,8 +36,8 @@ public class UserServiceTest {
     @Test
     public void testFindbyemailandpasswordSucces() {
         User user = service.findByEmailAndPassword("example@example.com", "password123");
-        assertNotNull(user);
-        assertEquals(1l, user.getId());
+        assertNotNull(user); // se espera que el usuario encontrado no sea nulo
+        assertEquals(1l, user.getId()); // se espera que el id del usuario encontrado sea 1
     }
 
     /**
@@ -44,18 +45,18 @@ public class UserServiceTest {
      */
 
     @Test
-    public void testFindbyemailandpasswordFaildEmail() {
+    public void testFindbyemailandpasswordFailedEmail() {
         User user = service.findByEmailAndPassword("", "password123");
-        assertNull(user);
+        assertNull(user); // se espera que el usuario encontrado sea nulo
     }
 
     /**
      * Prueba de fallo para encontrar un usuario por su email and password
      */
     @Test
-    public void testFindbyemailandpasswordFaildPassword() {
+    public void testFindbyemailandpasswordFailedPassword() {
         User user = service.findByEmailAndPassword("example2@example2.com", "");
-        assertNull(user);
+        assertNull(user); // se espera que el usuario encontrado sea nulo
     }
 
     /**

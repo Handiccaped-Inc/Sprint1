@@ -1,9 +1,11 @@
+--Tabla cuenta: Almacena la informacion sobre la cuenta y su dinero
 create table account(
     account_id integer primary key,
     account_card text not null,
-    account_available_money integer not null,
+    account_available_money integer not null
 );
 
+--Tabla transacciones: Almacena la informacion de las transacciones
 create table transactions(
     transactions_id integer primary key,
     transactions_date date not null,

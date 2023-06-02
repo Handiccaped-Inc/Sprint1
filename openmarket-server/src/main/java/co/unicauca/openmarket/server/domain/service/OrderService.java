@@ -26,7 +26,7 @@ public class OrderService implements IOrderService {
     public String save(Order newOrder) {
         List<JsonError> errors = new ArrayList<>();
 
-        if (newOrder == null || newOrder.getPrice() == null || newOrder.getDate() == null
+        if (newOrder == null || newOrder.getCustomer() == null|| newOrder.getStatus() == null || newOrder.getProduct() == null ||newOrder.getPrice() == null || newOrder.getDate() == null
                 || newOrder.getCustomer().getId() == null ||
                 newOrder.getProduct().getId() == null || newOrder.getStatus().getId() == null) {
             errors.add(new JsonError("400", "BAD_REQUEST", "La orden es inválida. El precio es obligatorio."));
@@ -45,7 +45,7 @@ public class OrderService implements IOrderService {
     public String update(Order updatedOrder) {
         List<JsonError> errors = new ArrayList<>();
 
-        if (updatedOrder == null || updatedOrder.getPrice() == null || updatedOrder.getDate() == null
+        if (updatedOrder == null ||  updatedOrder.getCustomer() == null|| updatedOrder.getStatus() == null || updatedOrder.getProduct() == null || updatedOrder.getPrice() == null || updatedOrder.getDate() == null
                 || updatedOrder.getCustomer().getId() == null ||
                 updatedOrder.getProduct().getId() == null || updatedOrder.getStatus().getId() == null) {
             errors.add(new JsonError("400", "BAD_REQUEST", "La orden es inválida. El precio es obligatorio."));
@@ -66,7 +66,7 @@ public class OrderService implements IOrderService {
     }
 
     @Override
-    public synchronized List<Order> findByUser(Integer userId) {
+    public synchronized List<Order> findByUser(Long userId) {
         return orderRepository.findByUser(userId);
     }
 }

@@ -4,9 +4,13 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.Date;
+
 
 import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.server.infra.Hashing;
@@ -48,7 +52,7 @@ public class UserRepository implements IUserRepository {
                 Long user_Id = res.getLong("user_id");
                 Long rol_Id = res.getLong("rol_id");
                 user_rol = new RolRepository().findById(rol_Id);
-                Date birth_Date = res.getDate("user_birth_date");
+                String birth_DateStr = res.getString("user_birth_date");
                 String user_Email = res.getString("user_email");
                 String user_Phone = res.getString("user_phone");
                 String user_Card = res.getString("user_card");
@@ -56,6 +60,8 @@ public class UserRepository implements IUserRepository {
                 String user_name = res.getString("user_username");
                 String user_password = res.getString("user_password");
                 String user_Address = res.getString("user_address");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date birth_Date = dateFormat.parse(birth_DateStr);
                 user = new User(user_Id, user_rol, birth_Date, user_Email, user_Phone, user_Card, real_Name, user_name,
                         user_password, user_Address);
                 return user;
@@ -63,6 +69,10 @@ public class UserRepository implements IUserRepository {
         } catch (SQLException e) {
             Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE,
                     "Error al consultar Customer de la base de datos", e);
+                    System.out.println(e.getMessage());
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         return null; // No se encontró el usuario
     }
@@ -82,7 +92,7 @@ public class UserRepository implements IUserRepository {
                 Long user_Id = res.getLong("user_id");
                 long rol_Id = res.getLong("rol_id");
                 user_rol = new RolRepository().findById(rol_Id);
-                Date birth_Date = res.getDate("user_birth_date");
+                String birth_DateStr = res.getString("user_birth_date");
                 String user_Email = res.getString("user_email");
                 String user_Phone = res.getString("user_phone");
                 String user_Card = res.getString("user_card");
@@ -90,6 +100,8 @@ public class UserRepository implements IUserRepository {
                 String user_name = res.getString("user_username");
                 String user_password = res.getString("user_password");
                 String user_Address = res.getString("user_address");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date birth_Date = dateFormat.parse(birth_DateStr);
                 user = new User(user_Id, user_rol, birth_Date, user_Email, user_Phone, user_Card, real_Name, user_name,
                         user_password, user_Address);
                 return user;
@@ -97,6 +109,10 @@ public class UserRepository implements IUserRepository {
         } catch (SQLException e) {
             Logger.getLogger(UserRepository.class.getName()).log(Level.SEVERE,
                     "Error al consultar user de la base de datos", e);
+                    System.out.println(e.getMessage());
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
         return null; // No se encontró el usuario
     }

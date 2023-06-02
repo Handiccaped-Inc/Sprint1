@@ -112,13 +112,13 @@ public class OrderRepository implements IOrderRepository {
     }
 
     @Override
-    public List<Order> findByUser(Integer userId) {
+    public List<Order> findByUser(Long userId) {
         List<Order> orders = new ArrayList<>();
         try {
 
             String sql = "SELECT * FROM orders WHERE user_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);
-            pstmt.setInt(1, userId);
+            pstmt.setLong(1, userId);
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Order order = new Order();
