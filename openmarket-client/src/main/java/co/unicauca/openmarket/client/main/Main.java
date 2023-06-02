@@ -1,13 +1,11 @@
-package co.unicauca.openmarket.client;
+package co.unicauca.openmarket.client.main;
 
-/**
- * Hello world!
- *
- */
-public class App 
-{
-    public static void main( String[] args )
-    {
-        System.out.println( "Hello World!" );
+import co.unicauca.openmarket.client.presentation.MainGUI;
+
+public class Main {
+
+    public static void main(String[] args) {
+        MainGUI instance = new MainGUI();
+        instance.setVisible(true);
     }
 }
