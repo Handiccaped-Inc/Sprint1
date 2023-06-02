@@ -45,7 +45,7 @@ public class Account {
 
     /**
      * Obtiene el numero de la tarjeta actual
-     * @return
+     * @return tarjeta actual
      */
     public String getCard() {
         return card;

@@ -3,6 +3,9 @@ package co.unicauca.payment.domain.service;
 import co.unicauca.payment.access.IAccountRepository;
 import co.unicauca.payment.domain.Account;
 
+/**
+ * Clase AccountService
+ */
 public class AccountService {
     private IAccountRepository accountRepository;
 

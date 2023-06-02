@@ -15,6 +15,9 @@ public class TransactionRepository implements ITransactionRepository {
 
     private Connection conn;
 
+    /**
+     * Constructor del repositorio
+     */
     public TransactionRepository() {
         conn = DatabaseConnection.getInstance().getConnection();
     }

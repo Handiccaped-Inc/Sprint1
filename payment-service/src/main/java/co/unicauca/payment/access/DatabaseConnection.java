@@ -39,8 +39,7 @@ public class DatabaseConnection {
 
     /**
      * Implementación del patrón Singleton
-     * 
-     * @return
+     * @return instancia
      */
     public static DatabaseConnection getInstance() {
         if (instance == null) {
@@ -54,8 +53,8 @@ public class DatabaseConnection {
     }
 
     /**
+     * Obtiene la conexion
      * @return La conexion
-     * @throws java.sql.SQLException
      */
     public Connection getConnection() {
         try {

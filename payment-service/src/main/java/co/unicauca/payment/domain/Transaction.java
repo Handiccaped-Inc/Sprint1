@@ -19,7 +19,7 @@ public class Transaction {
     }
 
     /**
-     * 
+     * Constructor de transaccion
      * @param id Identificador
      * @param date Fecha cuando se efectua
      * @param ammount Cantidad de dinero
