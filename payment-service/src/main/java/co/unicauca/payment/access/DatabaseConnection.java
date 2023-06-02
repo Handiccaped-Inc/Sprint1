@@ -1,4 +1,4 @@
-package co.unicauca.openmarket.server.access;
+package co.unicauca.payment.access;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -8,7 +8,7 @@ public class DatabaseConnection {
 
     private static DatabaseConnection instance;
     private Connection connection;
-    private static final String url = "jdbc:sqlite:C:/sqlite/db/openmarket.db";
+    private static final String url = "jdbc:sqlite:C:/sqlite/db/payment-service.db";
 
     /**
      * Constructor privado para implementar el patrón Singleton
@@ -20,6 +20,7 @@ public class DatabaseConnection {
         } catch (SQLException e) {
             System.out.println("Error establishing database connection: " + e.getMessage());
         }
+
         Runtime.getRuntime().addShutdownHook(new Thread() {
             @Override
             public void run() {
@@ -32,7 +33,6 @@ public class DatabaseConnection {
                 }
             }
         });
-
     }
 
     /**

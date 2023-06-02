@@ -79,4 +79,23 @@ public class ProductService implements IProductService {
         return myProductRepository.findById(id);
     }
 
+    @Override
+    public String delete(Product newProduct) {
+        List<JsonError> errors = new ArrayList<>();
+        if (newProduct.getName().isEmpty()
+                || newProduct.getDescription().isEmpty()
+                || newProduct.getOwner() == null
+                || newProduct.getCategory() == null
+                || newProduct.getState() == null
+                || newProduct.getId() == null) {
+            errors.add(new JsonError("400", "BAD_REQUEST", "LA INFORMACION ESTA INCOMPLETA"));
+        }
+        if (!errors.isEmpty()) {
+            Gson gson = new Gson();
+            String errosJson = gson.toJson(errors);
+            return errosJson;
+        }
+        return myProductRepository.delete(newProduct) ? "ok" : "!error";
+    }
+
 }

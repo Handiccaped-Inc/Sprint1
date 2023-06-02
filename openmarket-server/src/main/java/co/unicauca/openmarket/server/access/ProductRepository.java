@@ -166,4 +166,26 @@ public class ProductRepository implements IProductRepository {
         return null;
     }
 
+    @Override
+    public boolean delete(Product newProduct) {
+        try {
+            // Validate product
+            if (newProduct == null || newProduct.getName().isEmpty()) {
+                return false;
+            }
+            // this.connect();
+
+            String sql = "DELETE FROM product WHERE product_id=?";
+
+            PreparedStatement pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, newProduct.getId());
+
+            // this.disconnect();
+            return pstmt.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
 }
