@@ -21,7 +21,7 @@ public class ShoppingCartService implements IShoppingCartService {
     }
 
     @Override
-    public String saveShoppingCart(ShoppingCart newCart) {
+    public String save(ShoppingCart newCart) {
         List<JsonError> errors = new ArrayList<>();
         if (newCart.getOwner() == null || newCart.getProduct() == null || newCart.getQuantity() == 0L) {
             errors.add(
