@@ -37,7 +37,7 @@ public class TransactionServiceTest {
      * Prueba para guardar una transaccion
      */
     @Test
-    public void saveTransactionSucces(){
+    public void saveTransactionSuccess(){
         Transaction transaction = new Transaction(1L, new Date(0), 20000L,new Account(1L, "12345", 100000L), new Account(2L, "12345", 100000L));
         boolean result = service.save(transaction);
         assertTrue(result); // se espera que la transaccion se guarde
