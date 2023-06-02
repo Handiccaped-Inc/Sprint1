@@ -18,7 +18,7 @@ public class StateProductRepositoryTest {
      * Prueba para encontrar un estado del producto por su id
      */
     @Test
-    public void TestFindByIdSuccess(){
+    public void testFindByIdSuccess(){
         StateProduct stateProductTest = repository.findById(1L);
         assertEquals(1, stateProductTest.getId()); // se espera que el id del estado del producto encontrado sea 1
         assertEquals("disponible", stateProductTest.getName()); // se espera que el nombre del estado del producto encontrado sea disponible
@@ -28,7 +28,7 @@ public class StateProductRepositoryTest {
      * Prueba para encontrar un estado del producto por su id fallada
      */
     @Test
-    public void TestFindByIdFailed(){
+    public void testFindByIdFailed(){
         StateProduct stateProductTest = repository.findById(50L);
         assertNull(stateProductTest); //No se encuentra el estado del producto
     }
