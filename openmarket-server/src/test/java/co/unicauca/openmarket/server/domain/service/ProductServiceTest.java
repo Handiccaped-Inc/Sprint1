@@ -40,7 +40,7 @@ public class ProductServiceTest {
      * Prueba para encontrar un producto por su nombre y descripcion
      */
     @Test
-    public void testFinbyNameAndDescriptionSucces(){
+    public void testFinbyNameAndDescriptionSuccess(){
         List<Product> productsTest = service.findByNameAndDescription("Carro","This is an example product");
         assertFalse(productsTest.isEmpty()); // se espera que la lista de productos no este vacia
     }

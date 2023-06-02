@@ -37,7 +37,7 @@ public class DeliveryServiceTest {
      * Prueba para guardar un delivery
      */
     @Test
-    public void testSaveSucces(){
+    public void testSaveSuccess(){
             User usuario = new User(2L, new Rol(1L, "Comprador"), new Date(0), "Example2@email.com", "123454678", "1234567890", "nombre2", "usuarioDePrueba2", "12345", "calle-1");
             Product product = new Product(2L, usuario, new Category(1L, "Juguetes"), new StateProduct(1L, "Disponible"), "Carro", "Es un carro", 1000L, 3L, 0, 0);
             Order order = new Order(1L, usuario, product, new StatusOrder(1L,"Enviado"), (double) 100L,new Date(0), 3.0);
@@ -62,7 +62,7 @@ public class DeliveryServiceTest {
      * Prueba para actualizar un delivery
      */
     @Test
-    public void updateDeliverySucces(){
+    public void updateDeliverySuccess(){
             User usuario = new User(1L, new Rol(1L, "Comprador"), new Date(0), "Example@email.com", "123454678", "1234567890", "nombre", "usuarioDePrueba", "12345", "calle-1");
             Product product = new Product(2L, usuario, new Category(1L, "Juguetes"), new StateProduct(1L, "Disponible"), "Carro", "Es un carro", 1000L, 3L, 0, 0);
             Order order = new Order(3L, usuario, product, new StatusOrder(1L,"Devuelto"), (double) 100L,new Date(0), 3.0);
