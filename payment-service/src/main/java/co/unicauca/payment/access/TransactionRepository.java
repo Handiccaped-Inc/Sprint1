@@ -8,6 +8,9 @@ import java.util.logging.Logger;
 
 import co.unicauca.payment.domain.Transaction;
 
+/**
+ * Clase repositorio de la transaccion
+ */
 public class TransactionRepository implements ITransactionRepository {
 
     private Connection conn;

@@ -6,7 +6,7 @@
 package co.unicauca.strategyserver.helpers;
 
 /**
- *
+ * Clase JsonError
  * @author ahurtado
  */
 public class JsonError {
@@ -29,9 +29,9 @@ public class JsonError {
     }
     /**
      * Constructor parametrizado
-     * @param code
-     * @param error
-     * @param message 
+     * @param code codigo
+     * @param error error
+     * @param message mensaje
      */
     public JsonError(String code, String error, String message) {
         this.code = code;
@@ -39,26 +39,50 @@ public class JsonError {
         this.message = message;
     }
 
+    /**
+     * Obtiene el codigo actual
+     * @return string con codigo
+     */
     public String getCode() {
         return code;
     }
 
+    /**
+     * Establece un nuevo codigo
+     * @param code nuevo codigo
+     */
     public void setCode(String code) {
         this.code = code;
     }
 
+    /**
+     * Obtiene el error actual
+     * @return string con error
+     */
     public String getError() {
         return error;
     }
 
+    /**
+     * Establece un nuevo mensaje error
+     * @param error nuevo error
+     */
     public void setError(String error) {
         this.error = error;
     }
 
+    /**
+     * Obtiene el mensaje actual
+     * @return string con el mensaje
+     */
     public String getMessage() {
         return message;
     }
 
+    /**
+     * Establece un nuevo mensaje
+     * @param message nuevo mensaje
+     */
     public void setMessage(String message) {
         this.message = message;
     }

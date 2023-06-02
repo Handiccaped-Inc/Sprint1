@@ -13,7 +13,12 @@ import java.util.Properties;
 public class Utilities {
 
     /**
-     * Cargar una propiedadd de config.properties
+     * Constructor default
+     */
+    public Utilities (){}
+
+    /**
+     * Cargar una propiedad de config.properties
      *
      * @param key llave de la propiedad
      * @return valor de la propiedad
@@ -31,6 +36,7 @@ public class Utilities {
 
         return prop.getProperty(key);
     }
+
     /**
      * Verifica si un String contiene sólo digitos
      * @param str Cadena a verificvar

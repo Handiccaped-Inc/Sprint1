@@ -12,9 +12,17 @@ import java.util.logging.Logger;
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.StateProduct;
 
+/**
+ * Clase ProductRepository
+ */
 public class ProductRepository implements IProductRepository {
+
+    /** Conexion */
     protected Connection conn;
 
+    /**
+     * Constructor default
+     */
     public ProductRepository() {
         conn = DatabaseConnection.getInstance().getConnection();
     }

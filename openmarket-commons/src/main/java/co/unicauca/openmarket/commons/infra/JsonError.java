@@ -29,9 +29,9 @@ public class JsonError {
     /**
      * Constructor parametrizado
      * 
-     * @param code
-     * @param error
-     * @param message
+     * @param code codigo
+     * @param error error
+     * @param message mensaje
      */
     public JsonError(String code, String error, String message) {
         this.code = code;
@@ -56,9 +56,8 @@ public class JsonError {
      * parameter.
      * 
      *
-     * @param String code Set the code of the object
+     * @param code code Set the code of the object
      *
-     * @return Nothing, so it's return type is void
      *
      */
     public void setCode(String code) {
@@ -83,9 +82,8 @@ public class JsonError {
      * an error.
      * 
      *
-     * @param String error Set the error message
+     * @param error error Set the error message
      *
-     * @return Void
      *
      */
     public void setError(String error) {
@@ -108,9 +106,8 @@ public class JsonError {
      * The setMessage function sets the message variable to a new value.
      * 
      *
-     * @param String message Set the message instance variable
+     * @param message message Set the message instance variable
      *
-     * @return Nothing, so it should be void
      *
      */
     public void setMessage(String message) {

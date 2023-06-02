@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Clase DatabaseConnection
+ */
 public class DatabaseConnection {
 
     private static DatabaseConnection instance;
@@ -12,7 +15,6 @@ public class DatabaseConnection {
 
     /**
      * Constructor privado para implementar el patrón Singleton
-     * 
      */
     private DatabaseConnection() {
         try {

@@ -14,6 +14,9 @@ public class Protocol {
     private String action;
     private List<Parameter> parameters;
 
+    /**
+     * Constructor del protocolo
+     */
     public Protocol() {
         parameters = new ArrayList<>();
     }

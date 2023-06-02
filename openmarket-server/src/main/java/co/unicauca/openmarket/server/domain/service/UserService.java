@@ -3,10 +3,17 @@ package co.unicauca.openmarket.server.domain.service;
 import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.server.access.IUserRepository;
 
+/**
+ * Clase UserService
+ */
 public class UserService implements IUserService {
 
     private IUserRepository repository;
 
+    /**
+     * Constructor del servicio
+     * @param repository Repositorio del usuario
+     */
     public UserService(IUserRepository repository) {
         this.repository = repository;
     }

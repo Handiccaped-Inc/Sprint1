@@ -6,7 +6,6 @@ import co.unicauca.openmarket.commons.domain.Category;
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.Rol;
 import co.unicauca.openmarket.commons.domain.StateProduct;
-import co.unicauca.openmarket.commons.domain.StatusOrder;
 import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.server.access.IProductRepository;
 
@@ -17,13 +16,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.security.Provider.Service;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 
-/*
+/**
  * Pruebas unitarias del servicio de productos
  */
 public class ProductServiceTest {
@@ -36,7 +34,7 @@ public class ProductServiceTest {
         service = new ProductService(repository);
     }
 
-    /*
+    /**
      * Prueba para encontrar un producto por su nombre y descripcion
      */
     @Test
@@ -45,7 +43,7 @@ public class ProductServiceTest {
         assertFalse(productsTest.isEmpty());
     }
 
-    /*
+    /**
      * Prueba de fallo para encontrar un producto por su nombre y descripcion
      */
     @Test
@@ -54,7 +52,7 @@ public class ProductServiceTest {
         assertTrue(productsTest.isEmpty());
     }
     
-    /*
+    /**
      * Prueba para encontrar un producto por su estado
      */
 
@@ -65,7 +63,7 @@ public class ProductServiceTest {
         assertEquals(1L,productsTest.get(0).getId());
     }
 
-    /*
+    /**
      * prueba de fallo para encontrar un producto por su estado
      */
     @Test
@@ -74,7 +72,7 @@ public class ProductServiceTest {
         assertTrue(productsTest.isEmpty());
     }
 
-    /*
+    /**
      * Prueba para encontrar un producto por su id
      */
     @Test
@@ -83,7 +81,7 @@ public class ProductServiceTest {
         assertEquals(1L,productTest.getId());
     }
 
-    /*
+    /**
      * Prueba de fallo para encontrar un producto por su id
      */
     @Test
@@ -92,7 +90,7 @@ public class ProductServiceTest {
         assertNull(productTest);
     }
 
-    /*
+    /**
      * Prueba para guardar un producto
      */
     @Test
@@ -105,7 +103,7 @@ public class ProductServiceTest {
 
     }
 
-    /*
+    /**
      * Prueba de fallo para guardar un producto
      */
 
@@ -120,7 +118,7 @@ public class ProductServiceTest {
     }
     
 
-    /*
+    /**
      * Prueba de fallo para guardar un producto
      */
     @Test
@@ -133,7 +131,7 @@ public class ProductServiceTest {
 
     }
 
-    /*
+    /**
      * Prueba para editar un producto
      */
     @Test
@@ -145,7 +143,7 @@ public class ProductServiceTest {
         assertEquals(product.getId(), testProdutAux.getId());
     }
 
-    /*
+    /**
      * Prueba de fallo para editar un producto
      */
     @Test
@@ -158,7 +156,7 @@ public class ProductServiceTest {
         
     }
 
-    /*
+    /**
      * Prueba para eliminar un producto
      */
     @Test
@@ -169,7 +167,7 @@ public class ProductServiceTest {
         assertEquals("ok", response);
     }
 
-    /*
+    /**
      * Prueba de fallo para eliminar un producto
      */
     @Test
@@ -181,9 +179,10 @@ public class ProductServiceTest {
         assertNotNull(response);
 
     }
-
-
     
+    /**
+     * Mock para los tests
+     */
     private class MockProductRepository implements IProductRepository{
         List<Product> products;
 

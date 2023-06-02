@@ -12,10 +12,16 @@ import co.unicauca.payment.access.AccountRepository;
 import co.unicauca.payment.access.IAccountRepository;
 import co.unicauca.payment.domain.Account;
 
+/**
+ * Clase de testeo para AccountRepository
+ */
 public class AccountRepositoryTest {
 
     IAccountRepository repository = new AccountRepository();
 
+    /**
+     * Test para encontrar la cuenta
+     */
     @Test
     public void TestFindAccountbyCard() {
         

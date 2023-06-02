@@ -3,7 +3,7 @@ package co.unicauca.openmarket.server.domain.service;
 import co.unicauca.openmarket.commons.domain.Delivery;
 
 /**
- * Interface que maneja los metodos que deben
+ * Interfaz que maneja los metodos que deben
  * contener todos los Service de que desean manejar un pedido
  */
 public interface IDeliveryService {
@@ -20,7 +20,6 @@ public interface IDeliveryService {
      * @param newDelivery objeto que cotiene los datos de un pedido
      * @return boolean dependiendo del exito de la operación
      */
-
     public String update(Delivery newDelivery);
     
 }

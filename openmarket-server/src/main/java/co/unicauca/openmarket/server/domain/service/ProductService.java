@@ -10,9 +10,16 @@ import co.unicauca.openmarket.commons.domain.StateProduct;
 import co.unicauca.openmarket.commons.infra.JsonError;
 import co.unicauca.openmarket.server.access.IProductRepository;
 
+/**
+ * Clase ProductService
+ */
 public class ProductService implements IProductService {
     IProductRepository myProductRepository;
 
+    /**
+     * Constructor del servicio
+     * @param myProductRepository Repositorio del producto
+     */
     public ProductService(IProductRepository myProductRepository) {
         this.myProductRepository = myProductRepository;
     }

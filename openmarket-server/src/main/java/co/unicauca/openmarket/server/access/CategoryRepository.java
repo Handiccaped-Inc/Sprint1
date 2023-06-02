@@ -9,8 +9,12 @@ import java.util.logging.Logger;
 
 import co.unicauca.openmarket.commons.domain.Category;
 
+/**
+ * Clase CategoryRepository
+ */
 public class CategoryRepository implements ICategoryRepository {
 
+    /** Conexion */
     protected Connection conn;
 
     /**

@@ -9,7 +9,12 @@ import java.util.logging.Logger;
 
 import co.unicauca.openmarket.commons.domain.StateProduct;
 
+/**
+ * Clase StateProductRepository
+ */
 public class StateProductRepository implements IStateProductRepository {
+
+    /** Conexion */
     protected Connection conn;
 
     /**

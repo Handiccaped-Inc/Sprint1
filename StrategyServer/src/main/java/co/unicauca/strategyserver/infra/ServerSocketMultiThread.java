@@ -12,12 +12,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Clase socket multi hilo
  * @author Julio Hurtado, Libardo Pantoja
  */
-
 public class ServerSocketMultiThread{
     
-/**
+    /**
      * Server Socket, la orejita
      */
     private static ServerSocket ssock;
@@ -36,7 +36,10 @@ public class ServerSocketMultiThread{
     private ServerHandler handler;
     
     
-    
+    /**
+     * Constructor de la clase
+     * @param port puerto
+     */
     public ServerSocketMultiThread(int port){
         PORT = port;
     }
@@ -44,13 +47,15 @@ public class ServerSocketMultiThread{
     
     /**
      * Arranca el servidor y hace la estructura completa
-     * @param handler
+     * @param handler handler
      */
-    
     public void setServerHandler(ServerHandler handler){
         this.handler = handler;
     }
     
+    /**
+     * Empieza el servidor
+     */
     public void startServer() {
         openPort();
         while (true) {
@@ -58,10 +63,10 @@ public class ServerSocketMultiThread{
             throwThread();
         }
     }
+
     /**
      * Abre el puerto
      */
-    
     private void openPort(){
         try {
             if(PORT == -1)
@@ -73,6 +78,10 @@ public class ServerSocketMultiThread{
         }
     } 
     
+    /**
+     * Espera al cliente
+     * @return Socket del cliente
+     */
     private Socket waitToClient(){
         try {
             System.out.println("En servidor multihilo esta espera");
@@ -87,7 +96,6 @@ public class ServerSocketMultiThread{
     /**
      * Lanza el hilo
      */
-    
     private void throwThread() {
         try {   
             handler = (ServerHandler) handler.getClass().newInstance();

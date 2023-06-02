@@ -9,13 +9,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * clase parametros
  * @author ahurtado
  */
 public class Parameters {
 
     private List<Parameter> parameters;
 
+    /**
+     * Constructor de parametros
+     */
     public Parameters() {
         parameters = new ArrayList<>();
     }

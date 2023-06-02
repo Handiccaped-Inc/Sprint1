@@ -6,11 +6,15 @@ import co.unicauca.openmarket.commons.domain.User;
 
 import java.util.List;
 
+/**
+ * Interfaz de ShoppingCartRepository
+ */
 public interface IShoppingCartRepository {
 
     /**
      * Guarda un carrito en la base de datos
      * @param cart Carrito a guardar
+     * @return true si la operacion fue exitosa
      */
     public boolean save(ShoppingCart cart);
 
@@ -22,21 +26,21 @@ public interface IShoppingCartRepository {
 
     /**
      * Elimina el carrito del usuario
-     * @param owner Usuario dueño del carrito
+     * @param owner Usuario propietario del carrito
      * @return true si la operacion fue exitosa
      */
     public boolean delete(User owner);
 
     /**
      * Busca los carritos del usuario
-     * @owner Usuario dueño del carrito
+     * @param owner Usuario propietario del carrito
      * @return Carritos de compra segun el id del usuairo
      */
     public List<ShoppingCart> findRepoByOwner(User owner);
 
     /**
      * Busca los productos del usuario
-     * @owner Usuario dueño del carrito
+     * @param owner Usuario propietario del carrito
      * @return Productos del carrito del usuario
      */
     public List<Product> findByOwner(User owner);

@@ -12,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import co.unicauca.openmarket.commons.domain.Rol;
 import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.server.access.IUserRepository;
-/*
+
+/**
  * Pruebas unitarias del servicio de usuarios
  *
  */
-
 public class UserServiceTest {
 
     private UserService service;
@@ -27,7 +27,7 @@ public class UserServiceTest {
         service = new UserService(repository);
     }
 
-    /*
+    /**
      * Prueba para encontrar un usuario por su email and password
      *     
      */
@@ -39,7 +39,7 @@ public class UserServiceTest {
         assertEquals(1l, user.getId());
     }
 
-    /*
+    /**
      * Prueba de fallo para encontrar un usuario por su email and password
      */
 
@@ -49,7 +49,7 @@ public class UserServiceTest {
         assertNull(user);
     }
 
-    /*
+    /**
      * Prueba de fallo para encontrar un usuario por su email and password
      */
     @Test
@@ -58,6 +58,9 @@ public class UserServiceTest {
         assertNull(user);
     }
 
+    /**
+     * Mock usado para realizar las pruebas
+     */
     private class MockUserServiceRepository implements IUserRepository {
         List<User> usaurios;
 

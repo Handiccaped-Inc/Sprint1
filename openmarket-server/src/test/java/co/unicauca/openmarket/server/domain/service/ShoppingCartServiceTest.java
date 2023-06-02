@@ -13,6 +13,9 @@ import co.unicauca.openmarket.commons.domain.ShoppingCart;
 import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.server.access.IShoppingCartRepository;
 
+/**
+ * Clase de testeo de ShoppingCartService
+ */
 public class ShoppingCartServiceTest {
     private ShoppingCartService service;
     private IShoppingCartRepository repository;
@@ -51,19 +54,19 @@ public class ShoppingCartServiceTest {
     }
 
     /**
-     * Test para comprobar el resultado de buscar los productos del carrito por su dueño
+     * Test para comprobar el resultado de buscar los productos del carrito por su propietario
      */
     @Test
     public void testFindByOwner() {
         User owner = new User();
-        //Trata de buscar los productos del carrito de su dueño
+        //Trata de buscar los productos del carrito de su propietario
         List<Product> products = service.findByOwner(owner);
         //Verifica que la lista de productos contenga elementos
         assertNotNull(products);
     }
 
     /**
-     * Test para comprobar el resultado de buscar los productos del carrito por su dueño nulo o sin carrito
+     * Test para comprobar el resultado de buscar los productos del carrito por su propietario nulo o sin carrito
      */
     @Test
     public void testFindByOwnerUnsuccess() {
@@ -92,7 +95,7 @@ public class ShoppingCartServiceTest {
     @Test
     public void testFindRepoByOwner() {
         User owner = new User();
-        //Busca y devuelve un carrito segun su dueño
+        //Busca y devuelve un carrito segun su propietario
         List<ShoppingCart> carts = service.findRepoByOwner(owner);
         //Verifica que la lista de carritos no sea nula
         assertNotNull(carts);
@@ -102,7 +105,7 @@ public class ShoppingCartServiceTest {
      */
     @Test
     public void testFindRepoByOwnerUnsuccess() {
-        //Busca y devuelve un carrito segun su dueño
+        //Busca y devuelve un carrito segun su propietario
         List<ShoppingCart> carts = service.findRepoByOwner(null);
         //Verifica que carts tenga el valor retornado que es []
         assertNotNull(carts);

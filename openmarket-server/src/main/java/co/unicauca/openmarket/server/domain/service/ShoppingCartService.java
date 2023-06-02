@@ -11,11 +11,17 @@ import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.commons.infra.JsonError;
 import co.unicauca.openmarket.server.access.IShoppingCartRepository;
 
-
+/**
+ * Clase ShoppingCartService
+ */
 public class ShoppingCartService implements IShoppingCartService {
 
     private IShoppingCartRepository repository;
 
+    /**
+     * Constructor del servicio
+     * @param repository Repositorio del carrito
+     */
     public ShoppingCartService(IShoppingCartRepository repository) {
         this.repository = repository;
     }
@@ -25,7 +31,7 @@ public class ShoppingCartService implements IShoppingCartService {
         List<JsonError> errors = new ArrayList<>();
         if (newCart.getOwner() == null || newCart.getProduct() == null || newCart.getQuantity() == 0L) {
             errors.add(
-                    new JsonError("400", "BAD_REQUEST", "El dueño, el producto y la cantidad son campos obligatorios"));
+                    new JsonError("400", "BAD_REQUEST", "El propietario, el producto y la cantidad son campos obligatorios"));
 
         }
 
@@ -71,7 +77,7 @@ public class ShoppingCartService implements IShoppingCartService {
     public String delete(User owner) {
         List<JsonError> errors = new ArrayList<>();
         if (owner == null) {
-            errors.add(new JsonError("400", "BAD_REQUEST", "El dueño es un campo obligatorio"));
+            errors.add(new JsonError("400", "BAD_REQUEST", "El propietario es un campo obligatorio"));
         }
 
         if (!errors.isEmpty()) {
