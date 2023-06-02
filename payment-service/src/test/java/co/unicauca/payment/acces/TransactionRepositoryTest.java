@@ -11,11 +11,14 @@ import co.unicauca.payment.access.TransactionRepository;
 import co.unicauca.payment.domain.Account;
 import co.unicauca.payment.domain.Transaction;
 
+/**
+ * pruebas unitarias para la clase TransactionRepository
+ */
 public class TransactionRepositoryTest {
 
     ITransactionRepository repository = new TransactionRepository();
 
-    /*
+    /**
      * Prueba para guardar una transaccion en la base de datos
      */
     @Test
@@ -25,8 +28,7 @@ public class TransactionRepositoryTest {
 
         Transaction transaccion = new Transaction(5L, new Date(0), 120L, accountSender, accountReceiver);
         Boolean response = repository.save(transaccion);
-        assertTrue(response);
-        //TODO implementar
+        assertTrue(response); // se espera que la transaccion se guarde
     }
     
 }

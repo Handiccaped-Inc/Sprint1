@@ -19,55 +19,55 @@ public class AccountRepositoryTest {
 
     IAccountRepository repository = new AccountRepository();
 
-    /*
+    /**
      * Prueba para encontrar una cuenta por su numero de tarjeta
      */
     @Test
-    public void TestFindAccountbyCard() {
+    public void testFindAccountbyCard() {
         
         Account result = repository.findByCard("1234567890");
-        assertNotNull(result);
-        assertEquals(1, result.getId());
+        assertNotNull(result); // se espera que el usuario encontrado no sea nulo
+        assertEquals(1, result.getId()); // se espera que el id del usuario encontrado sea 1
     }
 
-    /*
+    /**
      * Prueba de erorr para encontrar una cuenta por su numero de tarjeta
      */
     @Test
-    public void TestfindAccountByCardFailed() {
+    public void testfindAccountByCardFailed() {
         
         Account result = repository.findByCard("12469");
-        assertNull(result);
+        assertNull(result); // se espera que el usuario encontrado no sea nulo
     }
 
-    /*
+    /**
      * Prueba para actualizar una cuenta 
      */
     @Test
-    public void TestUpdateAccount() {
+    public void testUpdateAccount() {
         Account account = new Account(1L, "123456789", 200L);
         Boolean result = repository.update(account);
-        assertTrue(result);
+        assertTrue(result);  //se espera que el usuario se actualice
     }
 
-    /*
+    /**
      * Prueba para actualizar una cuenta fallida
      */
     @Test
-    public void TestUpdateAccountFailed() {
+    public void testUpdateAccountFailed() {
         Account account = new Account(4L, "123456789", 200L);
         Boolean result = repository.update(account);
-        assertFalse(result);
+        assertFalse(result); //se espera que el usuario no se actualice
     }
 
-    /*
+    /**
      * Prueba para actualizar una cuenta fallida
      */
     @Test
-    public void TestUpdateAccountFailed2() {
+    public void testUpdateAccountFailed2() {
         Account account = new Account(4L, "", 200L);
         Boolean result = repository.update(account);
-        assertFalse(result);
+        assertFalse(result); //se espera que el usuario no se actualice
     }
     
     

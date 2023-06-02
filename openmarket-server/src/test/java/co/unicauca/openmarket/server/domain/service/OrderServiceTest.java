@@ -17,8 +17,8 @@ import co.unicauca.openmarket.commons.domain.StatusOrder;
 import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.server.access.IOrderRepository;
 
-/*
- * Pruebas unitaris del OrderService
+/**
+ * Pruebas unitarias del OrderService
  */
 public class OrderServiceTest {
 
@@ -31,39 +31,39 @@ public class OrderServiceTest {
         service = new OrderService(repository);
     }
 
-    /*
+    /**
      * Prueba para guardar una orden
      */
     @Test
-    public void TestsaveSucces(){
+    public void testsaveSuccess(){
         User usuario = new User(4L, new Rol(1L,"Comprador"), new Date(0), "Example5@emai.com","12345","12345","TestName5", "TestUsername5", "1234", "cr-4");
         User usuario2 = new User(2L, new Rol(1L,"Vendedor"), new Date(0), "Example2@Email.com","2345","12345","TestName2", "TestUsername2", "1234", "cr-1");
         Product product = new Product(1L, usuario2, new Category(1L,"Juguetes"), new StateProduct(1L,"Disponible"), "Carro", "Es un carro", 1000L, 3L, 0, 0);
         Order order = new Order(3L, usuario, product, new StatusOrder(1L,"Enviado"), (double) 100L,new Date(0), 3.0);
         String responde = service.save(order);
-        assertEquals(responde, "ok");
-        assertEquals(service.findByUser(4L).get(0).getId(), order.getId());
+        assertEquals(responde, "ok"); // se espera que la orden se guarde
+        assertEquals(service.findByUser(4L).get(0).getId(), order.getId()); // se espera que el id de la orden encontrada sea 4
     }
 
-    /*
+    /**
      *  Prueba para guardar una orden fallida
      */
     @Test
-    public void TestsaveFailed(){
+    public void testsaveFailed(){
         User usuario = null;
         User usuario2 = new User(2L, new Rol(1L,"Vendedor"), new Date(0), "Example2@Email.com","2345","12345","TestName2", "TestUsername2", "1234", "cr-1");
         Product product = new Product(1L, usuario2, new Category(1L,"Juguetes"), new StateProduct(1L,"Disponible"), "Carro", "Es un carro", 1000L, 3L, 0, 0);
         Order order = new Order(3L, usuario, product, new StatusOrder(1L,"Enviado"), (double) 100L,new Date(0), 3.0);
         String responde = service.save(order);
-        assertTrue(responde.length() > 3);
-        assertEquals(service.findByUser(5L).size(), 0);
+        assertTrue(responde.length() > 3); // se espera que la orden no se guarde
+        assertEquals(service.findByUser(5L).size(), 0); // se espera que el tamaño del arreglo de regreso sea 0
     }
 
-    /*
+    /**
      *  Prueba para actualizar una orden
      */
     @Test
-    public void TestupdateSucces(){
+    public void testupdateSucces(){
         User usuario2 = new User(2L, new Rol(1L,"Vendedor"), new Date(0), "Example2@Email.com","2345","12345","TestName2", "TestUsername2", "1234", "cr-1");
         User usuario3 = new User(3L, new Rol(1L,"Comprador"), new Date(0), "Example3@emai.com","3456","12345","TestName3", "TestUsername3", "1234", "cr-2");
         Product product1 = new Product(1L, usuario2, new Category(1L,"Juguetes"), new StateProduct(1L,"Disponible"), "Carro", "Es un carro", 1000L, 3L, 0, 0);
