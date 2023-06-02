@@ -18,6 +18,8 @@ public class UserRepositoryTest {
 
     /**
      *@displayName  Prueba para encontrar un usuario por su email y contraseña
+     *Para realizar este test agregar a la base de datos el usuario con email: usuausuario10@example.com
+     * y contraseña: 6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b
      */
     @Test
     public void TestFindByEmailAndPasswordSuccess() {
