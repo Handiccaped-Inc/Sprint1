@@ -17,6 +17,9 @@ import co.unicauca.payment.access.TransactionRepository;
 import co.unicauca.payment.domain.Account;
 import co.unicauca.payment.domain.service.PaymentFacade;
 
+/**
+ * Fachada o fachada de servicios en inglés, es un patrón de diseño que provee
+ */
 public class OpenMarketFacade {
     IDeliveryService deliveryService;
     IOrderService orderService;
@@ -26,6 +29,17 @@ public class OpenMarketFacade {
     PaymentFacade paymentFacade;
     User requester;
 
+    /**
+     * Constructor del facade. Inicializa las fachadas que se encargan de cada una
+     * de las entidades
+     * 
+     * @param deliveryService     servicio de delivery
+     * @param orderService        servicio de orden
+     * @param productService      servicio de producto
+     * @param shoppingCartService servicio de carrito de compras
+     * @param userService         servicio de usuario
+     * @param requester           usuario que realiza la solicitud
+     */
     public OpenMarketFacade(IDeliveryService deliveryService, IOrderService orderService,
             IProductService productService, IShoppingCartService shoppingCartService, IUserService userService,
             User requester) {
@@ -38,14 +52,32 @@ public class OpenMarketFacade {
         this.paymentFacade = new PaymentFacade(new AccountRepository(), new TransactionRepository());
     }
 
+    /**
+     * Busca los productos disponibles
+     * 
+     * @return lista de productos disponibles
+     */
     public List<Product> findAvailableProducts() {
         return productService.findByStatus(new StateProduct(1L, "disponible"));
     }
 
+    /**
+     * Busca los productos por nombre y descripcion
+     * 
+     * @param name        nombre del producto
+     * @param description descripcion del producto
+     * @return lista de productos
+     */
     public List<Product> findProductByNameAndDescription(String name, String description) {
         return productService.findByNameAndDescription(name, description);
     }
 
+    /**
+     * Realiza la compra de un producto
+     * 
+     * @param product producto a comprar
+     * @return mensaje de confirmacion
+     */
     public String buyProduct(Product product) {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
@@ -85,6 +117,13 @@ public class OpenMarketFacade {
         return "!error";
     }
 
+    /**
+     * Agrega un producto al carrito de compras
+     * 
+     * @param product  Producto a agregar
+     * @param quantity Cantidad del producto
+     * @return mensaje de confirmacion
+     */
     public String addProductToTheShoppingCart(Product product, Long quantity) {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
@@ -97,6 +136,11 @@ public class OpenMarketFacade {
         return "!error";
     }
 
+    /**
+     * Obtien los productos del carrito de compras del solicitante
+     * 
+     * @return
+     */
     public List<ShoppingCart> getShoppingCart() {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
@@ -105,6 +149,11 @@ public class OpenMarketFacade {
         return null;
     }
 
+    /**
+     * Compra los productos del carrito de compras
+     * 
+     * @return mensaje de confirmacion
+     */
     public String buyShoppingCart() {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
@@ -124,6 +173,11 @@ public class OpenMarketFacade {
         return "!error";
     }
 
+    /**
+     * Elimina los productos del carrito de compras
+     * 
+     * @return mensaje de confirmacion
+     */
     public String deleteShoppingCart() {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
@@ -137,6 +191,12 @@ public class OpenMarketFacade {
         return "!error";
     }
 
+    /**
+     * Guarda un producto
+     * 
+     * @param product producto a guardar
+     * @return mensaje de confirmacion
+     */
     public String saveProduct(Product product) {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
@@ -152,6 +212,12 @@ public class OpenMarketFacade {
         return "!error";
     }
 
+    /**
+     * Actualiza un producto
+     * 
+     * @param product producto a actualizar con el estado a actualizar
+     * @return mensaje de confirmacion
+     */
     public String updateProduct(Product product) {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
@@ -166,16 +232,28 @@ public class OpenMarketFacade {
         return "!error";
     }
 
+    /**
+     * Obtiene los productos del solicitante
+     * 
+     * @return lista de productos
+     */
     public List<Product> getOwnProducts() {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
             if (requester.getRol().getName().equals("vendedor")) {
+                // TODO crear metodo en el servicio para obtener los productos por el vendedor
                 return productService.findByOwner(requester);
             }
         }
         return null;
     }
 
+    /**
+     * Obtiene las ordenes del solicitante en caso de ser usuario, si es vendedor
+     * obtiene todas las ordenes de productos
+     * 
+     * @return lista de ordenes
+     */
     public List<Order> getOrders() {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
@@ -188,6 +266,13 @@ public class OpenMarketFacade {
         return null;
     }
 
+    /**
+     * Confirma la recepcion de una orden, realiza el pago al vendedor y se queda
+     * con la comision
+     * 
+     * @param order orden a confirmar
+     * @return mensaje de confirmacion
+     */
     public String confirmOrder(Order order) {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
@@ -219,6 +304,13 @@ public class OpenMarketFacade {
         return "!error";
     }
 
+    /**
+     * Califica una orden
+     * 
+     * @param order         orden a calificar
+     * @param qualification calificacion
+     * @return mensaje de confirmacion
+     */
     public String qualificateOrder(Order order, Long qualification) {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
@@ -231,6 +323,12 @@ public class OpenMarketFacade {
         return "!error";
     }
 
+    /**
+     * registra una entrega
+     * 
+     * @param delivery entrega a registrar
+     * @return mensaje de confirmacion
+     */
     public String registerDelivery(Delivery delivery) {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
