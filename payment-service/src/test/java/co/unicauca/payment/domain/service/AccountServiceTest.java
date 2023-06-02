@@ -15,7 +15,7 @@ import co.unicauca.payment.access.IAccountRepository;
 import co.unicauca.payment.domain.Account;
 import co.unicauca.payment.domain.service.AccountService;
 
-/*
+/**
  * Pruebas unitarias para la clase AccountService
  */
 public class AccountServiceTest {
@@ -29,67 +29,67 @@ public class AccountServiceTest {
         service = new AccountService(repo);
     }
 
-    /* 
+    /**
      * Prueba para encontrar una cuenta por su numero de tarjeta
      */
     @Test
-    public void testfindAccountByCardSucces(){
+    public void testFindAccountByCardSuccess(){
         Account account = service.findByCard("12345");
-        assertNotNull(account);
-        assertEquals(1L,account.getId());
+        assertNotNull(account); // se espera que el usuario encontrado no sea nulo
+        assertEquals(1L,account.getId()); // se espera que el id del usuario encontrado sea 1
     }
 
 
-    /*
+    /**
      * Prueba de erorro para encontrar una cuenta por su numero de tarjeta
      */
     @Test
-    public void testfindAccountByCardFaild(){
+    public void testFindAccountByCardFailed(){
         Account account = service.findByCard("1233");
-        assertNull(account);
+        assertNull(account); // se espera que el usuario encontrado sea nulo
     }
 
-    /*
-     * Prueba para actualizar una cuenta p
+    /**
+     * Prueba para actualizar una cuenta 
      */
 
     @Test
-    public void updateAcountSucces(){
+    public void updateAcountSuccess(){
         Account account = new Account(1L, "12345", 100000L);
         boolean result = service.update(account);
-        assertTrue(result);
+        assertTrue(result); // se espera que la cuenta se actualice
     }
 
-    /*
+    /**
      * prueba de error para actualizar una cuenta
      */
     @Test
-    public void updateAcountFaild(){
+    public void UpdateAcountFailed(){
         Account account = null;
         boolean result = service.update(account);
-        assertFalse(result);
+        assertFalse(result); // se espera que la cuenta no se actualice
     }
 
 
-    /*
+    /**
      * prueba de error para actualizar una cuenta
      */
     @Test
-    public void updateAcountFaild2(){
+    public void updateAcountFailed2(){
         Account account = new Account(1L, "", 0000L);
         boolean result = service.update(account);
-        assertFalse(result);
+        assertFalse(result); // se espera que la cuenta no se actualice
     }
 
     
-    /*
+    /**
      * prueba de error para actualizar una cuenta
      */
     @Test
-    public void updateAcountFaild3(){
+    public void updateAcountFailed3(){
         Account account = new Account(5L, "", 0000L);
         boolean result = service.update(account);
-        assertFalse(result);
+        assertFalse(result); // se espera que la cuenta no se actualice
     }
 
 

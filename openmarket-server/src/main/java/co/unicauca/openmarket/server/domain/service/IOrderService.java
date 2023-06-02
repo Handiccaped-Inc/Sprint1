@@ -39,5 +39,5 @@ public interface IOrderService {
      * @param UserId id del usuario
      * @return lista de objetos entcontrados
      */
-    public List<Order> findByUser(Integer UserId);
+    public List<Order> findByUser(Long UserId);
 }
