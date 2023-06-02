@@ -33,7 +33,7 @@ public class AccountServiceTest {
      * Prueba para encontrar una cuenta por su numero de tarjeta
      */
     @Test
-    public void testFindAccountByCardSucces(){
+    public void testFindAccountByCardSuccess(){
         Account account = service.findByCard("12345");
         assertNotNull(account); // se espera que el usuario encontrado no sea nulo
         assertEquals(1L,account.getId()); // se espera que el id del usuario encontrado sea 1
