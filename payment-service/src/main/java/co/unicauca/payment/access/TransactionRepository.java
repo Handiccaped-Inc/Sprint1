@@ -19,7 +19,7 @@ public class TransactionRepository implements ITransactionRepository {
     @Override
     public boolean save(Transaction newTransaction) {
         try {
-            String sql = "INSERT INTO transactions (transaction_date, transaction_ammount, account_id_sender, account_id_receiver) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO transactions (transactions_date, transactions_ammount, account_id_sender, account_id_receiver) VALUES (?, ?, ?, ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, newTransaction.getDate().toString());
             pstmt.setLong(2, newTransaction.getAmmount());
