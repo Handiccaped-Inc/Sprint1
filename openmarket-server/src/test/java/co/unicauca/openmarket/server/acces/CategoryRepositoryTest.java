@@ -9,6 +9,9 @@ import co.unicauca.openmarket.commons.domain.Category;
 import co.unicauca.openmarket.server.access.CategoryRepository;
 import co.unicauca.openmarket.server.access.ICategoryRepository;
 
+/**
+ * Pruebas unitarias de la clase CategoryRepository
+ */
 public class CategoryRepositoryTest {
     
     ICategoryRepository repository = new CategoryRepository();
