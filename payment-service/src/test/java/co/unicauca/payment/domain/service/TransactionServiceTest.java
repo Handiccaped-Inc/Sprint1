@@ -47,7 +47,7 @@ public class TransactionServiceTest {
      * pruba para guardar una transaccion fallida
      */
     @Test
-    public void saveTransactionFail(){
+    public void saveTransactionFailed(){
         Transaction transaction = null;
         boolean result = service.save(transaction);
         assertFalse(result);
@@ -57,7 +57,7 @@ public class TransactionServiceTest {
      * pruba para guardar una transaccion fallida
      */
     @Test
-    public void SaveTransactionFail2(){
+    public void SaveTransactionFailed2(){
         Transaction transaction = new Transaction(1L, new Date(0), 20000L,null, new Account(2L, "12345", 100000L));
         boolean result = service.save(transaction);
         assertFalse(result);
@@ -67,7 +67,7 @@ public class TransactionServiceTest {
      * pruba para guardar una transaccion fallida
      */
     @Test
-    public void SaveTransactionFail3(){
+    public void SaveTransactionFailed3(){
         Transaction transaction = new Transaction(1L, new Date(0), 0L,new Account(1L, "12345", 100000L), new Account(2L, "12345", 100000L));
         boolean result = service.save(transaction);
         assertFalse(result);
@@ -77,7 +77,7 @@ public class TransactionServiceTest {
      * pruba para guardar una transaccion fallida
      */
     @Test
-    public void SaveTransactionFail4(){
+    public void SaveTransactionFailed4(){
         Transaction transaction = new Transaction(1L, null, 20000L,new Account(1L, "12345", 100000L), new Account(2L, "12345", 100000L));
         boolean result = service.save(transaction);
         assertFalse(result);

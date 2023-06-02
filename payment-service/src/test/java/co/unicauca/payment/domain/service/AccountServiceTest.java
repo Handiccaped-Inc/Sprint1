@@ -44,7 +44,7 @@ public class AccountServiceTest {
      * Prueba de erorro para encontrar una cuenta por su numero de tarjeta
      */
     @Test
-    public void TestFindAccountByCardFail(){
+    public void TestFindAccountByCardFailed(){
         Account account = service.findByCard("1233");
         assertNull(account);
     }
@@ -64,7 +64,7 @@ public class AccountServiceTest {
      * prueba de error para actualizar una cuenta
      */
     @Test
-    public void UpdateAcountFail(){
+    public void UpdateAcountFailed(){
         Account account = null;
         boolean result = service.update(account);
         assertFalse(result);
@@ -75,7 +75,7 @@ public class AccountServiceTest {
      * prueba de error para actualizar una cuenta
      */
     @Test
-    public void UpdateAcountFail2(){
+    public void UpdateAcountFailed2(){
         Account account = new Account(1L, "", 0000L);
         boolean result = service.update(account);
         assertFalse(result);
@@ -86,7 +86,7 @@ public class AccountServiceTest {
      * prueba de error para actualizar una cuenta
      */
     @Test
-    public void UpdateAcountFail3(){
+    public void UpdateAcountFailed3(){
         Account account = new Account(5L, "", 0000L);
         boolean result = service.update(account);
         assertFalse(result);

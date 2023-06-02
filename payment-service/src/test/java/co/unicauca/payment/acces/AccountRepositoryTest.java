@@ -34,7 +34,7 @@ public class AccountRepositoryTest {
      * Prueba de erorr para encontrar una cuenta por su numero de tarjeta
      */
     @Test
-    public void TestfindAccountByCardFail() {
+    public void TestfindAccountByCardFailed() {
         
         Account result = repository.findByCard("12469");
         assertNull(result);
@@ -54,7 +54,7 @@ public class AccountRepositoryTest {
      * Prueba para actualizar una cuenta fallida
      */
     @Test
-    public void TestUpdateAccountFail() {
+    public void TestUpdateAccountFailed() {
         Account account = new Account(4L, "123456789", 200L);
         Boolean result = repository.update(account);
         assertFalse(result);
@@ -64,7 +64,7 @@ public class AccountRepositoryTest {
      * Prueba para actualizar una cuenta fallida
      */
     @Test
-    public void TestUpdateAccountFail2() {
+    public void TestUpdateAccountFailed2() {
         Account account = new Account(4L, "", 200L);
         Boolean result = repository.update(account);
         assertFalse(result);

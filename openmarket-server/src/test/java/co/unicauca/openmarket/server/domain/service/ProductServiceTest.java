@@ -49,7 +49,7 @@ public class ProductServiceTest {
      * Prueba de fallo para encontrar un producto por su nombre y descripcion
      */
     @Test
-    public void TestFinbyNameAndDescriptionFaild(){
+    public void TestFinbyNameAndDescriptionFailed(){
         List<Product> productsTest = service.findByNameAndDescription("Non Product","This is an example product");
         assertTrue(productsTest.isEmpty());
     }
@@ -87,7 +87,7 @@ public class ProductServiceTest {
      * Prueba de fallo para encontrar un producto por su id
      */
     @Test
-    public void findByIdFaild(){
+    public void findByIdFailed(){
         Product productTest = service.findById(3L);
         assertNull(productTest);
     }
@@ -110,7 +110,7 @@ public class ProductServiceTest {
      */
 
     @Test
-    public void SaveProductFail(){
+    public void SaveProductFailed(){
         User user = null;
         Product product = new Product(3L, user, new Category(3L,"Tecnologia"), new StateProduct(2L,"no disponible"), "Tv", "This is an example product", 10.99, 50L, 0.0, 0.0);
         service.save(product);
@@ -124,7 +124,7 @@ public class ProductServiceTest {
      * Prueba de fallo para guardar un producto
      */
     @Test
-    public void SaveProductFail2(){
+    public void SaveProductFailed2(){
         User user = null;
         Product product = new Product(3L, user,null, new StateProduct(2L,"no disponible"), "Tv", "This is an example product", 10.99, 50L, 0.0, 0.0);
         service.save(product);
@@ -149,7 +149,7 @@ public class ProductServiceTest {
      * Prueba de fallo para editar un producto
      */
     @Test
-    public void editProdutfail(){
+    public void editProdutFailed(){
         User user = null;
         Product product = new Product(1L, user, null, new StateProduct(2L,"no disponible"), "Carro", "This is an example product", 66.99, 100L, 0.0, 0.0);
         service.update(product);
@@ -173,7 +173,7 @@ public class ProductServiceTest {
      * Prueba de fallo para eliminar un producto
      */
     @Test
-    public void DeleteProductFail(){
+    public void DeleteProductFailed(){
         User user = null;
         Product product = new Product(1L, user, new Category(1L,"Juguetes"), new StateProduct(1L,"disponible"), "Carro", "This is an example product", 9.99, 100L, 0.0, 0.0);
         service.delete(product);

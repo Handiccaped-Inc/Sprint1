@@ -44,7 +44,7 @@ public class UserServiceTest {
      */
 
     @Test
-    public void testFindbyemailandpasswordFaildEmail() {
+    public void testFindbyemailandpasswordFailedEmail() {
         User user = service.findByEmailAndPassword("", "password123");
         assertNull(user);
     }
@@ -53,7 +53,7 @@ public class UserServiceTest {
      * Prueba de fallo para encontrar un usuario por su email and password
      */
     @Test
-    public void testFindbyemailandpasswordFaildPassword() {
+    public void testFindbyemailandpasswordFailedPassword() {
         User user = service.findByEmailAndPassword("example2@example2.com", "");
         assertNull(user);
     }

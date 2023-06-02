@@ -50,9 +50,8 @@ public class DeliveryServiceTest {
      * Prueba para guardar un delivery fallido
      */
     @Test
-    public void TestsaveFail(){
+    public void TestsaveFailed(){
             User usuario = new User(2L, new Rol(1L, "Comprador"), new Date(0), "Example2@email.com", "123454678", "1234567890", "nombre2", "usuarioDePrueba2", "12345", "calle-1");
-            Product product = new Product(2L, usuario, new Category(1L, "Juguetes"), new StateProduct(1L, "Disponible"), "Carro", "Es un carro", 1000L, 3L, 0, 0);
             Order order = null;
             Delivery delivery = new Delivery(1l, order, usuario, usuario, new Date(0));
             String responde = service.save(delivery);
@@ -77,7 +76,7 @@ public class DeliveryServiceTest {
          * Prueba para actualizar un delivery fallido
          */
         @Test
-         public void updateDeliveryFail(){
+         public void updateDeliveryFailed(){
             User usuario = null;
             Product product = new Product(2L, usuario, new Category(1L, "Juguetes"), new StateProduct(1L, "Disponible"), "Carro", "Es un carro", 1000L, 3L, 0, 0);
             Order order = new Order(3L, usuario, product, new StatusOrder(1L,"Devuelto"), (double) 100L,new Date(0), 3.0);

@@ -49,7 +49,7 @@ public class OrderServiceTest {
      *  Prueba para guardar una orden fallida
      */
     @Test
-    public void TestsaveFail(){
+    public void TestsaveFailed(){
         User usuario = null;
         User usuario2 = new User(2L, new Rol(1L,"Vendedor"), new Date(0), "Example2@Email.com","2345","12345","TestName2", "TestUsername2", "1234", "cr-1");
         Product product = new Product(1L, usuario2, new Category(1L,"Juguetes"), new StateProduct(1L,"Disponible"), "Carro", "Es un carro", 1000L, 3L, 0, 0);
@@ -77,7 +77,7 @@ public class OrderServiceTest {
      * Prueba para actualizar una orden fallida
      */
     @Test
-    public void TestupdateFail(){
+    public void TestupdateFailed(){
         User usuario2 = new User(2L, new Rol(1L,"Vendedor"), new Date(0), "Example2@Email.com","2345","12345","TestName2", "TestUsername2", "1234", "cr-1");
         User usuario3 = null;
         Product product1 = new Product(1L, usuario2, new Category(1L,"Juguetes"), new StateProduct(1L,"Disponible"), "Carro", "Es un carro", 1000L, 3L, 0, 0);
@@ -100,7 +100,7 @@ public class OrderServiceTest {
      * Prueba para encontrar una orden por su estado fallida
      */
     @Test
-    public void FinbyStateFail(){
+    public void FinbyStateFailed(){
         List<Order> orderFindByState = service.findByState(new StatusOrder(3L,"Recibido"));
         assertTrue(orderFindByState.isEmpty());
     }
@@ -118,7 +118,7 @@ public class OrderServiceTest {
      * Prueba para encontrar una orden por su usuario fallida
      */
     @Test
-    public void findByUserFail(){
+    public void findByUserFailed(){
         List<Order> orderFindByUser = service.findByUser(6L);
         assertTrue(orderFindByUser.isEmpty());
     }
