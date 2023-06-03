@@ -190,6 +190,11 @@ public class ProductRepository implements IProductRepository {
         return false;
     }
 
+    /**
+     * Metodo de encontar productos por su dueño
+     * @param User usurio que es dueño de los productos
+     * @return lista de los elementos encontrados
+     */
     @Override
     public List<Product> findByOwner(User user) {
         List<Product> productsFindbyOwner = new ArrayList<>();
