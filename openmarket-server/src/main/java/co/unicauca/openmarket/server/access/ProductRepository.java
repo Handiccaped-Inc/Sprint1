@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.StateProduct;
+import co.unicauca.openmarket.commons.domain.User;
 
 public class ProductRepository implements IProductRepository {
     protected Connection conn;
@@ -187,6 +188,41 @@ public class ProductRepository implements IProductRepository {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    @Override
+    public List<Product> findByOwner(User user) {
+        List<Product> productsFindbyOwner = new ArrayList<>();
+        try {
+            if (user.getId() == 0 || user == null) {
+                return productsFindbyOwner;
+            }
+            String sql = "SELECT * FROM product WHERE user_id = ?";
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setLong(1, user.getId());
+            ResultSet result = pstm.executeQuery();
+            if (result.next()) {
+                Product newProduct = new Product();
+                newProduct.setId(result.getLong("product_id"));
+                newProduct.setOwner(new UserRepository().findById(result.getLong("user_id")));
+                newProduct.setCategory(new CategoryRepository().findById(result.getLong("category_id")));
+                newProduct.setState(new StateProductRepository().findById(result.getLong("state_product_id")));
+                newProduct.setName(result.getString("product_name"));
+                newProduct.setDescription(result.getString("product_description"));
+                newProduct.setPrice(result.getDouble("product_price"));
+                newProduct.setStock(result.getLong("product_stock"));
+                newProduct.setLatitude(result.getDouble("product_latitude"));
+                newProduct.setLongitude(result.getDouble("product_longitude"));
+                productsFindbyOwner.add(newProduct);
+            }
+
+            return productsFindbyOwner;
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return productsFindbyOwner;
     }
 
 }

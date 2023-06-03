@@ -68,10 +68,10 @@ public class DatabaseTestManagement {
 }
                 
     
-/**
- * Metodo para truncar una tabla de la base de datos
- * @param table_name nombre de la tablal que se desea truncar
- */
+    /**
+    * Metodo para truncar una tabla de la base de datos
+    * @param table_name nombre de la tablal que se desea truncar
+    */
     public void truncateTablebyName(String table_name){
         try{
             String sql = "DELETE FROM " + table_name;
@@ -89,6 +89,9 @@ public class DatabaseTestManagement {
         }
     }
 
+    /**
+     * Metodo para llenar la tabla Rols de la base de datos
+     */
     public void insertRols(){
 
         try {
@@ -108,6 +111,9 @@ public class DatabaseTestManagement {
         }
     }
 
+    /**
+     * Metodo para llenar la tabla User de la base de datos
+     */
     public void insertUser(){
         try{
             String sqlUser = "INSERT INTO user (rol_id, user_birth_date, user_email, user_phone, user_card, user_realname, user_username, user_password, user_address) VALUES " +
@@ -123,6 +129,9 @@ public class DatabaseTestManagement {
         }
     }
 
+    /**
+     * Metodo para llenar la tabla Category de la base de datos
+     */
     public void insertCategory(){
         try{
             String sqlCategory = "INSERT INTO category (category_name) VALUES " +
@@ -138,6 +147,9 @@ public class DatabaseTestManagement {
         }
     }
 
+    /**
+     * Metodo para llenar la tabla StateProduct de la base de datos
+     */
     public void insertStateProduct(){
         try{
             String sqlStateProduct = "INSERT INTO state_product (state_product_name) VALUES " +
@@ -152,6 +164,9 @@ public class DatabaseTestManagement {
         }
     }
 
+    /**
+     * Metodo para llenar la tabla Product de la base de datos
+     */
     public void insertProduct(){
         try{
             String sqlProduct = "INSERT INTO product (user_id, category_id, state_product_id, product_name, product_description, product_price, product_stock, product_latitude, product_longitude) VALUES " +
@@ -166,6 +181,9 @@ public class DatabaseTestManagement {
         }
     }
 
+    /**
+     * Metodo para llenar la tabla ShoppingCart de la base de datos
+     */
     public void insertShoppingCart(){
         try{
             String sqlShoppingCart = "INSERT INTO shopping_cart (user_id, product_id, shopping_cart_quantity) VALUES " +
@@ -180,6 +198,9 @@ public class DatabaseTestManagement {
         }
     }
 
+    /**
+     * Metodo para llenar la tabla Order_Status de la base de datos
+     */
     public void insertOrderStatus(){
         try{
             String sqlOrderStatus = "INSERT INTO order_status (order_status_name) VALUES " +
@@ -194,6 +215,9 @@ public class DatabaseTestManagement {
         }
     }
     
+    /**
+     * Metodo para llenar la tabla Orders de la base de datos
+     */
     public void insertOrders(){
         try{
             String sqlOrders = "INSERT INTO orders (user_id, product_id, orders_id, order_status_id, orders_price, orders_qualification, orders_date) VALUES " +
@@ -208,6 +232,9 @@ public class DatabaseTestManagement {
         }
     }
 
+    /**
+     * Metodo para llenar la tabla Delivery de la base de datos
+     */
     public void insertDelivery(){
         try{
             String sqlDelivery = "INSERT INTO delivery (orders_id, deliveryman_id, delivery_receiver, delivery_date) VALUES " +

@@ -2,6 +2,7 @@ package co.unicauca.openmarket.server.acces;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -169,6 +170,29 @@ public class ProductRepositoryTest{
         assertFalse(result); // Espera como resultado false que nos indica una eliminacion fallida
     }
 
+
+    /**
+     * Test de la funcion de encontrar producto por propietario
+     */
+    @Test 
+    public void testFindByOwner(){
+        User user = new User(1L, new Rol(1L, "Vendedor"), new Date(0), "example@example.com", "1+234567890","1234 5678 9012 3456","Jojan Esteban", "jojanE", "password123", "123 Street, City");
+        List<Product> listFindByOwner = repository.findByOwner(user);
+        assertEquals(1,listFindByOwner.get(0).getId());
+        assertEquals(1, listFindByOwner.size());
+        assertNotNull(listFindByOwner);
+    }
+
+    /**
+     *  Test de la funcion de encontrar producto por propietario fallada
+     */
+    @Test
+    public void testFindByOwnerFailed(){
+        User user = new User(60L, new Rol(1L, "Vendedor"), new Date(0), "example@example.com", "1+234567890","1234 5678 9012 3456","Jojan Esteban", "jojanE", "password123", "123 Street, City");
+        List<Product> listFindByOwner = repository.findByOwner(user);
+        assertEquals(0, listFindByOwner.size());
+        assertTrue(listFindByOwner.isEmpty());
+    }
 
 
 
