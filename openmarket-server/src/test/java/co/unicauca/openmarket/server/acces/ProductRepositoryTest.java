@@ -11,6 +11,7 @@ import java.util.List;
 
 import javax.swing.text.StyledEditorKit.BoldAction;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,6 +28,7 @@ import co.unicauca.openmarket.server.access.ProductRepository;
 /**
  * Pruebas unitarias para la clase ProductRepository
  */
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ProductRepositoryTest{
 
     IProductRepository repository = new ProductRepository(); // Instancia de la clase ProductRepository
@@ -40,6 +42,15 @@ public class ProductRepositoryTest{
         database.truncateTablebyName("Product");
         database.insertProduct();
 
+    }
+
+    /**
+     * Metodo para limpiar la base de datos una vez se hayan ejecutado todos los Test
+     */
+    @AfterAll
+    public void cleanDatabaseAtEnd(){
+        database.truncateTablebyName("Product");
+        database.insertProduct();
     }
     /**
      * Test de la funcion encontrar por estado Exitosa
