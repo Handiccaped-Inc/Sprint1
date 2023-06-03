@@ -8,7 +8,7 @@ import co.unicauca.payment.domain.Account;
 import co.unicauca.payment.domain.Transaction;
 
 /**
- * Clae PaymentFacade
+ * Clase PaymentFacade
  */
 public class PaymentFacade {
     AccountService accountService;
