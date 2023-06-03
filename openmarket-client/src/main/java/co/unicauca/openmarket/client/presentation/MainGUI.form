@@ -44,8 +44,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="pnlMenu" min="-2" pref="154" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="pnlCentral" min="-2" pref="700" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <Component id="pnlCentral" pref="700" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -60,7 +60,7 @@
         <Container class="javax.swing.JPanel" name="pnlMenu">
           <Properties>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-              <Color id="Default Cursor"/>
+              <Color id="Cursor Por defecto"/>
             </Property>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[2147483647, 2147483647]"/>
