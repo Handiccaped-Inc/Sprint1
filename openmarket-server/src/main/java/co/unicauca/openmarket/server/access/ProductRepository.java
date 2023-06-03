@@ -13,9 +13,17 @@ import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.StateProduct;
 import co.unicauca.openmarket.commons.domain.User;
 
+/**
+ * Clase ProductRepository
+ */
 public class ProductRepository implements IProductRepository {
+
+    /** Conexion */
     protected Connection conn;
 
+    /**
+     * Constructor default
+     */
     public ProductRepository() {
         conn = DatabaseConnection.getInstance().getConnection();
     }

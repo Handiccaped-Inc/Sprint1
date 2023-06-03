@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 
 import co.unicauca.payment.access.IAccountRepository;
 import co.unicauca.payment.domain.Account;
-import co.unicauca.payment.domain.service.AccountService;
 
 /**
  * Pruebas unitarias para la clase AccountService
@@ -23,7 +22,9 @@ public class AccountServiceTest {
     private IAccountRepository repo;
     private AccountService service;
 
-
+    /**
+     * Constructor del test
+     */
     AccountServiceTest(){
         repo = new mockAccountRepository();
         service = new AccountService(repo);

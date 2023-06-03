@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Clase de conexion de la database
+ */
 public class DatabaseConnection {
 
     private static DatabaseConnection instance;
@@ -12,7 +15,6 @@ public class DatabaseConnection {
 
     /**
      * Constructor privado para implementar el patrón Singleton
-     * 
      */
     private DatabaseConnection() {
         try {
@@ -37,8 +39,7 @@ public class DatabaseConnection {
 
     /**
      * Implementación del patrón Singleton
-     * 
-     * @return
+     * @return instancia
      */
     public static DatabaseConnection getInstance() {
         if (instance == null) {
@@ -52,8 +53,8 @@ public class DatabaseConnection {
     }
 
     /**
+     * Obtiene la conexion
      * @return La conexion
-     * @throws java.sql.SQLException
      */
     public Connection getConnection() {
         try {

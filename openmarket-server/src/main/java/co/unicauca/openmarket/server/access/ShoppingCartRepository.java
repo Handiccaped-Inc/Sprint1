@@ -14,10 +14,17 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * Clase ShoppingCartRepository
+ */
 public class ShoppingCartRepository implements IShoppingCartRepository {
 
+    /** Conexion */
     protected Connection conn;
 
+    /**
+     * Constructor por defecto
+     */
     public ShoppingCartRepository() {
         conn = DatabaseConnection.getInstance().getConnection();
     }

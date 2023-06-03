@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 import org.junit.jupiter.api.Test;
 import co.unicauca.openmarket.server.infra.Hashing;
-/*
+/**
  * Pruebas unitarias del servicio de hashing
  */
 public class hashingTest {
 
     
-    /*
+    /**
      * prueba para hashear una frase con minusculas y mayusculas
      */
     @Test
@@ -20,7 +20,7 @@ public class hashingTest {
         assertEquals(hashfrase,fraseHasheada);
     }
 
-    /*
+    /**
      * pruebas para hashear una frase con minusculas, mayusculas y numeros
      */
     @Test
@@ -30,7 +30,7 @@ public class hashingTest {
         assertEquals(hashfrase,fraseHasheada);
     }
 
-    /*
+    /**
      * pruebas para hashear una frase con minusculas, mayusculas, numeros y simbolos
      */
     @Test
@@ -41,7 +41,7 @@ public class hashingTest {
 
     }
 
-    /*
+    /**
      * pruebas de fallo para hashear una frase con minusculas, mayusculas, numeros y simbolos
      */
     @Test

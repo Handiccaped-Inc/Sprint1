@@ -6,7 +6,6 @@ import co.unicauca.openmarket.commons.domain.Category;
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.Rol;
 import co.unicauca.openmarket.commons.domain.StateProduct;
-import co.unicauca.openmarket.commons.domain.StatusOrder;
 import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.server.access.IProductRepository;
 
@@ -17,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.security.Provider.Service;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -207,6 +205,9 @@ public class ProductServiceTest {
 
 
     
+    /**
+     * Mock para los tests
+     */
     private class MockProductRepository implements IProductRepository{
         List<Product> products;
 

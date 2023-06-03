@@ -12,6 +12,10 @@ import java.util.Properties;
  */
 public class Utilities {
 
+    /** Default constructor */
+    public Utilities (){
+
+    }
     /**
      * Cargar una propiedadd de config.properties
      *

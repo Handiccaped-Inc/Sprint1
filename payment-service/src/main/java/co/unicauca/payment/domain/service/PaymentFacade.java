@@ -7,6 +7,9 @@ import co.unicauca.payment.access.ITransactionRepository;
 import co.unicauca.payment.domain.Account;
 import co.unicauca.payment.domain.Transaction;
 
+/**
+ * Clase PaymentFacade
+ */
 public class PaymentFacade {
     AccountService accountService;
     TransactionService transactionService;

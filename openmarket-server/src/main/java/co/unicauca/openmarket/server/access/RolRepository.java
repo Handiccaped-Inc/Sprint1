@@ -10,10 +10,12 @@ import java.util.logging.Logger;
 import co.unicauca.openmarket.commons.domain.Rol;
 
 /**
- *
+ * Clase RolRepository
  * @author Arturo
  */
 public class RolRepository implements IRolRepository {
+
+    /** Conexion */
     protected Connection conn;
 
     /**

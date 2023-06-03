@@ -13,10 +13,17 @@ import java.util.logging.Logger;
 import co.unicauca.openmarket.commons.domain.Order;
 import co.unicauca.openmarket.commons.domain.StatusOrder;
 
+/**
+ * Clase OrderRepository 
+ */
 public class OrderRepository implements IOrderRepository {
 
+    /** Conexion */
     protected Connection connection;
-
+    
+    /**
+     * Constructor default
+     */
     public OrderRepository() {
         connection = DatabaseConnection.getInstance().getConnection();
     }

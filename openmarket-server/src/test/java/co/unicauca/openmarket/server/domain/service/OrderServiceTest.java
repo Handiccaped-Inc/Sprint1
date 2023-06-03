@@ -123,7 +123,7 @@ public class OrderServiceTest {
         assertTrue(orderFindByUser.isEmpty()); // se espera que el arreglo de regreso este vacio
     }
 
-    
+    /** Mock para usar en los tests */
     private class mockOrderRepository implements IOrderRepository{
 
         List<Order> orders;

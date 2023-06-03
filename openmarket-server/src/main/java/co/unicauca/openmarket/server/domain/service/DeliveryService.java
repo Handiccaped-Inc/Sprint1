@@ -9,10 +9,14 @@ import co.unicauca.openmarket.commons.domain.Delivery;
 import co.unicauca.openmarket.commons.infra.JsonError;
 import co.unicauca.openmarket.server.access.IDeliveryRepository;
 
+/**
+ * Clase DeliveryService
+ */
 public class DeliveryService implements IDeliveryService {
 
     private IDeliveryRepository myDeliverRepository;
 
+    /** Constructor default */
     DeliveryService(IDeliveryRepository myDeliveryRespository) {
         this.myDeliverRepository = myDeliveryRespository;
     }

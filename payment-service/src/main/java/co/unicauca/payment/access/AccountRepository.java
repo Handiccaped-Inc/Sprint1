@@ -9,10 +9,16 @@ import java.util.logging.Logger;
 
 import co.unicauca.payment.domain.Account;
 
+/**
+ * Clase repositorio de la cuenta
+ */
 public class AccountRepository implements IAccountRepository {
 
     private Connection conn;
 
+    /**
+     * Constructor de AccountRepository
+     */
     public AccountRepository() {
         conn = DatabaseConnection.getInstance().getConnection();
     }

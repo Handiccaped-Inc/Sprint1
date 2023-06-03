@@ -15,7 +15,7 @@ import co.unicauca.openmarket.server.infra.Hashing;
 import co.unicauca.openmarket.commons.domain.Rol;
 
 /**
- *
+ * Clase UserRepository
  * @author Arturo
  */
 
@@ -26,6 +26,9 @@ public class UserRepository implements IUserRepository {
      */
     protected Connection conn;
 
+    /**
+     * Constructor default
+     */
     public UserRepository() {
         conn = DatabaseConnection.getInstance().getConnection();
     }

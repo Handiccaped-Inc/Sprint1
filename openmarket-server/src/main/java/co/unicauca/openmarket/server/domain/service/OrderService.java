@@ -8,9 +8,16 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Clase OrderService
+ */
 public class OrderService implements IOrderService {
     private IOrderRepository orderRepository;
 
+    /**
+     * Constructor del servicio
+     * @param orderRepository Repositorio de la orden
+     */
     public OrderService(IOrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }

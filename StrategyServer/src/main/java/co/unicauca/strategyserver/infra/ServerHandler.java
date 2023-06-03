@@ -17,7 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ *  Server handler
  * @author ahurtado
  */
 public abstract class ServerHandler extends Thread{  
@@ -58,6 +58,7 @@ public abstract class ServerHandler extends Thread{
     }
 
     /**
+     * Obtiene el socket
      * @return the s
      */
     public Socket getS() {
@@ -65,6 +66,7 @@ public abstract class ServerHandler extends Thread{
     }
 
     /**
+     * Establece el socket
      * @param s the s to set
      */
     public void setS(Socket s) {
@@ -72,6 +74,7 @@ public abstract class ServerHandler extends Thread{
     }
 
     /**
+     * Obtiene el input
      * @return the input
      */
     public Scanner getInput() {
@@ -79,6 +82,7 @@ public abstract class ServerHandler extends Thread{
     }
 
     /**
+     * Establece el input
      * @param input the input to set
      */
     public void setInput(Scanner input) {
@@ -86,6 +90,7 @@ public abstract class ServerHandler extends Thread{
     }
 
     /**
+     * Get the output
      * @return the output
      */
     public PrintStream getOutput() {
@@ -93,6 +98,7 @@ public abstract class ServerHandler extends Thread{
     }
 
     /**
+     * Set the output
      * @param output the output to set
      */
     public void setOutput(PrintStream output) {
@@ -102,6 +108,7 @@ public abstract class ServerHandler extends Thread{
         
     /**
      * Lee el flujo del socket
+     * @return retorna request si se cumple el flujo sino ""
      */
     public String readStream() {
         if (getInput().hasNextLine()) {
@@ -120,7 +127,7 @@ public abstract class ServerHandler extends Thread{
     /**
      * Cierra los flujos de entrada y salida
      *
-     * @throws IOException
+     * @throws IOException exception
      */
     public void closeStream() throws IOException {
         getOutput().close();
@@ -132,7 +139,6 @@ public abstract class ServerHandler extends Thread{
      *
      * @return error en formato json
      */
-    
     private String generateErrorJson() {
         List<JsonError> errors = new ArrayList<>();
         JsonError error = new JsonError();
@@ -151,7 +157,7 @@ public abstract class ServerHandler extends Thread{
      * Convierte el objeto Customer a json para que el servidor lo envie como
      * respuesta por el socket
      *
-     * @param object
+     * @param object Objeto a convertir
      * @return customer en formato json
      */
     protected String objectToJSON(Object object) {
@@ -163,26 +169,32 @@ public abstract class ServerHandler extends Thread{
     
     /**
      * Envia la respuesta al cliente
-     * @param response
+     * @param response respuesta
      */
     protected void respond(String response){
          getOutput().println(response);
     }
 
     /**
-     * @return the s
+     * Obtiene el socker
+     * @return the socket
      */
     public Socket getSocket() {
         return getS();
     }
 
     /**
+     * Establece el socket
      * @param s the s to set
      */
     public void setSocket(Socket s) {
         this.setS(s);
     }
 
+    /**
+     * Crete the streams
+     * @throws IOException exception
+     */
     private void createStreams() throws IOException {
         setInput(new Scanner(getS().getInputStream()));
         setOutput(new PrintStream(getS().getOutputStream()));   

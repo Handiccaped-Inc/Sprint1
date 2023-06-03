@@ -3,6 +3,9 @@ package co.unicauca.payment.domain.service;
 import co.unicauca.payment.access.ITransactionRepository;
 import co.unicauca.payment.domain.Transaction;
 
+/**
+ * Clase TransactionService
+ */
 public class TransactionService {
     private ITransactionRepository transactionRepository;
 

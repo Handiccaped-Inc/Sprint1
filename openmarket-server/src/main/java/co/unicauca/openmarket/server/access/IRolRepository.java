@@ -2,7 +2,7 @@ package co.unicauca.openmarket.server.access;
 
 import co.unicauca.openmarket.commons.domain.Rol;
 /**
- * Interface del respositorio de roles
+ * Interfaz del respositorio de roles
  * @author Arturo Restrepo Ruiz
  */
 public interface IRolRepository {

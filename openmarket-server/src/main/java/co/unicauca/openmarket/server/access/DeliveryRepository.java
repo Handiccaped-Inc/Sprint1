@@ -14,8 +14,12 @@ import co.unicauca.openmarket.commons.domain.Delivery;
  */
 public class DeliveryRepository implements IDeliveryRepository {
 
+    /** Conexion */
     protected Connection conn;
 
+    /**
+     * Constructor por defecto
+     */
     public DeliveryRepository() {
         conn = DatabaseConnection.getInstance().getConnection();
     }

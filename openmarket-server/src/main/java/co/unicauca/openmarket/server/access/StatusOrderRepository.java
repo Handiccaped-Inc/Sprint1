@@ -9,9 +9,17 @@ import java.util.logging.Logger;
 
 import co.unicauca.openmarket.commons.domain.StatusOrder;
 
+/**
+ * Clase StatusOrderRepository
+ */
 public class StatusOrderRepository implements IStatusOrderRepository {
+
+    /** Conexion */
     private Connection connection;
 
+    /**
+     * Constructor default
+     */
     public StatusOrderRepository() {
         connection = DatabaseConnection.getInstance().getConnection();
     }

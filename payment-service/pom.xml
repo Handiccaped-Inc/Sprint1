@@ -19,10 +19,31 @@
     <dependency>
             <groupId>org.xerial</groupId>
             <artifactId>sqlite-jdbc</artifactId>
-            <version>3.32.3.2</version>
+            <version>3.42.0.0</version>
         </dependency>
 
   </dependencies>
 
-  
+  <build>
+  <plugins>
+        <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version> 3.3.1 </version>
+                <configuration>
+                <source>1.8</source>
+                <failOnWarnings>true</failOnWarnings>
+                </configuration>
+                <executions>
+                <execution>
+                <id>attach-javadoc</id>
+                <goals>
+                <goal>javadoc</goal>
+                </goals>
+                </execution>
+                </executions>
+            </plugin>
+        
+  </plugins>
+  </build>
 </project>

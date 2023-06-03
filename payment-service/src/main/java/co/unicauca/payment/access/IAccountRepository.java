@@ -2,6 +2,10 @@ package co.unicauca.payment.access;
 
 import co.unicauca.payment.domain.Account;
 
+/**
+ * Interfaz que maneja los metodos que deben
+ * contener todos los Service de que desean manejar el repositorio de la cuenta
+ */
 public interface IAccountRepository {
     /**
      * Busca una cuenta en la base de datos

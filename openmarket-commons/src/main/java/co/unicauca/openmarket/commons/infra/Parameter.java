@@ -11,11 +11,19 @@ public class Parameter {
     private String name;
     private String value;
 
+    /**
+     * Constructor
+     * @param name nombre de la entidad
+     * @param value valor
+     */
     public Parameter(String name, String value) {
         this.name = name;
         this.value = value;
     }
 
+    /**
+     * Constructor sin parametros
+     */
     public Parameter() {
 
     }

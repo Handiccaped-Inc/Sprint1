@@ -1,10 +1,7 @@
 package co.unicauca.payment.domain.service;
 
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Date;
@@ -13,12 +10,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import co.unicauca.payment.access.IAccountRepository;
 import co.unicauca.payment.access.ITransactionRepository;
 import co.unicauca.payment.domain.Account;
 import co.unicauca.payment.domain.Transaction;
-import co.unicauca.payment.domain.service.AccountService;
-import co.unicauca.payment.domain.service.TransactionService;
 
 /**
  * Pruebas unitarias para la clase TransactionService
@@ -28,6 +22,9 @@ public class TransactionServiceTest {
     private ITransactionRepository repo;
     private TransactionService service;
 
+    /**
+     * Constructor del test
+     */
     public TransactionServiceTest(){
         repo = new mockTransactionRepository();
         service = new TransactionService(repo);
@@ -83,6 +80,7 @@ public class TransactionServiceTest {
         assertFalse(result); // se espera que la transaccion no se guarde
     }
 
+    /** Mock para usar en los tests */
     private class mockTransactionRepository implements ITransactionRepository{
 
         private List<Transaction> transactions;
