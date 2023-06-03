@@ -3,6 +3,7 @@ package co.unicauca.openmarket.server.access;
 import java.util.List;
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.StateProduct;
+import co.unicauca.openmarket.commons.domain.User;
 
 public interface IProductRepository {
     /**
@@ -29,7 +30,7 @@ public interface IProductRepository {
     /**
      * @brief Metodo que encuentra un producto por su estado
      * @param status objeto que contiene el estado de un producto
-     * @return lista de objetos entcontrados
+     * @return lista de objetos encontrados
      */
     public List<Product> findByStatus(StateProduct status);
 
@@ -38,14 +39,21 @@ public interface IProductRepository {
      *        descripcion
      * @param name        nombre del producto
      * @param description descripcion del producto
-     * @return lista de objetos entcontrados
+     * @return lista de objetos encontrados
      */
     public List<Product> findByNameAndDescription(String name, String description);
 
     /**
      * @brief Metodo que encuentra un producto por su id
      * @param id identificador del producto
-     * @return objeto entcontrado
+     * @return objeto encontrado
      */
     public Product findById(Long id);
+
+      /**
+     * Metodo que encuentra los productos de un vendedor
+     * @param User_id
+     * @return lista de objetos Encontrados
+     */
+        public List<Product> findByOwner(User user);
 }
