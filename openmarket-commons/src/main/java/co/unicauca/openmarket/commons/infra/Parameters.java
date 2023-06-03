@@ -25,8 +25,6 @@ public class Parameters {
 
     /**
      * Returns the list of parameters.
-     * 
-     * 
      * @return the list of parameters
      */
     public List<Parameter> getParameters() {
