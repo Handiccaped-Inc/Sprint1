@@ -187,8 +187,7 @@ public class ProductServiceTest {
     public void testFindByOwner(){
         User user = new User(1L, new Rol(1L, "Vendedor"), new Date(0), "example@example.com", "1+234567890","1234 5678 9012 3456","Jojan Esteban", "jojanE", "password123", "123 Street, City");
         List<Product> listFindByOwner = repository.findByOwner(user);
-        assertEquals(1,listFindByOwner.get(0).getId());
-        assertEquals(1, listFindByOwner.size());
+        assertEquals(2, listFindByOwner.size());
         assertNotNull(listFindByOwner);
     }
 

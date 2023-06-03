@@ -45,7 +45,8 @@ public class OrderRepository implements IOrderRepository {
             pstmt.setLong(3, newOrder.getStatus().getId());
             pstmt.setDouble(4, newOrder.getPrice());
             pstmt.setDouble(5, newOrder.getQualification());
-            pstmt.setDate(6, (Date) newOrder.getDate());
+            String date = newOrder.getDate().toString();
+            pstmt.setString(6,date);
             return pstmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             Logger.getLogger(OrderRepository.class.getName()).log(Level.SEVERE, null, ex);
@@ -62,7 +63,7 @@ public class OrderRepository implements IOrderRepository {
             }
 
             String sql = "UPDATE orders SET user_id = ?, product_id = ?, order_status_id = ?, orders_price = ?, "
-                    + "orders_qualification = ?, orders_date = ? WHERE order_id = ?";
+                    + "orders_qualification = ?, orders_date = ? WHERE orders_id = ?";
 
             PreparedStatement pstmt = connection.prepareStatement(sql);
             pstmt.setLong(1, newOrder.getCustomer().getId());
@@ -70,7 +71,8 @@ public class OrderRepository implements IOrderRepository {
             pstmt.setLong(3, newOrder.getStatus().getId());
             pstmt.setDouble(4, newOrder.getPrice());
             pstmt.setDouble(5, newOrder.getQualification());
-            pstmt.setDate(6, (Date) newOrder.getDate());
+            String date = newOrder.getDate().toString();
+            pstmt.setString(6,date);
             pstmt.setLong(7, newOrder.getId());
 
             int rowsUpdated = pstmt.executeUpdate();
@@ -93,13 +95,15 @@ public class OrderRepository implements IOrderRepository {
 
             while (rs.next()) {
                 Order order = new Order();
-                order.setId(rs.getLong("order_id"));
+                order.setId(rs.getLong("orders_id"));
                 order.setCustomer(new UserRepository().findById(rs.getLong("user_id")));
                 order.setProduct(new ProductRepository().findById(rs.getLong("product_id")));
                 order.setStatus(new StatusOrderRepository().findById(rs.getLong("order_status_id")));
                 order.setPrice(rs.getDouble("orders_price"));
                 order.setQualification(rs.getDouble("orders_qualification"));
-                order.setDate(rs.getDate("orders_date"));
+                String date = rs.getString("orders_date");
+                order.setDate(Date.valueOf(date));
+
                 orders.add(order);
             }
 
@@ -122,13 +126,14 @@ public class OrderRepository implements IOrderRepository {
             ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Order order = new Order();
-                order.setId(rs.getLong("order_id"));
+                order.setId(rs.getLong("orders_id"));
                 order.setCustomer(new UserRepository().findById(rs.getLong("user_id")));
                 order.setProduct(new ProductRepository().findById(rs.getLong("product_id")));
                 order.setStatus(new StatusOrderRepository().findById(rs.getLong("order_status_id")));
                 order.setPrice(rs.getDouble("orders_price"));
                 order.setQualification(rs.getDouble("orders_qualification"));
-                order.setDate(rs.getDate("orders_date"));
+                String strDate = rs.getString("orders_date");
+                order.setDate(Date.valueOf(strDate));
                 orders.add(order);
             }
 
