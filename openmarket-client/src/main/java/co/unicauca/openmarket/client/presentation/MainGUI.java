@@ -41,12 +41,12 @@ public class MainGUI extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
         pnlCentral = new javax.swing.JPanel();
         pnlLogin = new javax.swing.JPanel();
-        txtUsuario = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        txtCorreoUsuario = new javax.swing.JTextField();
+        lblCorreoUsuario = new javax.swing.JLabel();
+        lblContraseniaUsuario = new javax.swing.JLabel();
         btnIniciarSesion = new javax.swing.JButton();
         btnAnonimo = new javax.swing.JButton();
-        txtConstrasenia = new javax.swing.JPasswordField();
+        txtConstraseniaUsuario = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("OpenMarket");
@@ -100,11 +100,11 @@ public class MainGUI extends javax.swing.JFrame {
 
         pnlCentral.setLayout(new java.awt.BorderLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel2.setText("Usuario:");
+        lblCorreoUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblCorreoUsuario.setText("Correo Electronico:");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel3.setText("Contrasenia:");
+        lblContraseniaUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblContraseniaUsuario.setText("Contrasenia:");
 
         btnIniciarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnIniciarSesion.setText("Iniciar Sesion");
@@ -121,10 +121,10 @@ public class MainGUI extends javax.swing.JFrame {
                 .addContainerGap(246, Short.MAX_VALUE)
                 .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel3)
-                        .addComponent(jLabel2)
-                        .addComponent(txtUsuario)
-                        .addComponent(txtConstrasenia, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                        .addComponent(lblContraseniaUsuario)
+                        .addComponent(lblCorreoUsuario)
+                        .addComponent(txtCorreoUsuario)
+                        .addComponent(txtConstraseniaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
                         .addComponent(btnIniciarSesion)
                         .addGap(32, 32, 32))
@@ -137,13 +137,13 @@ public class MainGUI extends javax.swing.JFrame {
             pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlLoginLayout.createSequentialGroup()
                 .addGap(130, 130, 130)
-                .addComponent(jLabel2)
+                .addComponent(lblCorreoUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtCorreoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel3)
+                .addComponent(lblContraseniaUsuario)
                 .addGap(18, 18, 18)
-                .addComponent(txtConstrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtConstraseniaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addComponent(btnIniciarSesion)
                 .addGap(32, 32, 32)
@@ -196,13 +196,13 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JButton btnPuntuarOrdenes;
     private javax.swing.JButton btnRegistrarEntrega;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel lblContraseniaUsuario;
+    private javax.swing.JLabel lblCorreoUsuario;
     private javax.swing.JPanel pnlCentral;
     private javax.swing.JPanel pnlLogin;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMenu;
-    private javax.swing.JPasswordField txtConstrasenia;
-    private javax.swing.JTextField txtUsuario;
+    private javax.swing.JPasswordField txtConstraseniaUsuario;
+    private javax.swing.JTextField txtCorreoUsuario;
     // End of variables declaration//GEN-END:variables
 }

@@ -176,10 +176,10 @@
                           <EmptySpace pref="246" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" alignment="0" max="-2" attributes="0"/>
-                                  <Component id="txtUsuario" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="txtConstrasenia" alignment="0" pref="170" max="32767" attributes="0"/>
+                                  <Component id="lblContraseniaUsuario" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblCorreoUsuario" alignment="0" max="-2" attributes="0"/>
+                                  <Component id="txtCorreoUsuario" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="txtConstraseniaUsuario" alignment="0" pref="170" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
                                   <Component id="btnIniciarSesion" min="-2" max="-2" attributes="0"/>
@@ -198,13 +198,13 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="130" max="-2" attributes="0"/>
-                          <Component id="jLabel2" max="-2" attributes="0"/>
+                          <Component id="lblCorreoUsuario" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtUsuario" max="-2" attributes="0"/>
+                          <Component id="txtCorreoUsuario" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblContraseniaUsuario" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txtConstrasenia" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtConstraseniaUsuario" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                           <Component id="btnIniciarSesion" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
@@ -215,17 +215,17 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JTextField" name="txtUsuario">
+                <Component class="javax.swing.JTextField" name="txtCorreoUsuario">
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel2">
+                <Component class="javax.swing.JLabel" name="lblCorreoUsuario">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="12" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Usuario:"/>
+                    <Property name="text" type="java.lang.String" value="Correo Electronico:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel3">
+                <Component class="javax.swing.JLabel" name="lblContraseniaUsuario">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="12" style="1"/>
@@ -250,7 +250,7 @@
                     <Property name="text" type="java.lang.String" value="Anonimo"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JPasswordField" name="txtConstrasenia">
+                <Component class="javax.swing.JPasswordField" name="txtConstraseniaUsuario">
                 </Component>
               </SubComponents>
             </Container>
