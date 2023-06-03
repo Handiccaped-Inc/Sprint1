@@ -31,7 +31,7 @@ public interface IProductService {
     /**
      * @brief Metodo que encuentra un producto por su estado
      * @param status objeto que contiene el estado de un producto
-     * @return lista de objetos entcontrados
+     * @return lista de objetos encontrados
      */
     public List<Product> findByStatus(StateProduct status);
 
@@ -40,14 +40,14 @@ public interface IProductService {
      *        descripcion
      * @param name        nombre del producto
      * @param description descripcion del producto
-     * @return lista de objetos entcontrados
+     * @return lista de objetos encontrados
      */
     public List<Product> findByNameAndDescription(String name, String description);
 
     /**
      * @brief Metodo que encuentra un producto por su id
      * @param id identificador del producto
-     * @return objeto entcontrado
+     * @return objeto encontrado
      */
     public Product findById(Long id);
 
