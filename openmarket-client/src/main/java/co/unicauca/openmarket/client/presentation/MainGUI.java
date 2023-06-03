@@ -40,6 +40,13 @@ public class MainGUI extends javax.swing.JFrame {
         btnRegistrarEntrega = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         pnlCentral = new javax.swing.JPanel();
+        pnlLogin = new javax.swing.JPanel();
+        txtCorreoUsuario = new javax.swing.JTextField();
+        lblCorreoUsuario = new javax.swing.JLabel();
+        lblContraseniaUsuario = new javax.swing.JLabel();
+        btnIniciarSesion = new javax.swing.JButton();
+        btnAnonimo = new javax.swing.JButton();
+        txtConstraseniaUsuario = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("OpenMarket");
@@ -93,6 +100,59 @@ public class MainGUI extends javax.swing.JFrame {
 
         pnlCentral.setLayout(new java.awt.BorderLayout());
 
+        lblCorreoUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblCorreoUsuario.setText("Correo Electronico:");
+
+        lblContraseniaUsuario.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblContraseniaUsuario.setText("Contrasenia:");
+
+        btnIniciarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnIniciarSesion.setText("Iniciar Sesion");
+        btnIniciarSesion.setActionCommand("Iniciar Sesion");
+
+        btnAnonimo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnAnonimo.setText("Anonimo");
+
+        javax.swing.GroupLayout pnlLoginLayout = new javax.swing.GroupLayout(pnlLogin);
+        pnlLogin.setLayout(pnlLoginLayout);
+        pnlLoginLayout.setHorizontalGroup(
+            pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLoginLayout.createSequentialGroup()
+                .addContainerGap(246, Short.MAX_VALUE)
+                .addGroup(pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(lblContraseniaUsuario)
+                        .addComponent(lblCorreoUsuario)
+                        .addComponent(txtCorreoUsuario)
+                        .addComponent(txtConstraseniaUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
+                        .addComponent(btnIniciarSesion)
+                        .addGap(32, 32, 32))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlLoginLayout.createSequentialGroup()
+                        .addComponent(btnAnonimo)
+                        .addGap(41, 41, 41)))
+                .addContainerGap(284, Short.MAX_VALUE))
+        );
+        pnlLoginLayout.setVerticalGroup(
+            pnlLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLoginLayout.createSequentialGroup()
+                .addGap(130, 130, 130)
+                .addComponent(lblCorreoUsuario)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtCorreoUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(lblContraseniaUsuario)
+                .addGap(18, 18, 18)
+                .addComponent(txtConstraseniaUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(btnIniciarSesion)
+                .addGap(32, 32, 32)
+                .addComponent(btnAnonimo)
+                .addContainerGap(170, Short.MAX_VALUE))
+        );
+
+        pnlCentral.add(pnlLogin, java.awt.BorderLayout.CENTER);
+
         javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
@@ -100,7 +160,7 @@ public class MainGUI extends javax.swing.JFrame {
             .addGroup(pnlMainLayout.createSequentialGroup()
                 .addComponent(pnlMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlCentral, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
+                .addComponent(pnlCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         pnlMainLayout.setVerticalGroup(
             pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,17 +185,24 @@ public class MainGUI extends javax.swing.JFrame {
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bntBajaSuspender;
+    private javax.swing.JButton btnAnonimo;
     private javax.swing.JButton btnBuscarProductos;
     private javax.swing.JButton btnCarritodeCompras;
     private javax.swing.JButton btnComprarProductos;
     private javax.swing.JButton btnConfirmarOrdenes;
     private javax.swing.JButton btnCrearEditarProductos;
+    private javax.swing.JButton btnIniciarSesion;
     private javax.swing.JButton btnModificarStock;
     private javax.swing.JButton btnPuntuarOrdenes;
     private javax.swing.JButton btnRegistrarEntrega;
     private javax.swing.JButton btnSalir;
+    private javax.swing.JLabel lblContraseniaUsuario;
+    private javax.swing.JLabel lblCorreoUsuario;
     private javax.swing.JPanel pnlCentral;
+    private javax.swing.JPanel pnlLogin;
     private javax.swing.JPanel pnlMain;
     private javax.swing.JPanel pnlMenu;
+    private javax.swing.JPasswordField txtConstraseniaUsuario;
+    private javax.swing.JTextField txtCorreoUsuario;
     // End of variables declaration//GEN-END:variables
 }
