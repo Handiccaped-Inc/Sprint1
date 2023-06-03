@@ -84,9 +84,9 @@ public class ProductRepository implements IProductRepository {
     public List<Product> findByStatus(StateProduct status) {
         List<Product> products = new ArrayList<>();
         try {
-            String sql = "SELECT * FROM product WHERE state_product_id=?";
+            String sql = "SELECT * FROM product WHERE product.state_product_id in (select state_product_id from state_product where state_product_name = ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setLong(1, status.getId());
+            pstmt.setString(1, status.getName());
             ResultSet result = pstmt.executeQuery();
             while (result.next()) {
                 Product newProduct = new Product();
@@ -113,10 +113,11 @@ public class ProductRepository implements IProductRepository {
         List<Product> products = new ArrayList<>();
 
         try {
-            String sql = "SELECT * FROM product WHERE state_product_id = 1 AND product_name like ? OR product_description like ?";
+            String sql = "SELECT * FROM product WHERE product.state_product_id in (select state_product_id from state_product where state_product_name = ?) AND (product_name like ? OR product_description like ?)";
             PreparedStatement pstmt = conn.prepareStatement(sql);
-            pstmt.setString(1, "%" + name + "%");
-            pstmt.setString(2, "%" + description + "%");
+            pstmt.setString(1, "disponible");
+            pstmt.setString(2, "%" + name + "%");
+            pstmt.setString(3, "%" + description + "%");
             ResultSet result = pstmt.executeQuery();
             while (result.next()) {
                 Product newProduct = new Product();
