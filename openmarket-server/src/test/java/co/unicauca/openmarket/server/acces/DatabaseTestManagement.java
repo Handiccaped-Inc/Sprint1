@@ -11,11 +11,17 @@ import org.junit.jupiter.api.extension.ExtensionContext.Store;
 
 import co.unicauca.openmarket.server.access.DatabaseConnection;
 
+/**
+ * Clase para la gestion de la base de datos en las pruebas unitarias
+ */
 public class DatabaseTestManagement {
 
-    private static DatabaseTestManagement instance;
-    private Connection connection;
+    private static DatabaseTestManagement instance; // Instancia de la clase 
+    private Connection connection; // Conexion a la base de datos
 
+    /**
+     * Constructor de la clase
+     */
     private DatabaseTestManagement(){
         if (connection == null) {
             this.connection = DatabaseConnection.getInstance().getConnection();
@@ -23,6 +29,10 @@ public class DatabaseTestManagement {
     
     }
 
+    /**
+     * Metodo para obtener la instancia de la clase
+     * @return instancia de la clase DatabaseTestManagement
+     */
     public static DatabaseTestManagement getInstance() {
         if (instance == null) {
             synchronized (DatabaseTestManagement.class) {
@@ -34,6 +44,9 @@ public class DatabaseTestManagement {
         return instance;
     }
 
+    /**
+     * Metodo para truncar una tabla de la base de datos
+     */
   public void truncateTableAll() {
     try {
         String[] tables = {"state_product", "orders", "category", "user", "rol", "product", "shopping_cart", "order_status", "delivery"};
@@ -55,7 +68,10 @@ public class DatabaseTestManagement {
 }
                 
     
-
+/**
+ * Metodo para truncar una tabla de la base de datos
+ * @param table_name nombre de la tablal que se desea truncar
+ */
     public void truncateTablebyName(String table_name){
         try{
             String sql = "DELETE FROM " + table_name;

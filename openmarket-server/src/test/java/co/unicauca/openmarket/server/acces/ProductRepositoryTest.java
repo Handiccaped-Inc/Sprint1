@@ -23,20 +23,24 @@ import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.server.access.IProductRepository;
 import co.unicauca.openmarket.server.access.ProductRepository;
 
-
+/**
+ * Pruebas unitarias para la clase ProductRepository
+ */
 public class ProductRepositoryTest{
 
-    IProductRepository repository = new ProductRepository();
-    DatabaseTestManagement database = DatabaseTestManagement.getInstance();
+    IProductRepository repository = new ProductRepository(); // Instancia de la clase ProductRepository
+    DatabaseTestManagement database = DatabaseTestManagement.getInstance(); // Instancia de la clase DatabaseTestManagement
 
+    /**
+     * Metodo para limpiar la base de datos antes de cada test
+     */
     @BeforeEach
     public  void cleanDatabase(){
-        //database.truncateTableAll();
         database.truncateTablebyName("Product");
         database.insertProduct();
 
     }
-    /*
+    /**
      * Test de la funcion encontrar por estado Exitosa
      */
     @Test
@@ -45,6 +49,9 @@ public class ProductRepositoryTest{
         assertEquals(2, products.size()); // Espera como resultado 2 que nos indica que se encontraron 2 productos
     }
 
+    /**
+     * Test de la funcion encontrar por estado fallida
+     */
     @Test
     public void testFindByStatusFailed() {
         List<Product> products = repository.findByStatus(new StateProduct(4L,"fallar"));
@@ -72,7 +79,6 @@ public class ProductRepositoryTest{
 
     /**
      * Test de la funcion findById
-     * En estas pruebas correr el scrip de la base de datos
      */
     @Test 
     public void findByIdSuccess(){
