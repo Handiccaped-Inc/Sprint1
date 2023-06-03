@@ -4,6 +4,7 @@ import java.util.List;
 
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.StateProduct;
+import co.unicauca.openmarket.commons.domain.User;
 
 /**
  * Interfaz que maneja los metodos que deben
@@ -53,4 +54,11 @@ public interface IProductService {
      * @return objeto entcontrado
      */
     public Product findById(Long id);
+
+     /**
+     * Metodo que encuentra los productos de un vendedor
+     * @param User_id
+     * @return lista de objetos Encontrados
+     */
+    public List<Product> findByOwner(User user);
 }

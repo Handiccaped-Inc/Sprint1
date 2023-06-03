@@ -179,6 +179,31 @@ public class ProductServiceTest {
         assertNotNull(response); // se espera que el producto no se elimine
 
     }
+
+       /**
+     * Test de la funcion de encontrar producto por propietario
+     */
+    @Test 
+    public void testFindByOwner(){
+        User user = new User(1L, new Rol(1L, "Vendedor"), new Date(0), "example@example.com", "1+234567890","1234 5678 9012 3456","Jojan Esteban", "jojanE", "password123", "123 Street, City");
+        List<Product> listFindByOwner = repository.findByOwner(user);
+        assertEquals(1,listFindByOwner.get(0).getId());
+        assertEquals(1, listFindByOwner.size());
+        assertNotNull(listFindByOwner);
+    }
+
+    /**
+     *  Test de la funcion de encontrar producto por propietario fallada
+     */
+    @Test
+    public void testFindByOwnerFailed(){
+        User user = new User(60L, new Rol(1L, "Vendedor"), new Date(0), "example@example.com", "1+234567890","1234 5678 9012 3456","Jojan Esteban", "jojanE", "password123", "123 Street, City");
+        List<Product> listFindByOwner = repository.findByOwner(user);
+        assertEquals(0, listFindByOwner.size());
+        assertTrue(listFindByOwner.isEmpty());
+    }
+
+
     
     /**
      * Mock para los tests
@@ -264,6 +289,17 @@ public class ProductServiceTest {
                 }
             }
             return null;
+        }
+
+        @Override
+        public List<Product> findByOwner(User user) {
+            List<Product> productsFindByOwner = new ArrayList<>();
+            for (Product product : products) {
+                if(product.getOwner().getId() == user.getId()){
+                    productsFindByOwner.add(product);
+                }
+            }
+            return productsFindByOwner;
         }
     }
 }

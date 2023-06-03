@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.StateProduct;
+import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.commons.infra.JsonError;
 import co.unicauca.openmarket.server.access.IProductRepository;
 
@@ -104,5 +105,20 @@ public class ProductService implements IProductService {
         }
         return myProductRepository.delete(newProduct) ? "ok" : "!error";
     }
+
+    @Override
+    public List<Product> findByOwner(User user) {
+        if(user == null || user.getId() <= 0 || user.getUserName().isEmpty() 
+        || user.getAddress().isEmpty()
+        || user.getCard().isEmpty()
+        || user.getEmail().isEmpty()
+        || user.getRealName().isEmpty()){
+            return new ArrayList<>();
+        }
+
+        return myProductRepository.findByOwner(user);
+
+    }
+
 
 }
