@@ -38,7 +38,7 @@ public class ProductService implements IProductService {
         if (!errors.isEmpty()) {
             Gson gson = new Gson();
             String errosJson = gson.toJson(errors);
-            return errosJson;
+            return errorsJson;
         }
         return myProductRepository.save(newProduct) ? "ok" : "!error";
 
@@ -57,8 +57,8 @@ public class ProductService implements IProductService {
         }
         if (!errors.isEmpty()) {
             Gson gson = new Gson();
-            String errosJson = gson.toJson(errors);
-            return errosJson;
+            String errorsJson = gson.toJson(errors);
+            return errorsJson;
         }
         return myProductRepository.update(newProduct) ? "ok" : "!error";
     }
@@ -100,8 +100,8 @@ public class ProductService implements IProductService {
         }
         if (!errors.isEmpty()) {
             Gson gson = new Gson();
-            String errosJson = gson.toJson(errors);
-            return errosJson;
+            String errorsJson = gson.toJson(errors);
+            return errorsJson;
         }
         return myProductRepository.delete(newProduct) ? "ok" : "!error";
     }
