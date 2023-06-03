@@ -101,11 +101,11 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> findByOwner(User user) {
-        if(user == null || user.getId() <= 0 || user.getUserName() == "" 
-        || user.getAddress() == ""
-        || user.getCard() == ""
-        || user.getEmail() == ""
-        || user.getRealName() == ""){
+        if(user == null || user.getId() <= 0 || user.getUserName().isEmpty() 
+        || user.getAddress().isEmpty()
+        || user.getCard().isEmpty()
+        || user.getEmail().isEmpty()
+        || user.getRealName().isEmpty()){
             return new ArrayList<>();
         }
 
