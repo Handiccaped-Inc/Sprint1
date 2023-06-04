@@ -133,6 +133,7 @@ public class OpenMarketFacade implements IOpenMarketFacade {
             }
             productService.update(dbProduct);
 
+            return "ok";
         }
         return "!error";
     }
@@ -286,7 +287,7 @@ public class OpenMarketFacade implements IOpenMarketFacade {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
             if (requester.getRol().getName().equals("repartidor")) {
-                orderService.findByState(new StatusOrder(3L, "en espera"));
+               return orderService.findByState(new StatusOrder(3L, "en espera"));
             } else {
                 return orderService.findByUser(requester.getId());
             }

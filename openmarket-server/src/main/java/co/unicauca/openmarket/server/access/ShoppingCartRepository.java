@@ -33,7 +33,7 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
     public boolean save(ShoppingCart newCart) {
         try {
             // Validate cart
-            if (newCart == null || newCart.getId() == 0L) {
+            if (newCart == null) {
                 return false;
             }
             // this.connect();
