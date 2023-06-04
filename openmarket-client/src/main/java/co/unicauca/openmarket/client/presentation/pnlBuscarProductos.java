@@ -4,17 +4,28 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.commons.domain.Product;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import co.unicauca.openmarket.client.infra.Messages;
+import framework.obsobs.Observador;
+
 /**
  *
  * @author restr
  */
-public class pnlBuscarProductos extends javax.swing.JPanel {
+public class pnlBuscarProductos extends javax.swing.JPanel implements Observador {
 
     /**
      * Creates new form pnlComprador
      */
-    public pnlBuscarProductos() {
+    
+    //private ProductService productService;
+    
+    public pnlBuscarProductos(/*ProductService productService*/) {
         initComponents();
+        //this.productService = productService;
+        initializeTable();
     }
 
     /**
@@ -37,9 +48,19 @@ public class pnlBuscarProductos extends javax.swing.JPanel {
 
         btnBuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
 
         btnListar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -87,6 +108,47 @@ public class pnlBuscarProductos extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void initializeTable() {
+        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "ID", "Nombre", "Descripcion", "Precio", "Stock", "Latitud", "Longitud", "Categoria"
+                }
+        ));
+    }
+
+    private void fillTable(List<Product> listProducts) {
+        initializeTable();
+        DefaultTableModel model = (DefaultTableModel) tblProductos.getModel();
+
+        Object rowData[] = new Object[7];//No columnas
+        for (int i = 0; i < listProducts.size(); i++) {
+            rowData[0] = listProducts.get(i).getId();
+            rowData[1] = listProducts.get(i).getName();
+            rowData[2] = listProducts.get(i).getDescription();
+            rowData[3] = listProducts.get(i).getPrice();
+            rowData[4] = listProducts.get(i).getStock();
+            rowData[5] = listProducts.get(i).getLatitude();
+            rowData[6] = listProducts.get(i).getLongitude();
+            rowData[7] = listProducts.get(i).getCategory().getName();
+
+            model.addRow(rowData);
+        }
+    }
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        if (txtNombre.getText().isEmpty() && txtDescripcion.getText().isEmpty()) {
+            Messages.showMessageDialog("Debe ingresar el nombre o descripcion del producto a buscar", "Atención");
+            txtNombre.requestFocus();
+            return;
+        }
+
+        //fillTable(productService.findByNameAndDescription(txtNombre.getText(), txtDescripcion.getText()));
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        //fillTable(productService.findAllProducts());
+    }//GEN-LAST:event_btnListarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
@@ -96,4 +158,9 @@ public class pnlBuscarProductos extends javax.swing.JPanel {
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizar() {
+        //fillTable(productService.findAllProducts());
+    }
 }

@@ -78,6 +78,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Comprar Carrito"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnComprarCarritoActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnEliminarCarrito">
           <Properties>
@@ -86,6 +89,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Eliminar Carrito"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarCarritoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

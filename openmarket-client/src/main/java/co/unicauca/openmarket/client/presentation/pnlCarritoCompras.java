@@ -4,17 +4,28 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.infra.Messages;
+import co.unicauca.openmarket.commons.domain.Product;
+import framework.obsobs.Observador;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author restr
  */
-public class pnlCarritoCompras extends javax.swing.JPanel {
+public class pnlCarritoCompras extends javax.swing.JPanel implements Observador {
 
     /**
      * Creates new form pnlComprador
      */
-    public pnlCarritoCompras() {
+    
+    //private ShoppingCartService shoppingcartService;
+    
+    public pnlCarritoCompras(/*ShoppingCartService shoppingcartService*/) {
         initComponents();
+        initializeTable();
+        //this.shoppingcartService = shoppingcartService;
     }
 
     /**
@@ -51,10 +62,20 @@ public class pnlCarritoCompras extends javax.swing.JPanel {
 
         btnComprarCarrito.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnComprarCarrito.setText("Comprar Carrito");
+        btnComprarCarrito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarCarritoActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnComprarCarrito);
 
         btnEliminarCarrito.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnEliminarCarrito.setText("Eliminar Carrito");
+        btnEliminarCarrito.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCarritoActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnEliminarCarrito);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -79,6 +100,41 @@ public class pnlCarritoCompras extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnComprarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarCarritoActionPerformed
+        Messages.showMessageDialog("Carrito comprado", "Atención");
+    }//GEN-LAST:event_btnComprarCarritoActionPerformed
+
+    private void btnEliminarCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCarritoActionPerformed
+        Messages.showMessageDialog("Carrito Eliminado", "Atención");
+    }//GEN-LAST:event_btnEliminarCarritoActionPerformed
+
+    private void initializeTable() {
+        tblCarrito.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "ID", "Nombre", "Descripcion", "Precio", "Stock", "Latitud", "Longitud", "Categoria"
+                }
+        ));
+    }
+
+    private void fillTable(List<Product> listProducts) {
+        initializeTable();
+        DefaultTableModel model = (DefaultTableModel) tblCarrito.getModel();
+
+        Object rowData[] = new Object[7];//No columnas
+        for (int i = 0; i < listProducts.size(); i++) {
+            rowData[0] = listProducts.get(i).getId();
+            rowData[1] = listProducts.get(i).getName();
+            rowData[2] = listProducts.get(i).getDescription();
+            rowData[3] = listProducts.get(i).getPrice();
+            rowData[4] = listProducts.get(i).getStock();
+            rowData[5] = listProducts.get(i).getLatitude();
+            rowData[6] = listProducts.get(i).getLongitude();
+            rowData[7] = listProducts.get(i).getCategory().getName();
+
+            model.addRow(rowData);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnComprarCarrito;
@@ -87,4 +143,10 @@ public class pnlCarritoCompras extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblCarrito;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizar() {
+        //fillTable(shoppingcartService.findAll());
+    }
+
 }
