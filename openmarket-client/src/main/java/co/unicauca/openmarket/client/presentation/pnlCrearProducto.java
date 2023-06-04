@@ -4,17 +4,29 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.infra.Messages;
+import co.unicauca.openmarket.commons.domain.Category;
+import co.unicauca.openmarket.commons.domain.Product;
+import co.unicauca.openmarket.commons.domain.StateProduct;
+import framework.obsobs.Observador;
+
 /**
  *
  * @author restr
  */
-public class pnlCrearProducto extends javax.swing.JPanel {
+public class pnlCrearProducto extends javax.swing.JPanel implements Observador {
 
     /**
      * Creates new form pnlComprador
      */
-    public pnlCrearProducto() {
+    
+    //private ProductService productService;
+    //private CategoryService categoryService;
+    //private StateProductService stateproductService;
+    
+    public pnlCrearProducto(/*ProductService productService*/) {
         initComponents();
+        //this.productService = productService;
     }
 
     /**
@@ -28,7 +40,7 @@ public class pnlCrearProducto extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         btnCrearProducto = new javax.swing.JButton();
-        btnCrearProducto1 = new javax.swing.JButton();
+        btnEditarProducto = new javax.swing.JButton();
         txtNombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         txtStock = new javax.swing.JTextField();
@@ -54,11 +66,21 @@ public class pnlCrearProducto extends javax.swing.JPanel {
 
         btnCrearProducto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCrearProducto.setText("Crear Producto");
+        btnCrearProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearProductoActionPerformed(evt);
+            }
+        });
         jPanel1.add(btnCrearProducto);
 
-        btnCrearProducto1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCrearProducto1.setText("Editar Producto");
-        jPanel1.add(btnCrearProducto1);
+        btnEditarProducto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnEditarProducto.setText("Editar Producto");
+        btnEditarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarProductoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnEditarProducto);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("Nombre:");
@@ -186,10 +208,57 @@ public class pnlCrearProducto extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCrearProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearProductoActionPerformed
+        if (txtCategoriaID.getText().isEmpty() 
+                || txtDescripcion.getText().isEmpty()
+                || txtLatitud.getText().isEmpty()
+                || txtLongitud.getText().isEmpty()
+                || txtNombre.getText().isEmpty()
+                || txtPrecio.getText().isEmpty()
+                || txtProductoID.getText().isEmpty()
+                || txtStock.getText().isEmpty()) {
+            Messages.showMessageDialog("Hay espacios vacios", "Atención");
+            return;
+        }
+        
+        /*Category categoria = new Category();
+        
+        if (categoryService.findCategoryById(Long.parseLong(this.txtCategoriaID.getText())) != null) {
+                categoria = categoryService.findCategoryById(Long.parseLong(this.txtCategoriaID.getText()));
+            } else {
+                Messages.showMessageDialog("Error Id De Categoria No Encontrado", "Atención");
+                return;
+        }
+        
+        StateProduct stateproduct = new StateProduct();
+        
+        if (stateproductService.findById(Long.parseLong(this.jcbEstado.getSelectedItem().toString())) != null) {
+                stateproduct = stateproductService.findById(Long.parseLong(this.jcbEstado.getSelectedItem().toString()));
+            } else {
+                Messages.showMessageDialog("Error Id De Categoria No Encontrado", "Atención");
+                return;
+        }*/
+        
+        Product product = new Product();
+        //product.getState(stateproduct);
+        //product.setCategory(categoria);
+        product.setDescription(txtDescripcion.getText());
+        product.setLatitude(Double.parseDouble(txtLatitud.getText()));
+        product.setLongitude(Double.parseDouble(txtLongitud.getText()));
+        product.setName(txtNombre.getText());
+        product.setPrice(Double.parseDouble(txtPrecio.getText()));
+        product.setId(Long.parseLong(txtProductoID.getText()));
+        product.setStock(Long.parseLong(txtStock.getText()));
+    }//GEN-LAST:event_btnCrearProductoActionPerformed
+
+    private void btnEditarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProductoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEditarProductoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearProducto;
-    private javax.swing.JButton btnCrearProducto1;
+    private javax.swing.JButton btnEditarProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -210,4 +279,9 @@ public class pnlCrearProducto extends javax.swing.JPanel {
     private javax.swing.JTextField txtProductoID;
     private javax.swing.JTextField txtStock;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizar() {
+        //fillTable(productService.findAllProducts());
+    }
 }

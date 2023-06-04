@@ -4,17 +4,28 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.infra.Messages;
+import co.unicauca.openmarket.commons.domain.Product;
+import framework.obsobs.Observador;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author restr
  */
-public class pnlBajaSuspenderProducto extends javax.swing.JPanel {
+public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Observador{
 
     /**
      * Creates new form pnlComprador
      */
-    public pnlBajaSuspenderProducto() {
+    
+    //private ProductService productService;
+    
+    public pnlBajaSuspenderProducto(/*ProductService productService*/) {
         initComponents();
+        initializeTable();
+        //this.productService = productService;
     }
 
     /**
@@ -36,9 +47,19 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel {
 
         btnDarBaja.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnDarBaja.setText("Dar de Baja");
+        btnDarBaja.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDarBajaActionPerformed(evt);
+            }
+        });
 
         btnSuspender.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSuspender.setText("Suspender");
+        btnSuspender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSuspenderActionPerformed(evt);
+            }
+        });
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -83,7 +104,75 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDarBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDarBajaActionPerformed
+        if (txtProducto.getText().isEmpty()) {
+            Messages.showMessageDialog("Debe ingresar el ID del producto", "Atención");
+            txtProducto.requestFocus();
+            return;
+        }
+        
+        if (!correctFormatId(txtProducto.getText())) {
+            Messages.showMessageDialog("Debe ingresar un dato numerico", "Atención");
+            txtProducto.requestFocus();
+            return;
+        }
+        
+        Messages.showMessageDialog("Producto dado de baja", "Atención");
+    }//GEN-LAST:event_btnDarBajaActionPerformed
 
+    private void btnSuspenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuspenderActionPerformed
+        if (txtProducto.getText().isEmpty()) {
+            Messages.showMessageDialog("Debe ingresar el ID del producto", "Atención");
+            txtProducto.requestFocus();
+            return;
+        }
+        
+        if (!correctFormatId(txtProducto.getText())) {
+            Messages.showMessageDialog("Debe ingresar un dato numerico", "Atención");
+            txtProducto.requestFocus();
+            return;
+        }
+        
+        Messages.showMessageDialog("Producto suspendido", "Atención");
+    }//GEN-LAST:event_btnSuspenderActionPerformed
+
+    private void initializeTable() {
+        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "ID", "Nombre", "Descripcion", "Precio", "Stock", "Latitud", "Longitud", "Categoria"
+                }
+        ));
+    }
+
+    private void fillTable(List<Product> listProducts) {
+        initializeTable();
+        DefaultTableModel model = (DefaultTableModel) tblProductos.getModel();
+
+        Object rowData[] = new Object[7];//No columnas
+        for (int i = 0; i < listProducts.size(); i++) {
+            rowData[0] = listProducts.get(i).getId();
+            rowData[1] = listProducts.get(i).getName();
+            rowData[2] = listProducts.get(i).getDescription();
+            rowData[3] = listProducts.get(i).getPrice();
+            rowData[4] = listProducts.get(i).getStock();
+            rowData[5] = listProducts.get(i).getLatitude();
+            rowData[6] = listProducts.get(i).getLongitude();
+            rowData[7] = listProducts.get(i).getCategory().getName();
+
+            model.addRow(rowData);
+        }
+    }
+
+    private boolean correctFormatId(String id) {
+        for (int i = 0; i < id.length(); i++) {
+            if (!Character.isDigit(id.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDarBaja;
     private javax.swing.JButton btnSuspender;
@@ -91,4 +180,10 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel {
     private javax.swing.JTable tblProductos;
     private javax.swing.JTextField txtProducto;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizar() {
+        //fillTable(productService.findAllProducts());
+    }
+
 }

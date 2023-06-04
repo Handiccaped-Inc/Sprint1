@@ -4,17 +4,28 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.infra.Messages;
+import co.unicauca.openmarket.commons.domain.Delivery;
+import framework.obsobs.Observador;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author restr
  */
-public class pnlRegistrarEntrega extends javax.swing.JPanel {
+public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observador {
 
     /**
      * Creates new form pnlComprador
      */
-    public pnlRegistrarEntrega() {
+    
+    //private DeliveryService deliveryService;
+    
+    public pnlRegistrarEntrega(/*DeliveryService deliveryService*/) {
         initComponents();
+        initializeTable();
+        //this.deliveryService = deliveryService;
     }
 
     /**
@@ -36,6 +47,11 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel {
 
         btnCambiar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCambiar.setText("Cambiar");
+        btnCambiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCambiarActionPerformed(evt);
+            }
+        });
 
         tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -82,6 +98,53 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCambiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarActionPerformed
+        if (txtOrden.getText().isEmpty()) {
+            Messages.showMessageDialog("Debe ingresar el ID de la entrega", "Atención");
+            txtOrden.requestFocus();
+            return;
+        }
+
+        if (!correctFormatId(txtOrden.getText())) {
+            Messages.showMessageDialog("Debe ingresar un dato numerico", "Atención");
+            txtOrden.requestFocus();
+            return;
+        }
+
+        Messages.showMessageDialog("Entrega registrada", "Atención");
+    }//GEN-LAST:event_btnCambiarActionPerformed
+
+    private void initializeTable() {
+        tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "ID", "Estado", "Fecha"
+                }
+        ));
+    }
+
+    private void fillTable(List<Delivery> listDeliveries) {
+        initializeTable();
+        DefaultTableModel model = (DefaultTableModel) tblOrdenes.getModel();
+
+        Object rowData[] = new Object[3];//No columnas
+        for (int i = 0; i < listDeliveries.size(); i++) {
+            rowData[0] = listDeliveries.get(i).getId();
+            rowData[1] = listDeliveries.get(i).getOrder().getStatus().getName();
+            rowData[2] = listDeliveries.get(i).getDate();
+
+            model.addRow(rowData);
+        }
+    }
+
+    private boolean correctFormatId(String id) {
+        for (int i = 0; i < id.length(); i++) {
+            if (!Character.isDigit(id.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCambiar;
@@ -90,4 +153,10 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel {
     private javax.swing.JTable tblOrdenes;
     private javax.swing.JTextField txtOrden;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizar() {
+        //fillTable(deliveryService.update());
+    }
+
 }

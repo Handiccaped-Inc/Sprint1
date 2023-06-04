@@ -82,6 +82,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Buscar Productos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarProductosActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnComprarProductos">
               <Properties>
@@ -90,6 +93,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Comprar Productos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnComprarProductosActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnCarritodeCompras">
               <Properties>
@@ -98,6 +104,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Carrito de Compras"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCarritodeComprasActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnConfirmarOrdenes">
               <Properties>
@@ -106,6 +115,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Confirmar Ordenes"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmarOrdenesActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnPuntuarOrdenes">
               <Properties>
@@ -114,6 +126,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Puntuar Ordenes"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPuntuarOrdenesActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnCrearEditarProductos">
               <Properties>
@@ -122,23 +137,20 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Crear/Editar Productos"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearEditarProductosActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnModificarStock">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Segoe UI" size="12" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Modificar Strock"/>
-                <Property name="actionCommand" type="java.lang.String" value="Modificar Stock"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="bntBajaSuspender">
+            <Component class="javax.swing.JButton" name="btnBajaSuspender">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="11" style="1"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Dar de &#xa;Baja/Suspender"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBajaSuspenderActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnRegistrarEntrega">
               <Properties>
@@ -147,6 +159,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Registrar Entrega"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRegistrarEntregaActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="btnSalir">
               <Properties>
@@ -155,6 +170,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Salir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalirActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -239,8 +257,10 @@
                       <Font name="Segoe UI" size="12" style="1"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Iniciar Sesion"/>
-                    <Property name="actionCommand" type="java.lang.String" value="Iniciar Sesion"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciarSesionActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btnAnonimo">
                   <Properties>
@@ -249,6 +269,9 @@
                     </Property>
                     <Property name="text" type="java.lang.String" value="Anonimo"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAnonimoActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JPasswordField" name="txtConstraseniaUsuario">
                 </Component>

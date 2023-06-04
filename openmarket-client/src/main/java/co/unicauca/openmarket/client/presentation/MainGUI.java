@@ -4,6 +4,8 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author restr
@@ -13,9 +15,18 @@ public class MainGUI extends javax.swing.JFrame {
     /**
      * Creates new form MainGUI
      */
+    private pnlCrearProducto pnlcrearproducto;
+    private pnlBajaSuspenderProducto pnlbajasuspenderproducto;
+    private pnlBuscarProductos pnlbuscarproductos;
+    private pnlComprarProductos pnlcomprarproductos;
+    private pnlConfirmarOrden pnlconfirmarorden;
+    private pnlPuntuarOrden pnlpuntuarorden;
+    private pnlRegistrarEntrega pnlregistrarentrega;
+    private pnlCarritoCompras pnlcarritocompras;
+
     public MainGUI() {
         initComponents();
-        setLocationRelativeTo(null);
+        initMainGUI();
     }
 
     /**
@@ -35,8 +46,7 @@ public class MainGUI extends javax.swing.JFrame {
         btnConfirmarOrdenes = new javax.swing.JButton();
         btnPuntuarOrdenes = new javax.swing.JButton();
         btnCrearEditarProductos = new javax.swing.JButton();
-        btnModificarStock = new javax.swing.JButton();
-        bntBajaSuspender = new javax.swing.JButton();
+        btnBajaSuspender = new javax.swing.JButton();
         btnRegistrarEntrega = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         pnlCentral = new javax.swing.JPanel();
@@ -59,43 +69,83 @@ public class MainGUI extends javax.swing.JFrame {
 
         btnBuscarProductos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnBuscarProductos.setText("Buscar Productos");
+        btnBuscarProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarProductosActionPerformed(evt);
+            }
+        });
         pnlMenu.add(btnBuscarProductos);
 
         btnComprarProductos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnComprarProductos.setText("Comprar Productos");
+        btnComprarProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComprarProductosActionPerformed(evt);
+            }
+        });
         pnlMenu.add(btnComprarProductos);
 
         btnCarritodeCompras.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCarritodeCompras.setText("Carrito de Compras");
+        btnCarritodeCompras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCarritodeComprasActionPerformed(evt);
+            }
+        });
         pnlMenu.add(btnCarritodeCompras);
 
         btnConfirmarOrdenes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnConfirmarOrdenes.setText("Confirmar Ordenes");
+        btnConfirmarOrdenes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConfirmarOrdenesActionPerformed(evt);
+            }
+        });
         pnlMenu.add(btnConfirmarOrdenes);
 
         btnPuntuarOrdenes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnPuntuarOrdenes.setText("Puntuar Ordenes");
+        btnPuntuarOrdenes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPuntuarOrdenesActionPerformed(evt);
+            }
+        });
         pnlMenu.add(btnPuntuarOrdenes);
 
         btnCrearEditarProductos.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         btnCrearEditarProductos.setText("Crear/Editar Productos");
+        btnCrearEditarProductos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearEditarProductosActionPerformed(evt);
+            }
+        });
         pnlMenu.add(btnCrearEditarProductos);
 
-        btnModificarStock.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnModificarStock.setText("Modificar Strock");
-        btnModificarStock.setActionCommand("Modificar Stock");
-        pnlMenu.add(btnModificarStock);
-
-        bntBajaSuspender.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        bntBajaSuspender.setText("Dar de \nBaja/Suspender");
-        pnlMenu.add(bntBajaSuspender);
+        btnBajaSuspender.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        btnBajaSuspender.setText("Dar de \nBaja/Suspender");
+        btnBajaSuspender.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBajaSuspenderActionPerformed(evt);
+            }
+        });
+        pnlMenu.add(btnBajaSuspender);
 
         btnRegistrarEntrega.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnRegistrarEntrega.setText("Registrar Entrega");
+        btnRegistrarEntrega.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarEntregaActionPerformed(evt);
+            }
+        });
         pnlMenu.add(btnRegistrarEntrega);
 
         btnSalir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
         pnlMenu.add(btnSalir);
 
         pnlCentral.setLayout(new java.awt.BorderLayout());
@@ -108,10 +158,19 @@ public class MainGUI extends javax.swing.JFrame {
 
         btnIniciarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnIniciarSesion.setText("Iniciar Sesion");
-        btnIniciarSesion.setActionCommand("Iniciar Sesion");
+        btnIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarSesionActionPerformed(evt);
+            }
+        });
 
         btnAnonimo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAnonimo.setText("Anonimo");
+        btnAnonimo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnonimoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlLoginLayout = new javax.swing.GroupLayout(pnlLogin);
         pnlLogin.setLayout(pnlLoginLayout);
@@ -182,17 +241,102 @@ public class MainGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    
+    private void initMainGUI() {
+        setLocationRelativeTo(null);
+
+        btnBuscarProductos.setVisible(false);
+        btnCarritodeCompras.setVisible(false);
+        btnComprarProductos.setVisible(false);
+        btnConfirmarOrdenes.setVisible(false);
+        btnCrearEditarProductos.setVisible(false);
+        btnPuntuarOrdenes.setVisible(false);
+        btnRegistrarEntrega.setVisible(false);
+        btnBajaSuspender.setVisible(false);
+
+        this.pnlcrearproducto = new pnlCrearProducto();
+        this.pnlbajasuspenderproducto = new pnlBajaSuspenderProducto();
+        this.pnlbuscarproductos = new pnlBuscarProductos();
+        this.pnlcomprarproductos = new pnlComprarProductos();
+        this.pnlconfirmarorden = new pnlConfirmarOrden();
+        this.pnlpuntuarorden = new pnlPuntuarOrden();
+        this.pnlregistrarentrega = new pnlRegistrarEntrega();
+        this.pnlcarritocompras = new pnlCarritoCompras();
+    }
+
+    private void cambiarPanel(JPanel jpanel) {
+        pnlCentral.removeAll();
+        pnlCentral.revalidate();
+        pnlCentral.repaint();
+        pnlCentral.add(jpanel);
+    }
+
+    private void btnBuscarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProductosActionPerformed
+        cambiarPanel(pnlbuscarproductos);
+    }//GEN-LAST:event_btnBuscarProductosActionPerformed
+
+    private void btnComprarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarProductosActionPerformed
+        cambiarPanel(pnlcomprarproductos);
+    }//GEN-LAST:event_btnComprarProductosActionPerformed
+
+    private void btnCarritodeComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCarritodeComprasActionPerformed
+        cambiarPanel(pnlcarritocompras);
+    }//GEN-LAST:event_btnCarritodeComprasActionPerformed
+
+    private void btnConfirmarOrdenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarOrdenesActionPerformed
+        cambiarPanel(pnlconfirmarorden);
+    }//GEN-LAST:event_btnConfirmarOrdenesActionPerformed
+
+    private void btnPuntuarOrdenesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuntuarOrdenesActionPerformed
+        cambiarPanel(pnlpuntuarorden);
+    }//GEN-LAST:event_btnPuntuarOrdenesActionPerformed
+
+    private void btnCrearEditarProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearEditarProductosActionPerformed
+        cambiarPanel(pnlcrearproducto);
+    }//GEN-LAST:event_btnCrearEditarProductosActionPerformed
+
+    private void btnBajaSuspenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaSuspenderActionPerformed
+        cambiarPanel(pnlbajasuspenderproducto);
+    }//GEN-LAST:event_btnBajaSuspenderActionPerformed
+
+    private void btnRegistrarEntregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarEntregaActionPerformed
+        cambiarPanel(pnlregistrarentrega);
+    }//GEN-LAST:event_btnRegistrarEntregaActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
+        btnBuscarProductos.setVisible(true);
+        btnCarritodeCompras.setVisible(true);
+        btnComprarProductos.setVisible(true);
+        btnConfirmarOrdenes.setVisible(true);
+        btnCrearEditarProductos.setVisible(true);
+        btnPuntuarOrdenes.setVisible(true);
+        btnRegistrarEntrega.setVisible(true);
+        btnBajaSuspender.setVisible(true);
+        pnlCentral.removeAll();
+        pnlCentral.revalidate();
+        pnlCentral.repaint();
+    }//GEN-LAST:event_btnIniciarSesionActionPerformed
+
+    private void btnAnonimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnonimoActionPerformed
+        btnBuscarProductos.setVisible(true);
+        pnlCentral.removeAll();
+        pnlCentral.revalidate();
+        pnlCentral.repaint();
+    }//GEN-LAST:event_btnAnonimoActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bntBajaSuspender;
     private javax.swing.JButton btnAnonimo;
+    private javax.swing.JButton btnBajaSuspender;
     private javax.swing.JButton btnBuscarProductos;
     private javax.swing.JButton btnCarritodeCompras;
     private javax.swing.JButton btnComprarProductos;
     private javax.swing.JButton btnConfirmarOrdenes;
     private javax.swing.JButton btnCrearEditarProductos;
     private javax.swing.JButton btnIniciarSesion;
-    private javax.swing.JButton btnModificarStock;
     private javax.swing.JButton btnPuntuarOrdenes;
     private javax.swing.JButton btnRegistrarEntrega;
     private javax.swing.JButton btnSalir;
@@ -205,4 +349,4 @@ public class MainGUI extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtConstraseniaUsuario;
     private javax.swing.JTextField txtCorreoUsuario;
     // End of variables declaration//GEN-END:variables
-}
+  }

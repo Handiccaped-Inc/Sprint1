@@ -4,17 +4,28 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.infra.Messages;
+import co.unicauca.openmarket.commons.domain.Order;
+import framework.obsobs.Observador;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author restr
  */
-public class pnlPuntuarOrden extends javax.swing.JPanel {
+public class pnlPuntuarOrden extends javax.swing.JPanel implements Observador {
 
     /**
      * Creates new form pnlComprador
      */
-    public pnlPuntuarOrden() {
+    
+    //private OrderService orderService;
+    
+    public pnlPuntuarOrden(/*OrderService orderService*/) {
         initComponents();
+        initializeTable();
+        //this.orderService = orderService;
     }
 
     /**
@@ -36,6 +47,11 @@ public class pnlPuntuarOrden extends javax.swing.JPanel {
 
         btnPuntuarOrden.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnPuntuarOrden.setText("Puntuar");
+        btnPuntuarOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPuntuarOrdenActionPerformed(evt);
+            }
+        });
 
         tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -82,6 +98,55 @@ public class pnlPuntuarOrden extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnPuntuarOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPuntuarOrdenActionPerformed
+        if (txtOrden.getText().isEmpty() || jcbPuntuar.getSelectedItem().toString().isEmpty()) {
+            Messages.showMessageDialog("Debe ingresar el ID de la orden", "Atención");
+            txtOrden.requestFocus();
+            return;
+        }
+
+        if (!correctFormatId(txtOrden.getText())) {
+            Messages.showMessageDialog("Debe ingresar un dato numerico", "Atención");
+            txtOrden.requestFocus();
+            return;
+        }
+
+        Messages.showMessageDialog("Orden calificada", "Atención");
+    }//GEN-LAST:event_btnPuntuarOrdenActionPerformed
+
+    private void initializeTable() {
+        tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
+                new Object[][]{},
+                new String[]{
+                    "ID", "Estatus", "Precio", "Fecha", "Puntuacion"
+                }
+        ));
+    }
+
+    private void fillTable(List<Order> listOrders) {
+        initializeTable();
+        DefaultTableModel model = (DefaultTableModel) tblOrdenes.getModel();
+
+        Object rowData[] = new Object[5];//No columnas
+        for (int i = 0; i < listOrders.size(); i++) {
+            rowData[0] = listOrders.get(i).getId();
+            rowData[1] = listOrders.get(i).getStatus();
+            rowData[2] = listOrders.get(i).getPrice();
+            rowData[3] = listOrders.get(i).getDate();
+            rowData[4] = listOrders.get(i).getQualification();
+
+            model.addRow(rowData);
+        }
+    }
+
+    private boolean correctFormatId(String id) {
+        for (int i = 0; i < id.length(); i++) {
+            if (!Character.isDigit(id.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnPuntuarOrden;
@@ -90,4 +155,10 @@ public class pnlPuntuarOrden extends javax.swing.JPanel {
     private javax.swing.JTable tblOrdenes;
     private javax.swing.JTextField txtOrden;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void actualizar() {
+        //fillTable(orderService.findByUser());
+    }
+
 }
