@@ -14,14 +14,12 @@ import co.unicauca.openmarket.server.domain.service.OrderService;
 import co.unicauca.openmarket.server.domain.service.ProductService;
 import co.unicauca.openmarket.server.domain.service.ShoppingCartService;
 import co.unicauca.openmarket.server.domain.service.UserService;
-import co.unicauca.payment.domain.service.PaymentFacade;
 import co.unicauca.strategyserver.infra.ServerSocketMultiThread;
 import co.unicauca.openmarket.server.access.OrderRepository;
 import co.unicauca.openmarket.server.access.ProductRepository;
 import co.unicauca.openmarket.server.access.ShoppingCartRepository;
 import co.unicauca.openmarket.server.access.UserRepository;
-import co.unicauca.payment.access.AccountRepository;
-import co.unicauca.payment.access.TransactionRepository;
+
 
 public class OpenMarketServer {
         /**

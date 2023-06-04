@@ -17,7 +17,7 @@ public class DeliveryService implements IDeliveryService {
     private IDeliveryRepository myDeliverRepository;
 
     /** Constructor default */
-    DeliveryService(IDeliveryRepository myDeliveryRespository) {
+    public DeliveryService(IDeliveryRepository myDeliveryRespository) {
         this.myDeliverRepository = myDeliveryRespository;
     }
 
