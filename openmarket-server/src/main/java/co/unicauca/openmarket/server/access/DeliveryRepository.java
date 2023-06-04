@@ -1,7 +1,6 @@
 package co.unicauca.openmarket.server.access;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -38,7 +37,8 @@ public class DeliveryRepository implements IDeliveryRepository {
             pstm.setLong(1, newDelivery.getOrder().getId());
             pstm.setLong(2, newDelivery.getDeliveryMan().getId());
             pstm.setString(3, newDelivery.getReceiver().getRealName());
-            pstm.setDate(4, (Date) newDelivery.getDate());
+            String date = newDelivery.getDate().toString();
+            pstm.setString(4,date);
 
             return pstm.executeUpdate() > 0;
 
@@ -62,7 +62,8 @@ public class DeliveryRepository implements IDeliveryRepository {
             pstm.setLong(1, newDelivery.getOrder().getId());
             pstm.setLong(2, newDelivery.getDeliveryMan().getId());
             pstm.setString(3, newDelivery.getReceiver().getRealName());
-            pstm.setDate(4, (Date) newDelivery.getDate());
+            String date = newDelivery.getDate().toString();
+            pstm.setString(4,date);
             pstm.setLong(5, newDelivery.getId());
             return pstm.executeUpdate() > 0;
 
