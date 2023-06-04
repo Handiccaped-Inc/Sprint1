@@ -28,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
 /**
- *
  * @author Braian Rey / Arturo Restrepo Ruiz
  */
 public class OpenMarketHandler {
@@ -36,7 +35,6 @@ public class OpenMarketHandler {
     private OpenMarketFacade facade;
     User requester; 
     //facade = new OpenMarketFacade(deliveryService, orderService, productService, shoppingCartService, userService, requester);
-
     public OpenMarketHandler(OpenMarketFacade facade) {
         actionMap = new HashMap<>();
         this.facade = facade;
