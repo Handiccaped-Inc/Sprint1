@@ -6,7 +6,7 @@ package co.unicauca.openmarket.client.presentation;
 
 import co.unicauca.openmarket.client.infra.Messages;
 import co.unicauca.openmarket.commons.domain.Product;
-import framework.obsobs.Observador;
+import co.unicauca.openmarket.observer.obs.Observador;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
