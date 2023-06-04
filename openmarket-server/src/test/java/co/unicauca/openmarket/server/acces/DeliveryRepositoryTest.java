@@ -49,7 +49,7 @@ public class DeliveryRepositoryTest {
      *  prueba de exito de guardar un delivery 
      */
     @Test
-    public void saveDeliverySucces(){
+    public void saveDeliverySuccess(){
         User usuario = new User(1L,new Rol(1L,"Comprador"),new Date(0),"Example4@email.com","1234","1234","pablo","pablo1","123","cr-32");
         Product producTest = new Product(1L,usuario,new Category(1L,"Categoría 1"),new StateProduct(1L,"disponible" ),"Producto 1","Descripción del producto 1",10.99,50L,100,100);
         Order orderTest = new Order(2L,usuario,producTest,new StatusOrder(1L,"Enviado"),50.0,new Date(0),5.0);
