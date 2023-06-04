@@ -8,7 +8,7 @@ import co.unicauca.openmarket.client.infra.Messages;
 import co.unicauca.openmarket.commons.domain.Category;
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.StateProduct;
-import framework.obsobs.Observador;
+import co.unicauca.openmarket.observer.obs.Observador;
 
 /**
  *

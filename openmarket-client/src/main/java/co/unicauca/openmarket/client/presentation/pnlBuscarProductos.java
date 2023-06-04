@@ -8,7 +8,7 @@ import co.unicauca.openmarket.commons.domain.Product;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import co.unicauca.openmarket.client.infra.Messages;
-import framework.obsobs.Observador;
+import co.unicauca.openmarket.observer.obs.Observador;
 
 /**
  *
