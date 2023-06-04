@@ -73,7 +73,7 @@ public class OpenMarketHandler extends ServerHandler {
         facade.setRequester(requester);
 
         // Obtener la clave para el HashMap
-        String key = protocolRequest.getResource() + "." + protocolRequest.getAction();
+        String key = protocolRequest.getAction();
         // Obtener el Consumer correspondiente y ejecutarlo
         Function<Protocol, String> action = actionMap.get(key);
         if (action != null) {
