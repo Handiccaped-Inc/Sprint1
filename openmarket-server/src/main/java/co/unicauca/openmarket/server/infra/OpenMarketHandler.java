@@ -4,19 +4,14 @@ import co.unicauca.openmarket.commons.domain.Delivery;
 import co.unicauca.openmarket.commons.domain.Order;
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.ShoppingCart;
+import co.unicauca.openmarket.commons.domain.Category;
+import co.unicauca.openmarket.commons.domain.StateProduct;
 import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.commons.infra.JsonError;
 import co.unicauca.openmarket.commons.infra.Protocol;
 import co.unicauca.openmarket.server.access.IProductRepository;
-import co.unicauca.openmarket.server.domain.service.IDeliveryService;
-import co.unicauca.openmarket.server.domain.service.IOrderService;
-import co.unicauca.openmarket.server.domain.service.IProductService;
-import co.unicauca.openmarket.server.domain.service.IShoppingCartService;
-import co.unicauca.openmarket.server.domain.service.IUserService;
 import co.unicauca.openmarket.server.domain.service.OpenMarketFacade;
-import co.unicauca.openmarket.server.domain.service.ProductService;
 import co.unicauca.strategyserver.infra.ServerHandler;
-import co.unicauca.openmarket.server.domain.service.*;
 
 import com.google.gson.Gson;
 
@@ -34,10 +29,17 @@ public class OpenMarketHandler {
     private Map<String, Consumer<Protocol>> actionMap;
     private OpenMarketFacade facade;
     User requester; 
-    //facade = new OpenMarketFacade(deliveryService, orderService, productService, shoppingCartService, userService, requester);
-    public OpenMarketHandler(OpenMarketFacade facade) {
-        actionMap = new HashMap<>();
+
+    public OpenMarketHandler(OpenMarketFacade facade, String requestJson) {
         this.facade = facade;
+        
+        actionMap = new HashMap<>();
+        
+        Gson gson = new Gson();
+        Protocol protocolRequest = gson.fromJson(requestJson, Protocol.class);
+        String reply = "";
+
+        // Crear un HashMap para mapear las acciones según el recurso
         actionMap.put("findAvailableProducts", this::processFindAvailableProducts);
         actionMap.put("findProductByNameAndDescription", this::processFindProductByNameAndDescription);
         actionMap.put("buyProduct", this::processBuyProduct);
@@ -52,63 +54,211 @@ public class OpenMarketHandler {
         actionMap.put("confirmOrder", this::processConfirmOrder);
         actionMap.put("qualificateOrder", this::processQualificateOrder);
         actionMap.put("registerDelivery", this::processRegisterDelivery);
+        // Obtener la clave para el HashMap
+        String key = protocolRequest.getResource() + "." + protocolRequest.getAction();
+        // Obtener el Consumer correspondiente y ejecutarlo
+        Consumer<Protocol> action = actionMap.get(key);
+        if (action != null) {
+            action.accept(protocolRequest);
+        }
     }
 
-    public List<Product> processFindAvailableProducts() {
-        return facade.findAvailableProducts();
+    public String processFindAvailableProducts(Protocol protocolRequest) {
+        List<Product> products = facade.findAvailableProducts();
+        
+        if (products == null) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return objectToJSON(products);
+        }
     }
 
-    public List<Product> processFindProductByNameAndDescription(String name, String description) {
-        return facade.findProductByNameAndDescription(name, description);
+    public String processFindProductByNameAndDescription(Protocol protocolRequest) {
+        Product product = new Product();
+        
+        String name = protocolRequest.getParameters().get(0).getValue();
+        String description = protocolRequest.getParameters().get(1).getValue();
+        
+        List<Product> products = facade.findProductByNameAndDescription(name, description);
+        
+        if (products == null) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return objectToJSON(products);
+        }
     }
 
-    public String processBuyProduct(Product product) {
-        return facade.buyProduct(product);
+    public String processBuyProduct(Protocol protocolRequest) {
+        Product product = new Product();
+        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
+        product.setId(id);
+        
+        String reply = facade.buyProduct(product);
+
+        if (reply == "!error") {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return reply;
+        }
+
     }
 
-    
-    public String processAddProductToShoppingCart(Product product, Long quantity) {
-        return facade.addProductToTheShoppingCart(product, quantity);
+    public String processAddProductToShoppingCart(Protocol protocolRequest) {
+        Product product = new Product();
+        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
+        product.setId(id);
+        Long quantity = Long.parseLong(protocolRequest.getParameters().get(1).getValue());
+        
+        String reply = facade.addProductToTheShoppingCart(product, quantity);
+
+        if (reply == "!error") {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return reply;
+        }
     }
 
-    public List<ShoppingCart> processGetShoppingCart() {
-        return facade.getShoppingCart();
-    }
-    
-    public String processBuyShoppingCart() {
-        return facade.buyShoppingCart();
-    }
-    
-    public String processDeleteShoppingCart() {
-        return facade.deleteShoppingCart();
-    }
-    
-    public String processSaveProduct(Product product) {
-        return facade.saveProduct(product);
-    }
-    
-    public String processUpdateProduct(Product product) {
-        return facade.updateProduct(product);
-    }
-    
-    public List<Product> processGetOwnProducts() {
-        return facade.getOwnProducts();
-    }
-    
-    public List<Order> processGetOrders() {
-        return facade.getOrders();
-    }
-    
-    public String processConfirmOrder(Order order) {
-        return facade.confirmOrder(order);
-    }
-    
-    public String processQualificateOrder(Order order, Long qualification) {
-        return facade.qualificateOrder(order, qualification);
-    }
-    
-    public String processRegisterDelivery(Delivery delivery) {
-        return facade.registerDelivery(delivery);
+    public String processGetShoppingCart(Protocol protocolRequest) {
+        List<ShoppingCart> products = facade.getShoppingCart();
+        
+        if (products == null) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return objectToJSON(products);
+        }
     }
 
+    public String processBuyShoppingCart(Protocol protocolRequest) {
+        String reply = facade.buyShoppingCart();
+
+        if (reply == "!error") {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return reply;
+        }
+    }
+    
+    public String processDeleteShoppingCart(Protocol protocolRequest) {
+        String reply = facade.deleteShoppingCart();
+
+        if (reply == "!error") {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return reply;
+        }
+    }
+    
+    public String processSaveProduct(Protocol protocolRequest) {
+        Product product = new Product();
+        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
+        product.setId(id);
+        
+        String reply = facade.saveProduct(product);
+
+        if (reply == "!error") {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return reply;
+        }
+    }
+    
+    public String processUpdateProduct(Protocol protocolRequest) {
+        Product product = new Product();
+        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
+        product.setId(id);
+        
+        String reply = facade.updateProduct(product);
+        
+        if (reply == "!error") {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return reply;
+        }
+    }
+    
+    public String processGetOwnProducts(Protocol protocolRequest) {
+        List<Product> products = facade.getOwnProducts();
+        
+        if (products == null) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return objectToJSON(products);
+        }
+    }
+    
+    public String processGetOrders(Protocol protocolRequest) {
+        List<Order> orders = facade.getOrders();
+        if (orders == null) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return objectToJSON(orders);
+        }
+    }
+    
+    public String processConfirmOrder(Protocol protocolRequest) {
+        Order order = new Order();
+        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
+        order.setId(id);
+        String reply = facade.confirmOrder(order);
+        
+        if (reply == "!error") {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return reply;
+        }
+    }
+    
+    public String processQualificateOrder(Protocol protocolRequest) {
+        Order order = new Order();
+        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
+        order.setId(id);
+        Long qualification = Long.parseLong(protocolRequest.getParameters().get(1).getValue());
+        String reply = facade.qualificateOrder(order, qualification);
+        
+        if (reply == "!error") {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return reply;
+        }
+    }
+    
+    public String processRegisterDelivery(Protocol protocolRequest) {
+        Delivery delivery = new Delivery();
+        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
+        delivery.setId(id);
+
+        String reply = facade.registerDelivery(delivery);
+        
+        if (reply == "!error") {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return reply;
+        }
+    }
+
+    private String generateNotFoundErrorJson(String object) {
+        List<JsonError> errors = new ArrayList<>();
+        JsonError error = new JsonError();
+        error.setCode("404");
+        error.setError("NOT_FOUND");
+        error.setMessage("El " + object + " No Existe");
+        errors.add(error);
+
+        Gson gson = new Gson();
+        return gson.toJson(errors);
+    }
 }
