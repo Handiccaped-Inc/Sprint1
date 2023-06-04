@@ -84,6 +84,20 @@ public class OpenMarketHandler extends ServerHandler {
         return errorJson;
     }
 
+    public String processFindUserByEmailAndPassword(Protocol protocolRequest) {
+        String name = protocolRequest.getParameters().get(1).getValue();
+        String password = protocolRequest.getParameters().get(2).getValue();
+
+        User user = facade.findUserByEmailAndPassword(name, password);
+
+        if (user == null) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            return errorJson;
+        } else {
+            return objectToJSON(user);
+        }
+    }
+
     public String processFindAvailableProducts(Protocol protocolRequest) {
         List<Product> products = facade.findAvailableProducts();
 
