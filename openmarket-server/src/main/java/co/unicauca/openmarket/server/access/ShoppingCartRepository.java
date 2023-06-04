@@ -81,6 +81,9 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
     @Override
     public List<ShoppingCart> findRepoByOwner(User owner) {
         List<ShoppingCart> carts = new ArrayList<>();
+        if(owner == null){
+            return carts;
+        }
         try {
 
             String sql = "SELECT * FROM shopping_cart WHERE user_id = ?";
@@ -88,8 +91,7 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
             pstmt.setLong(1, owner.getId());
             // this.connect();
 
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 ShoppingCart newCart = new ShoppingCart(
                         rs.getLong("shopping_cart_id"),
@@ -109,6 +111,9 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
     @Override
     public List<Product> findByOwner(User owner) {
         List<Product> Products = new ArrayList<>();
+        if(owner == null){
+            return Products;
+        }
         try {
 
             String sql = "SELECT * FROM shopping_cart JOIN product ON shopping_cart.product_id = product.product_id WHERE shopping_cart.user_id = ?";
@@ -116,8 +121,7 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
             pstmt.setLong(1, owner.getId());
             // this.connect();
 
-            Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery(sql);
+            ResultSet rs = pstmt.executeQuery();
             while (rs.next()) {
                 Product newProduct = new Product(
                         rs.getLong("product_id"),
@@ -143,6 +147,9 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
 
     @Override
     public boolean delete(User owner) {
+        if(owner == null){
+            return false;
+        }
         try {
             // this.connect();
 
