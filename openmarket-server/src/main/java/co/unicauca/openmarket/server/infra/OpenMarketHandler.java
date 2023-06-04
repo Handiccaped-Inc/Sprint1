@@ -25,14 +25,32 @@ import java.util.function.Consumer;
 /**
  * @author Braian Rey / Arturo Restrepo Ruiz
  */
-public class OpenMarketHandler {
-    private Map<String, Consumer<Protocol>> actionMap;
+public class OpenMarketHandler extends ServerHandler{
+    private Map<String, Function<Protocol, String>> actionMap;
     private OpenMarketFacade facade;
     User requester; 
-
-    public OpenMarketHandler(OpenMarketFacade facade, String requestJson) {
-        this.facade = facade;
+    
+    /**
+     * Constructor por defecto
+     */
+    public OpenMarketHandler() {
         
+    }
+    
+    /**
+     * Constructor parametrizado
+     * @param facade OpenMarketFacade
+     */
+    public OpenMarketHandler(OpenMarketFacade facade) {
+        this.facade = facade;
+    }
+    
+    public void SetOpenMarketFacade(OpenMarketFacade facade){
+        this.facade = facade;
+    }
+    
+    @Override
+    public String processRequest(String requestJson){
         actionMap = new HashMap<>();
         String UserJson = protocolRequest.getParameters().get(0).getValue();
         User requester = gson.fromJson(userJson, User.class);
@@ -241,7 +259,7 @@ public class OpenMarketHandler {
     public String processRegisterDelivery(Protocol protocolRequest) {
         Delivery delivery = new Delivery();
         String deliveryJson = protocolRequest.getParameters().get(1).getValue();
-        Delivery delivery = gson.fromJson(deliveryJson, Order.class);
+        Delivery delivery = gson.fromJson(deliveryJson, delivery.class);
 
         String reply = facade.registerDelivery(delivery);
         
