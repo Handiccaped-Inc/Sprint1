@@ -37,7 +37,7 @@ public class ProductService implements IProductService {
         }
         if (!errors.isEmpty()) {
             Gson gson = new Gson();
-            String errosJson = gson.toJson(errors);
+            String errorsJson = gson.toJson(errors);
             return errorsJson;
         }
         return myProductRepository.save(newProduct) ? "ok" : "!error";
