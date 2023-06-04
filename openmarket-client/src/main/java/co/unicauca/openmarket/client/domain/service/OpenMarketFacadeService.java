@@ -8,7 +8,6 @@ import co.unicauca.openmarket.commons.domain.Order;
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.ShoppingCart;
 import co.unicauca.openmarket.commons.domain.User;
-import co.unicauca.openmarket.commons.domain.service.IOpenMarketFacade;
 
 public class OpenMarketFacadeService {
     public IOpenMarketFacadeDeserialized openMarkedFacade;
