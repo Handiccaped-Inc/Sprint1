@@ -51,6 +51,24 @@ public class OpenMarketFacade {
     }
 
     /**
+     * Obtener el usuario que realiza la solicitud
+     * 
+     * @return usuario que realiza la solicitud
+     */
+    public User getRequester() {
+        return requester;
+    }
+
+    /**
+     * Asignar el usuario que realiza la solicitud
+     * 
+     * @param requester usuario que realiza la solicitud
+     */
+    public void setRequester(User requester) {
+        this.requester = requester;
+    }
+
+    /**
      * Busca los productos disponibles
      * 
      * @return lista de productos disponibles
