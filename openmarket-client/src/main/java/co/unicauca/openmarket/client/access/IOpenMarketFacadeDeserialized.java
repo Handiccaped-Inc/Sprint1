@@ -1,4 +1,4 @@
-package co.unicauca.openmarket.commons.domain.service;
+package co.unicauca.openmarket.client.access;
 
 import java.util.List;
 
@@ -8,7 +8,16 @@ import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.ShoppingCart;
 import co.unicauca.openmarket.commons.domain.User;
 
-public interface IOpenMarketFacade {
+public interface IOpenMarketFacadeDeserialized {
+
+    /**
+     * Busca un usuario por email y password
+     * 
+     * @param email    El email del usuario
+     * @param password La contraseña del usuario
+     * @return El usuario encontrado
+     */
+    User findUserByEmailAndPassword(String email, String password);
 
     /**
      * Busca los productos disponibles
@@ -32,7 +41,7 @@ public interface IOpenMarketFacade {
      * @param product producto a comprar
      * @return mensaje de confirmacion
      */
-    String buyProduct(Product product);
+    boolean buyProduct(Product product);
 
     /**
      * Agrega un producto al carrito de compras
@@ -41,7 +50,7 @@ public interface IOpenMarketFacade {
      * @param quantity Cantidad del producto
      * @return mensaje de confirmacion
      */
-    String addProductToTheShoppingCart(Product product, Long quantity);
+    boolean addProductToTheShoppingCart(Product product, Long quantity);
 
     /**
      * Obtien los productos del carrito de compras del solicitante
@@ -55,14 +64,14 @@ public interface IOpenMarketFacade {
      * 
      * @return mensaje de confirmacion
      */
-    String buyShoppingCart();
+    boolean buyShoppingCart();
 
     /**
      * Elimina los productos del carrito de compras
      * 
      * @return mensaje de confirmacion
      */
-    String deleteShoppingCart();
+    boolean deleteShoppingCart();
 
     /**
      * Guarda un producto
@@ -70,7 +79,7 @@ public interface IOpenMarketFacade {
      * @param product producto a guardar
      * @return mensaje de confirmacion
      */
-    String saveProduct(Product product);
+    boolean saveProduct(Product product);
 
     /**
      * Actualiza un producto
@@ -78,7 +87,7 @@ public interface IOpenMarketFacade {
      * @param product producto a actualizar con el estado a actualizar
      * @return mensaje de confirmacion
      */
-    String updateProduct(Product product);
+    boolean updateProduct(Product product);
 
     /**
      * Obtiene los productos del solicitante
@@ -102,7 +111,7 @@ public interface IOpenMarketFacade {
      * @param order orden a confirmar
      * @return mensaje de confirmacion
      */
-    String confirmOrder(Order order);
+    boolean confirmOrder(Order order);
 
     /**
      * Califica una orden
@@ -111,7 +120,7 @@ public interface IOpenMarketFacade {
      * @param qualification calificacion
      * @return mensaje de confirmacion
      */
-    String qualificateOrder(Order order, Long qualification);
+    boolean qualificateOrder(Order order, Long qualification);
 
     /**
      * registra una entrega
@@ -119,15 +128,5 @@ public interface IOpenMarketFacade {
      * @param delivery entrega a registrar
      * @return mensaje de confirmacion
      */
-    String registerDelivery(Delivery delivery);
-
-    /**
-     * Busca un usuario por email y password
-     * 
-     * @param email    El email del usuario
-     * @param password La contraseña del usuario
-     * @return El usuario encontrado
-     */
-    User findUserByEmailAndPassword(String email, String password);
-
+    boolean registerDelivery(Delivery delivery);
 }

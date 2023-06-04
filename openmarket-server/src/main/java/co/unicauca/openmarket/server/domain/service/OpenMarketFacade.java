@@ -368,4 +368,9 @@ public class OpenMarketFacade implements IOpenMarketFacade {
         }
         return "!error";
     }
+
+    @Override
+    public User findUserByEmailAndPassword(String email, String password) {
+        return userService.findByEmailAndPassword(email, password);
+    }
 }
