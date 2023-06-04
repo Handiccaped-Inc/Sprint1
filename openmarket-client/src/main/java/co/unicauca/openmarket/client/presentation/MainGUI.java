@@ -7,6 +7,8 @@ package co.unicauca.openmarket.client.presentation;
 import javax.swing.JPanel;
 
 import co.unicauca.openmarket.client.domain.service.OpenMarketFacadeService;
+import co.unicauca.openmarket.client.infra.Messages;
+import co.unicauca.openmarket.client.infra.SessionManager;
 import co.unicauca.openmarket.commons.domain.User;
 
 /**
@@ -329,13 +331,19 @@ public class MainGUI extends javax.swing.JFrame {
         btnBajaSuspender.setVisible(true);
         // 1.Usar el OpenMarket facade service para encontrar el usuario por nombre y
         // contraseña
-        String contrasenia = txtConstraseniaUsuario.getPassword().toString();
-        String correo = txtCorreoUsuario.getText();
-        User usuario = null;
+        String password = txtConstraseniaUsuario.getPassword().toString();
+        String email = txtCorreoUsuario.getText();
+        User user = null;
+        user = openMarketFacadeService.findUserByEmailAndPassword(email, password);
         // 2. Si el usuario no es nulo entonces settear en
         // SessionManager.getInstance().setUsuario(); a ese usuario
-
-        // 2.1 Si es nulo entonces mostrar un mensaje de error y retornar
+        if (user != null) {
+            SessionManager.getInstance().setUser(user);
+        } else {
+            // 2.1 Si es nulo entonces mostrar un mensaje de error y retornar
+            Messages.showMessageDialog("Usuario o contraseña incorrectos", "Error");
+            return;
+        }
 
         // 3 Luego de las anteriores validaciones dependiendo del tipo de usuario que
         // sea
@@ -350,7 +358,9 @@ public class MainGUI extends javax.swing.JFrame {
 
         // Settear un usuaio anonimo en SessionManager.getInstance().setUsuario(); y
         // ocultar los botones que no puede usar
-
+        User anonUser = new User();
+        anonUser.setUserName("Anonimo");
+        SessionManager.getInstance().setUser(anonUser);
         pnlCentral.removeAll();
         pnlCentral.revalidate();
         pnlCentral.repaint();
