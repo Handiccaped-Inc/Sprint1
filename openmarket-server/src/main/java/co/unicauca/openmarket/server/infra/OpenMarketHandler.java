@@ -34,7 +34,9 @@ public class OpenMarketHandler {
         this.facade = facade;
         
         actionMap = new HashMap<>();
-        
+        String UserJson = protocolRequest.getParameters().get(0).getValue();
+        User requester = gson.fromJson(userJson, User.class);
+        facade.setRequester(requester);
         Gson gson = new Gson();
         Protocol protocolRequest = gson.fromJson(requestJson, Protocol.class);
         String reply = "";
@@ -77,8 +79,8 @@ public class OpenMarketHandler {
     public String processFindProductByNameAndDescription(Protocol protocolRequest) {
         Product product = new Product();
         
-        String name = protocolRequest.getParameters().get(0).getValue();
-        String description = protocolRequest.getParameters().get(1).getValue();
+        String name = protocolRequest.getParameters().get(1).getValue();
+        String description = protocolRequest.getParameters().get(2).getValue();
         
         List<Product> products = facade.findProductByNameAndDescription(name, description);
         
@@ -92,7 +94,7 @@ public class OpenMarketHandler {
 
     public String processBuyProduct(Protocol protocolRequest) {
         Product product = new Product();
-        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
+        Long id = Long.parseLong(protocolRequest.getParameters().get(1).getValue());
         product.setId(id);
         
         String reply = facade.buyProduct(product);
@@ -108,9 +110,9 @@ public class OpenMarketHandler {
 
     public String processAddProductToShoppingCart(Protocol protocolRequest) {
         Product product = new Product();
-        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
+        Long id = Long.parseLong(protocolRequest.getParameters().get(1).getValue());
         product.setId(id);
-        Long quantity = Long.parseLong(protocolRequest.getParameters().get(1).getValue());
+        Long quantity = Long.parseLong(protocolRequest.getParameters().get(2).getValue());
         
         String reply = facade.addProductToTheShoppingCart(product, quantity);
 
@@ -157,8 +159,8 @@ public class OpenMarketHandler {
     
     public String processSaveProduct(Protocol protocolRequest) {
         Product product = new Product();
-        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
-        product.setId(id);
+        String productJson = protocolRequest.getParameters().get(1).getValue();
+        Product product = gson.fromJson(productJson, Product.class);
         
         String reply = facade.saveProduct(product);
 
@@ -172,8 +174,8 @@ public class OpenMarketHandler {
     
     public String processUpdateProduct(Protocol protocolRequest) {
         Product product = new Product();
-        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
-        product.setId(id);
+        String productJson = protocolRequest.getParameters().get(1).getValue();
+        Product product = gson.fromJson(productJson, Product.class);
         
         String reply = facade.updateProduct(product);
         
@@ -208,8 +210,9 @@ public class OpenMarketHandler {
     
     public String processConfirmOrder(Protocol protocolRequest) {
         Order order = new Order();
-        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
-        order.setId(id);
+        String orderJson = protocolRequest.getParameters().get(1).getValue();
+        Order order = gson.fromJson(orderJson, Order.class);
+
         String reply = facade.confirmOrder(order);
         
         if (reply == "!error") {
@@ -222,9 +225,9 @@ public class OpenMarketHandler {
     
     public String processQualificateOrder(Protocol protocolRequest) {
         Order order = new Order();
-        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
-        order.setId(id);
-        Long qualification = Long.parseLong(protocolRequest.getParameters().get(1).getValue());
+        String orderJson = protocolRequest.getParameters().get(1).getValue();
+        Order order = gson.fromJson(orderJson, Order.class);
+        Long qualification = Long.parseLong(protocolRequest.getParameters().get(2).getValue());
         String reply = facade.qualificateOrder(order, qualification);
         
         if (reply == "!error") {
@@ -237,8 +240,8 @@ public class OpenMarketHandler {
     
     public String processRegisterDelivery(Protocol protocolRequest) {
         Delivery delivery = new Delivery();
-        Long id = Long.parseLong(protocolRequest.getParameters().get(0).getValue());
-        delivery.setId(id);
+        String deliveryJson = protocolRequest.getParameters().get(1).getValue();
+        Delivery delivery = gson.fromJson(deliveryJson, Order.class);
 
         String reply = facade.registerDelivery(delivery);
         
