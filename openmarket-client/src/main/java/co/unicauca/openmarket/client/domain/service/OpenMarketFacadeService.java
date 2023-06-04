@@ -23,7 +23,7 @@ public class OpenMarketFacadeService {
      * @param password La contraseña del usuario
      * @return El usuario encontrado
      */
-    User findUserByEmailAndPassword(String email, String password) {
+    public User findUserByEmailAndPassword(String email, String password) {
         if (email.isEmpty() || password.isEmpty()) {
             return null;
         }
@@ -35,7 +35,7 @@ public class OpenMarketFacadeService {
      * 
      * @return lista de productos disponibles
      */
-    List<Product> findAvailableProducts() {
+    public List<Product> findAvailableProducts() {
         return openMarkedFacade.findAvailableProducts();
     }
 
@@ -46,7 +46,7 @@ public class OpenMarketFacadeService {
      * @param description descripcion del producto
      * @return lista de productos
      */
-    List<Product> findProductByNameAndDescription(String name, String description) {
+    public List<Product> findProductByNameAndDescription(String name, String description) {
         return openMarkedFacade.findProductByNameAndDescription(name, description);
     }
 
@@ -56,7 +56,7 @@ public class OpenMarketFacadeService {
      * @param product producto a comprar
      * @return mensaje de confirmacion
      */
-    boolean buyProduct(Product product) {
+    public boolean buyProduct(Product product) {
         if (product.getId() == null || product.getId() <= 0) {
             return false;
         }
@@ -70,7 +70,7 @@ public class OpenMarketFacadeService {
      * @param quantity Cantidad del producto
      * @return mensaje de confirmacion
      */
-    boolean addProductToTheShoppingCart(Product product, Long quantity) {
+    public boolean addProductToTheShoppingCart(Product product, Long quantity) {
         if (product.getId() == null || product.getId() <= 0 || quantity == null || quantity <= 0) {
             return false;
         }
@@ -82,7 +82,7 @@ public class OpenMarketFacadeService {
      * 
      * @return lista de productos del carrito de compras
      */
-    List<ShoppingCart> getShoppingCart() {
+    public List<ShoppingCart> getShoppingCart() {
         return openMarkedFacade.getShoppingCart();
     }
 
@@ -91,7 +91,7 @@ public class OpenMarketFacadeService {
      * 
      * @return mensaje de confirmacion
      */
-    boolean buyShoppingCart() {
+    public boolean buyShoppingCart() {
         return openMarkedFacade.buyShoppingCart();
     }
 
@@ -100,7 +100,7 @@ public class OpenMarketFacadeService {
      * 
      * @return mensaje de confirmacion
      */
-    boolean deleteShoppingCart() {
+    public boolean deleteShoppingCart() {
         return openMarkedFacade.deleteShoppingCart();
     }
 
@@ -110,7 +110,7 @@ public class OpenMarketFacadeService {
      * @param product producto a guardar
      * @return mensaje de confirmacion
      */
-    boolean saveProduct(Product product) {
+    public boolean saveProduct(Product product) {
         if (product.getName().isEmpty() || product.getDescription().isEmpty() || product.getStock() <= 0) {
             return false;
         }
@@ -123,7 +123,7 @@ public class OpenMarketFacadeService {
      * @param product producto a actualizar con el estado a actualizar
      * @return mensaje de confirmacion
      */
-    boolean updateProduct(Product product) {
+    public boolean updateProduct(Product product) {
         if (product.getId() == null || product.getId() <= 0) {
             return false;
         }
@@ -135,7 +135,7 @@ public class OpenMarketFacadeService {
      * 
      * @return lista de productos
      */
-    List<Product> getOwnProducts() {
+    public List<Product> getOwnProducts() {
         return openMarkedFacade.getOwnProducts();
     }
 
@@ -145,7 +145,7 @@ public class OpenMarketFacadeService {
      * 
      * @return lista de ordenes
      */
-    List<Order> getOrders() {
+    public List<Order> getOrders() {
         return openMarkedFacade.getOrders();
     }
 
@@ -156,7 +156,7 @@ public class OpenMarketFacadeService {
      * @param order orden a confirmar
      * @return mensaje de confirmacion
      */
-    boolean confirmOrder(Order order) {
+    public boolean confirmOrder(Order order) {
         if (order.getId() <= 0 || order.getCustomer().getId() <= 0) {
             return false;
         }
@@ -170,7 +170,7 @@ public class OpenMarketFacadeService {
      * @param qualification calificacion
      * @return mensaje de confirmacion
      */
-    boolean qualificateOrder(Order order, Long qualification) {
+    public boolean qualificateOrder(Order order, Long qualification) {
         if (order.getId() <= 0 || qualification <= 0) {
             return false;
         }
@@ -183,7 +183,7 @@ public class OpenMarketFacadeService {
      * @param delivery entrega a registrar
      * @return mensaje de confirmacion
      */
-    boolean registerDelivery(Delivery delivery) {
+    public boolean registerDelivery(Delivery delivery) {
         if (delivery.getOrder().getId() <= 0) {
             return false;
         }
