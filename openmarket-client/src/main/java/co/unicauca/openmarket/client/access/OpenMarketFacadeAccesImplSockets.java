@@ -31,7 +31,7 @@ public class OpenMarketFacadeAccesImplSockets implements IOpenMarketFacadeDeseri
     @Override
     public User findUserByEmailAndPassword(String email, String password) {
         String jsonResponse = null;
-        String requestJson = dofindUserByEmailAndPasswordRequestJson(email, password);
+        String requestJson = doFindUserByEmailAndPasswordRequestJson(email, password);
         System.out.println(requestJson);
 
         try {
@@ -405,18 +405,16 @@ public class OpenMarketFacadeAccesImplSockets implements IOpenMarketFacadeDeseri
         return error;
     }
 
-    private String dofindUserByEmailAndPasswordRequestJson(String email, String password) {
+    private String doFindUserByEmailAndPasswordRequestJson(String email, String password) {
 
         User usuario = SessionManager.getInstance().getUser();
         String jsonUser = gson.toJson(usuario);
-        String jsonEmail = gson.toJson(email);
-        String jsonPassword = gson.toJson(password);
 
         Protocol protocol = new Protocol();
         protocol.setAction("findUserByEmailAndPassword");
         protocol.addParameter("user", jsonUser);
-        protocol.addParameter("email", jsonEmail);
-        protocol.addParameter("password", jsonPassword);
+        protocol.addParameter("email", email);
+        protocol.addParameter("password", String.valueOf(password));
 
         String requestJson = gson.toJson(protocol);
         return requestJson;
@@ -426,12 +424,11 @@ public class OpenMarketFacadeAccesImplSockets implements IOpenMarketFacadeDeseri
 
         User usuario = SessionManager.getInstance().getUser();
         String jsonUser = gson.toJson(usuario);
-        String jsonProduct = gson.toJson(product);
 
         Protocol protocol = new Protocol();
         protocol.setAction("buyProduct");
         protocol.addParameter("user", jsonUser);
-        protocol.addParameter("product", jsonProduct);
+        protocol.addParameter("product", String.valueOf(product.getId()));
 
         String requestJson = gson.toJson(protocol);
         return requestJson;
@@ -441,14 +438,12 @@ public class OpenMarketFacadeAccesImplSockets implements IOpenMarketFacadeDeseri
 
         User usuario = SessionManager.getInstance().getUser();
         String jsonUser = gson.toJson(usuario);
-        String jsonProduct = gson.toJson(product);
-        String jsonQuantity = gson.toJson(quantity);
 
         Protocol protocol = new Protocol();
         protocol.setAction("addProductToShoppingCart");
         protocol.addParameter("user", jsonUser);
-        protocol.addParameter("product", jsonProduct);
-        protocol.addParameter("quantity", jsonQuantity);
+        protocol.addParameter("product", String.valueOf(product.getId()));
+        protocol.addParameter("quantity", String.valueOf(quantity));
 
         String requestJson = gson.toJson(protocol);
         return requestJson;
@@ -539,13 +534,12 @@ public class OpenMarketFacadeAccesImplSockets implements IOpenMarketFacadeDeseri
         User usuario = SessionManager.getInstance().getUser();
         String jsonUser = gson.toJson(usuario);
         String jsonOrder = gson.toJson(order);
-        String jsonQualification = gson.toJson(qualification);
 
         Protocol protocol = new Protocol();
         protocol.setAction("qualificateOrder");
         protocol.addParameter("user", jsonUser);
         protocol.addParameter("order", jsonOrder);
-        protocol.addParameter("qualification", jsonQualification);
+        protocol.addParameter("qualification", String.valueOf(qualification));
 
         String requestJson = gson.toJson(protocol);
         return requestJson;
@@ -583,14 +577,12 @@ public class OpenMarketFacadeAccesImplSockets implements IOpenMarketFacadeDeseri
 
         User usuario = SessionManager.getInstance().getUser();
         String jsonUser = gson.toJson(usuario);
-        String jsonName = gson.toJson(name);
-        String jsonDescription = gson.toJson(description);
 
         Protocol protocol = new Protocol();
         protocol.setAction("findProductByNameAndDescription");
         protocol.addParameter("user", jsonUser);
-        protocol.addParameter("name", jsonName);
-        protocol.addParameter("description", jsonDescription);
+        protocol.addParameter("name", name);
+        protocol.addParameter("description", description);
 
         String requestJson = gson.toJson(protocol);
         return requestJson;
