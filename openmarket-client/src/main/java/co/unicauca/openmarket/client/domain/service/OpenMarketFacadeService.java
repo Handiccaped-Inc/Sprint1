@@ -21,7 +21,7 @@ public class OpenMarketFacadeService {
      * 
      * @param email    El email del usuario
      * @param password La contraseña del usuario
-     * @return El usuario encontrado
+     * @return true si lo encuentra, false de lo contrario
      */
     public User findUserByEmailAndPassword(String email, String password) {
         if (email.isEmpty() || password.isEmpty()) {
@@ -54,7 +54,7 @@ public class OpenMarketFacadeService {
      * Realiza la compra de un producto
      * 
      * @param product producto a comprar
-     * @return mensaje de confirmacion
+     * @return true si la compra fue exitosa, false de lo contrario
      */
     public boolean buyProduct(Product product) {
         if (product.getId() == null || product.getId() <= 0) {
@@ -68,7 +68,7 @@ public class OpenMarketFacadeService {
      * 
      * @param product  Producto a agregar
      * @param quantity Cantidad del producto
-     * @return mensaje de confirmacion
+     * @return true si el producto fue agregado, false de lo contrario
      */
     public boolean addProductToTheShoppingCart(Product product, Long quantity) {
         if (product.getId() == null || product.getId() <= 0 || quantity == null || quantity <= 0) {
@@ -89,7 +89,8 @@ public class OpenMarketFacadeService {
     /**
      * Compra los productos del carrito de compras
      * 
-     * @return mensaje de confirmacion
+     * @return true si la compra de todoslos productos fue exitosa, false de lo
+     *         contrario
      */
     public boolean buyShoppingCart() {
         return openMarkedFacade.buyShoppingCart();
@@ -98,7 +99,8 @@ public class OpenMarketFacadeService {
     /**
      * Elimina los productos del carrito de compras
      * 
-     * @return mensaje de confirmacion
+     * @return true si la eliminacion de todos los productos del carrito fue
+     *         exitosa, false de lo contrario
      */
     public boolean deleteShoppingCart() {
         return openMarkedFacade.deleteShoppingCart();
@@ -108,7 +110,7 @@ public class OpenMarketFacadeService {
      * Guarda un producto
      * 
      * @param product producto a guardar
-     * @return mensaje de confirmacion
+     * @return true si el producto fue guardado, false de lo contrario
      */
     public boolean saveProduct(Product product) {
         if (product.getName().isEmpty() || product.getDescription().isEmpty() || product.getStock() <= 0) {
@@ -121,7 +123,7 @@ public class OpenMarketFacadeService {
      * Actualiza un producto
      * 
      * @param product producto a actualizar con el estado a actualizar
-     * @return mensaje de confirmacion
+     * @return true si el producto fue actualizado, false de lo contrario
      */
     public boolean updateProduct(Product product) {
         if (product.getId() == null || product.getId() <= 0) {
@@ -154,7 +156,7 @@ public class OpenMarketFacadeService {
      * con la comision
      * 
      * @param order orden a confirmar
-     * @return mensaje de confirmacion
+     * @return true si la confirmacion fue exitosa, false de lo contrario
      */
     public boolean confirmOrder(Order order) {
         if (order.getId() <= 0 || order.getCustomer().getId() <= 0) {
@@ -168,7 +170,7 @@ public class OpenMarketFacadeService {
      * 
      * @param order         orden a calificar
      * @param qualification calificacion
-     * @return mensaje de confirmacion
+     * @return true si la calificacion fue exitosa, false de lo contrario
      */
     public boolean qualificateOrder(Order order, Long qualification) {
         if (order.getId() <= 0 || qualification <= 0) {
@@ -181,7 +183,7 @@ public class OpenMarketFacadeService {
      * registra una entrega
      * 
      * @param delivery entrega a registrar
-     * @return mensaje de confirmacion
+     * @return true si el registro fue exitoso, false de lo contrario
      */
     public boolean registerDelivery(Delivery delivery) {
         if (delivery.getOrder().getId() <= 0) {
