@@ -1,10 +1,12 @@
 package co.unicauca.openmarket.server.access;
 
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -113,9 +115,17 @@ public class OrderRepository implements IOrderRepository {
                 order.setStatus(new StatusOrderRepository().findById(rs.getLong("order_status_id")));
                 order.setPrice(rs.getDouble("orders_price"));
                 order.setQualification(rs.getDouble("orders_qualification"));
-                String date = rs.getString("orders_date");
-                order.setDate(Date.valueOf(date));
+                String strDate = rs.getString("orders_date");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date;
+                try {
+                    date = dateFormat.parse(strDate);
+                    order.setDate(date);
 
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
                 orders.add(order);
             }
 
@@ -151,7 +161,16 @@ public class OrderRepository implements IOrderRepository {
                 order.setPrice(rs.getDouble("orders_price"));
                 order.setQualification(rs.getDouble("orders_qualification"));
                 String strDate = rs.getString("orders_date");
-                order.setDate(Date.valueOf(strDate));
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                Date date;
+                try {
+                    date = dateFormat.parse(strDate);
+                    order.setDate(date);
+
+                } catch (ParseException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
                 orders.add(order);
             }
 
