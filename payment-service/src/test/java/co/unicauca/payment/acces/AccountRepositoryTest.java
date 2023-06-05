@@ -55,7 +55,7 @@ public class AccountRepositoryTest {
      */
     @Test
     public void testUpdateAccountFailed() {
-        Account account = new Account(4L, "123456789", 200L);
+        Account account = new Account(7L, "123456789", 200L);
         Boolean result = repository.update(account);
         assertFalse(result); //se espera que el usuario no se actualice
     }
@@ -65,7 +65,7 @@ public class AccountRepositoryTest {
      */
     @Test
     public void testUpdateAccountFailed2() {
-        Account account = new Account(4L, "", 200L);
+        Account account = new Account(7L, "", 200L);
         Boolean result = repository.update(account);
         assertFalse(result); //se espera que el usuario no se actualice
     }

@@ -87,7 +87,7 @@ public class OrderRepositoryTest {
      */
     @Test
     public void testFindByUserFailed(){
-        List<Order> listFindByUser = repository.findByUser(4L);
+        List<Order> listFindByUser = repository.findByUser(200L);
         assertEquals(0, listFindByUser.size());
         assertTrue(listFindByUser.isEmpty());
 

@@ -56,7 +56,7 @@ public class ProductRepositoryTest{
     @Test
     public void testFindByStatusSuccess() {
         List<Product> products = repository.findByStatus(new StateProduct(1L,"disponible"));
-        assertEquals(2, products.size()); // Espera como resultado 2 que nos indica que se encontraron 2 productos
+        assertEquals(3, products.size()); // Espera como resultado 2 que nos indica que se encontraron 2 productos
     }
 
     /**
@@ -73,9 +73,9 @@ public class ProductRepositoryTest{
      */
     @Test
     public void testFindByNameAndDescriptionSuccess() {
-        List<Product> productsFindByNameAndDescription  = repository.findByNameAndDescription("Producto 2", "Descripción del producto 2");
+        List<Product> productsFindByNameAndDescription  = repository.findByNameAndDescription("Lambo Rey", "En un carro Deportivo");
         assertEquals(1, productsFindByNameAndDescription.size()); // Espera como resultado 1 que nos indica que se encontro un producto
-        assertEquals("Producto 2", productsFindByNameAndDescription.get(0).getName()); // Espera como resultado el nombre del producto 1
+        assertEquals("Lambo Rey", productsFindByNameAndDescription.get(0).getName()); // Espera como resultado el nombre del producto 1
     }
 
     /**
@@ -94,7 +94,7 @@ public class ProductRepositoryTest{
     public void findByIdSuccess(){
         Product productTest = repository.findById(3L);
         assertEquals(3L, productTest.getOwner().getId());
-        assertEquals("Producto 3", productTest.getName());
+        assertEquals("Lambo Rey", productTest.getName());
         assertEquals(10,productTest.getStock());
     }
 
