@@ -35,8 +35,10 @@ public class CategoryRepository implements ICategoryRepository {
                 Category category = new Category();
                 category.setId(res.getLong("category_id"));
                 category.setName(res.getString("category_name"));
+                conn.close();
                 return category;
             } else {
+                conn.close();
                 return null;
             }
         } catch (SQLException ex) {

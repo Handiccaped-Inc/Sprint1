@@ -14,13 +14,13 @@ import co.unicauca.openmarket.commons.domain.Order;
 import co.unicauca.openmarket.commons.domain.StatusOrder;
 
 /**
- * Clase OrderRepository 
+ * Clase OrderRepository
  */
 public class OrderRepository implements IOrderRepository {
 
     /** Conexion */
     protected Connection connection;
-    
+
     /**
      * Constructor default
      */
@@ -46,10 +46,16 @@ public class OrderRepository implements IOrderRepository {
             pstmt.setDouble(4, newOrder.getPrice());
             pstmt.setDouble(5, newOrder.getQualification());
             String date = newOrder.getDate().toString();
-            pstmt.setString(6,date);
+            pstmt.setString(6, date);
             return pstmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             Logger.getLogger(OrderRepository.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return false;
     }
@@ -72,13 +78,19 @@ public class OrderRepository implements IOrderRepository {
             pstmt.setDouble(4, newOrder.getPrice());
             pstmt.setDouble(5, newOrder.getQualification());
             String date = newOrder.getDate().toString();
-            pstmt.setString(6,date);
+            pstmt.setString(6, date);
             pstmt.setLong(7, newOrder.getId());
 
             int rowsUpdated = pstmt.executeUpdate();
             return rowsUpdated > 0;
         } catch (SQLException ex) {
             Logger.getLogger(OrderRepository.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return false;
     }
@@ -111,6 +123,12 @@ public class OrderRepository implements IOrderRepository {
             pstmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(OrderRepository.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return orders;
     }
@@ -141,6 +159,12 @@ public class OrderRepository implements IOrderRepository {
             pstmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(OrderRepository.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return orders;
     }
