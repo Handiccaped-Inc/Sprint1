@@ -6,6 +6,34 @@
 *       Arturo Restrepo Ruiz
 */
 
+-- Drop table "delivery" (since it has foreign key constraints, it needs to be dropped last)
+DROP TABLE IF EXISTS delivery;
+
+-- Drop table "orders"
+DROP TABLE IF EXISTS orders;
+
+-- Drop table "order_status"
+DROP TABLE IF EXISTS order_status;
+
+-- Drop table "shopping_cart"
+DROP TABLE IF EXISTS shopping_cart;
+
+-- Drop table "product"
+DROP TABLE IF EXISTS product;
+
+-- Drop table "state_product"
+DROP TABLE IF EXISTS state_product;
+
+-- Drop table "category"
+DROP TABLE IF EXISTS category;
+
+-- Drop table "user"
+DROP TABLE IF EXISTS user;
+
+-- Drop table "rol"
+DROP TABLE IF EXISTS rol;
+
+
 -- Tabla rol: Almacena los roles de los usuarios
 CREATE TABLE rol (
     rol_id INTEGER PRIMARY KEY,
