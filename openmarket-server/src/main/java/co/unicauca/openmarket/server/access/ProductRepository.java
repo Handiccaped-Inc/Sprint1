@@ -37,7 +37,7 @@ public class ProductRepository implements IProductRepository {
             }
             // this.connect();
 
-            String sql = "INSERT INTO product (user_id, state_product_id, product_name, product_description, product_price, product_stock, product_latitude, product_longitude) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO product (user_id, state_product_id, product_name, product_description, product_price, product_stock, product_latitude, product_longitude) VALUES (?,?,?,?,?,?,?,?)";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, newProduct.getOwner().getId());
