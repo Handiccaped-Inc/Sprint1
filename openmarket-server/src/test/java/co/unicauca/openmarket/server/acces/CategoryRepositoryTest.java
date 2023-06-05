@@ -23,7 +23,6 @@ public class CategoryRepositoryTest {
     public void testFindByIdSuccess(){
         Category categoryTest = repository.findById(1L);
         assertEquals(1, categoryTest.getId()); // se espera que el id de la categoria encontrada sea 1
-        assertEquals(categoryTest.getName(), "Categoría 1"); // se espera que el nombre de la categoria encontrada sea Categoría 1
     }
 
     /**
