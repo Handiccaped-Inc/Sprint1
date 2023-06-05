@@ -25,6 +25,8 @@ public class DeliveryRepository implements IDeliveryRepository {
 
     @Override
     public boolean save(Delivery newDelivery) {
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
 
             if (newDelivery == null) {
@@ -56,6 +58,8 @@ public class DeliveryRepository implements IDeliveryRepository {
 
     @Override
     public boolean update(Delivery newDelivery) {
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
 
             if (newDelivery == null) {

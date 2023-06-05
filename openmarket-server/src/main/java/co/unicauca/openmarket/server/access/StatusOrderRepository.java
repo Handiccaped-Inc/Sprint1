@@ -26,6 +26,8 @@ public class StatusOrderRepository implements IStatusOrderRepository {
 
     @Override
     public StatusOrder findById(Long id) {
+        connection = DatabaseConnection.getInstance().getConnection();
+
         try {
             String sql = "SELECT * FROM order_status WHERE order_status_id = ?";
             PreparedStatement pstmt = connection.prepareStatement(sql);

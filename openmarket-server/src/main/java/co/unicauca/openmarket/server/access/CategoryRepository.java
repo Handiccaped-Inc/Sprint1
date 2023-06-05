@@ -26,6 +26,8 @@ public class CategoryRepository implements ICategoryRepository {
 
     @Override
     public Category findById(long id) {
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
             String sql = "SELECT * FROM category WHERE category_id=?";
             PreparedStatement pstmt = conn.prepareStatement(sql);

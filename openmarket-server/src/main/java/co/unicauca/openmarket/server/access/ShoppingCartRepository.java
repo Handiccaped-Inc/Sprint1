@@ -31,6 +31,8 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
 
     @Override
     public boolean save(ShoppingCart newCart) {
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
             // Validate cart
             if (newCart == null) {
@@ -61,6 +63,8 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
     @Override
     public List<ShoppingCart> findAll() {
         List<ShoppingCart> carts = new ArrayList<>();
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
 
             String sql = "SELECT * FROM shopping_cart";
@@ -96,6 +100,8 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
         if (owner == null) {
             return carts;
         }
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
 
             String sql = "SELECT * FROM shopping_cart WHERE user_id = ?";
@@ -132,6 +138,8 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
         if (owner == null) {
             return Products;
         }
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
 
             String sql = "SELECT * FROM shopping_cart JOIN product ON shopping_cart.product_id = product.product_id WHERE shopping_cart.user_id = ?";
@@ -171,9 +179,12 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
 
     @Override
     public boolean delete(User owner) {
+
         if (owner == null) {
             return false;
         }
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
             // this.connect();
 

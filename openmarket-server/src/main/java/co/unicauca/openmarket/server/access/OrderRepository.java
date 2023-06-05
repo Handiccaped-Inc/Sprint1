@@ -32,6 +32,8 @@ public class OrderRepository implements IOrderRepository {
 
     @Override
     public boolean save(Order newOrder) {
+        connection = DatabaseConnection.getInstance().getConnection();
+
         try {
             // Validate order
             if (newOrder == null || newOrder.getPrice().equals(null)) {
@@ -64,6 +66,8 @@ public class OrderRepository implements IOrderRepository {
 
     @Override
     public boolean update(Order newOrder) {
+        connection = DatabaseConnection.getInstance().getConnection();
+
         try {
             // Validate order
             if (newOrder == null || newOrder.getPrice().equals(null)) {
@@ -100,6 +104,8 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public List<Order> findByState(StatusOrder status) {
         List<Order> orders = new ArrayList<>();
+        connection = DatabaseConnection.getInstance().getConnection();
+
         try {
 
             String sql = "SELECT * FROM orders WHERE order_status_id = ?";
@@ -146,6 +152,8 @@ public class OrderRepository implements IOrderRepository {
     @Override
     public List<Order> findByUser(Long userId) {
         List<Order> orders = new ArrayList<>();
+        connection = DatabaseConnection.getInstance().getConnection();
+
         try {
 
             String sql = "SELECT * FROM orders WHERE user_id = ?";

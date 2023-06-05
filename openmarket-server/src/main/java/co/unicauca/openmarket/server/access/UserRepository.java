@@ -39,6 +39,8 @@ public class UserRepository implements IUserRepository {
      */
     @Override
     public User findByEmailAndPassword(String email, String password) {
+        conn = DatabaseConnection.getInstance().getConnection();
+
         User user = null;
         Rol user_rol = null;
         String hashedPassword = Hashing.getSHA256Hash(password);
@@ -87,6 +89,8 @@ public class UserRepository implements IUserRepository {
      */
     @Override
     public User findById(Long userId) {
+        conn = DatabaseConnection.getInstance().getConnection();
+
         User user = null;
         Rol user_rol = null;
         String sql = "SELECT * FROM user WHERE user_id = ?";

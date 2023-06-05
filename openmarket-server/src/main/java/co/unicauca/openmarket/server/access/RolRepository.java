@@ -31,6 +31,8 @@ public class RolRepository implements IRolRepository {
      */
     @Override
     public Rol findById(long id) {
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
             String sql = "SELECT * FROM rol WHERE rol_id=?";
             PreparedStatement pstmt = conn.prepareStatement(sql);

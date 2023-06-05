@@ -30,6 +30,8 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public boolean save(Product newProduct) {
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
             // Validate product
             if (newProduct == null || newProduct.getName().isEmpty()) {
@@ -65,6 +67,8 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public boolean update(Product newProduct) {
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
             // Validate product
             if (newProduct == null || newProduct.getName().isEmpty()) {
@@ -102,6 +106,8 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public List<Product> findByStatus(StateProduct status) {
+        conn = DatabaseConnection.getInstance().getConnection();
+
         List<Product> products = new ArrayList<>();
         try {
             String sql = "SELECT * FROM product WHERE product.state_product_id in (select state_product_id from state_product where state_product_name = ?)";
@@ -136,6 +142,8 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public List<Product> findByNameAndDescription(String name, String description) {
+        conn = DatabaseConnection.getInstance().getConnection();
+
         List<Product> products = new ArrayList<>();
 
         try {
@@ -174,6 +182,8 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public Product findById(Long id) {
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
             String sql = "SELECT * FROM product WHERE product_id=?";
             PreparedStatement pstmt = conn.prepareStatement(sql);
@@ -207,6 +217,8 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public boolean delete(Product newProduct) {
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
             // Validate product
             if (newProduct == null || newProduct.getName().isEmpty()) {
@@ -242,6 +254,8 @@ public class ProductRepository implements IProductRepository {
     @Override
     public List<Product> findByOwner(User user) {
         List<Product> productsFindbyOwner = new ArrayList<>();
+        conn = DatabaseConnection.getInstance().getConnection();
+
         try {
             if (user.getId() == 0 || user == null) {
                 return productsFindbyOwner;
