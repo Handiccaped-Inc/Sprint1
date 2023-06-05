@@ -26,7 +26,6 @@ public class StatusOrderRepository implements IStatusOrderRepository {
 
     @Override
     public StatusOrder findById(Long id) {
-        connection = DatabaseConnection.getInstance().getConnection();
 
         try {
             String sql = "SELECT * FROM order_status WHERE order_status_id = ?";
@@ -41,12 +40,6 @@ public class StatusOrderRepository implements IStatusOrderRepository {
             }
         } catch (SQLException ex) {
             Logger.getLogger(StatusOrderRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }

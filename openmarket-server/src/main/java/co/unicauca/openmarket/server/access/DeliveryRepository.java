@@ -25,7 +25,6 @@ public class DeliveryRepository implements IDeliveryRepository {
 
     @Override
     public boolean save(Delivery newDelivery) {
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
 
@@ -46,19 +45,12 @@ public class DeliveryRepository implements IDeliveryRepository {
 
         } catch (SQLException ex) {
             Logger.getLogger(DeliveryRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return false;
     }
 
     @Override
     public boolean update(Delivery newDelivery) {
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
 
@@ -79,13 +71,6 @@ public class DeliveryRepository implements IDeliveryRepository {
 
         } catch (SQLException ex) {
             Logger.getLogger(DeliveryRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
         }
 
         return false;

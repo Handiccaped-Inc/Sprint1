@@ -26,7 +26,6 @@ public class StateProductRepository implements IStateProductRepository {
 
     @Override
     public StateProduct findById(long id) {
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
             String sql = "SELECT * FROM state_product WHERE state_product_id=?";
@@ -43,12 +42,6 @@ public class StateProductRepository implements IStateProductRepository {
             }
         } catch (SQLException ex) {
             Logger.getLogger(CategoryRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }

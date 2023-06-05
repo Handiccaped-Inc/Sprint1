@@ -31,7 +31,6 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
 
     @Override
     public boolean save(ShoppingCart newCart) {
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
             // Validate cart
@@ -50,12 +49,6 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
             // this.disconnect();
         } catch (SQLException ex) {
             Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return false;
     }
@@ -63,7 +56,6 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
     @Override
     public List<ShoppingCart> findAll() {
         List<ShoppingCart> carts = new ArrayList<>();
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
 
@@ -84,12 +76,6 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
 
         } catch (SQLException ex) {
             Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return carts;
     }
@@ -100,7 +86,6 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
         if (owner == null) {
             return carts;
         }
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
 
@@ -122,12 +107,6 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
 
         } catch (SQLException ex) {
             Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return carts;
     }
@@ -138,7 +117,6 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
         if (owner == null) {
             return Products;
         }
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
 
@@ -167,12 +145,6 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
 
         } catch (SQLException ex) {
             Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return Products;
     }
@@ -183,7 +155,6 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
         if (owner == null) {
             return false;
         }
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
             // this.connect();
@@ -196,12 +167,6 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
             // this.disconnect();
         } catch (SQLException ex) {
             Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return false;
     }

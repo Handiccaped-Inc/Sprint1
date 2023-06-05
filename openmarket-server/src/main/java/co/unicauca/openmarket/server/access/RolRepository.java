@@ -31,7 +31,6 @@ public class RolRepository implements IRolRepository {
      */
     @Override
     public Rol findById(long id) {
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
             String sql = "SELECT * FROM rol WHERE rol_id=?";
@@ -48,12 +47,6 @@ public class RolRepository implements IRolRepository {
             }
         } catch (SQLException ex) {
             Logger.getLogger(RolRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }

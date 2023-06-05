@@ -30,7 +30,6 @@ public class ProductRepository implements IProductRepository {
 
     @Override
     public boolean save(Product newProduct) {
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
             // Validate product
@@ -55,19 +54,12 @@ public class ProductRepository implements IProductRepository {
             return pstmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return false;
     }
 
     @Override
     public boolean update(Product newProduct) {
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
             // Validate product
@@ -94,19 +86,12 @@ public class ProductRepository implements IProductRepository {
             return pstmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return false;
     }
 
     @Override
     public List<Product> findByStatus(StateProduct status) {
-        conn = DatabaseConnection.getInstance().getConnection();
 
         List<Product> products = new ArrayList<>();
         try {
@@ -130,19 +115,12 @@ public class ProductRepository implements IProductRepository {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return products;
     }
 
     @Override
     public List<Product> findByNameAndDescription(String name, String description) {
-        conn = DatabaseConnection.getInstance().getConnection();
 
         List<Product> products = new ArrayList<>();
 
@@ -170,19 +148,12 @@ public class ProductRepository implements IProductRepository {
             return products;
         } catch (SQLException ex) {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return products;
     }
 
     @Override
     public Product findById(Long id) {
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
             String sql = "SELECT * FROM product WHERE product_id=?";
@@ -205,19 +176,12 @@ public class ProductRepository implements IProductRepository {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }
 
     @Override
     public boolean delete(Product newProduct) {
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
             // Validate product
@@ -235,12 +199,6 @@ public class ProductRepository implements IProductRepository {
             return pstmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return false;
     }
@@ -254,7 +212,6 @@ public class ProductRepository implements IProductRepository {
     @Override
     public List<Product> findByOwner(User user) {
         List<Product> productsFindbyOwner = new ArrayList<>();
-        conn = DatabaseConnection.getInstance().getConnection();
 
         try {
             if (user.getId() == 0 || user == null) {
@@ -283,12 +240,6 @@ public class ProductRepository implements IProductRepository {
 
         } catch (SQLException ex) {
             Logger.getLogger(ProductRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
 
         return productsFindbyOwner;

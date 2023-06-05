@@ -39,7 +39,6 @@ public class UserRepository implements IUserRepository {
      */
     @Override
     public User findByEmailAndPassword(String email, String password) {
-        conn = DatabaseConnection.getInstance().getConnection();
 
         User user = null;
         Rol user_rol = null;
@@ -74,12 +73,6 @@ public class UserRepository implements IUserRepository {
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return null; // No se encontró el usuario
     }
@@ -89,7 +82,6 @@ public class UserRepository implements IUserRepository {
      */
     @Override
     public User findById(Long userId) {
-        conn = DatabaseConnection.getInstance().getConnection();
 
         User user = null;
         Rol user_rol = null;
@@ -122,12 +114,6 @@ public class UserRepository implements IUserRepository {
         } catch (ParseException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return null; // No se encontró el usuario
     }
