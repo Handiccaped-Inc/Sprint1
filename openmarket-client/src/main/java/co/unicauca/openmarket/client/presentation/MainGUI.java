@@ -33,6 +33,9 @@ public class MainGUI extends javax.swing.JFrame {
     public MainGUI(OpenMarketFacadeService openMarketFacadeService) {
         initComponents();
         this.openMarketFacadeService = openMarketFacadeService;
+        // Agregar los paneles al observador
+
+        initMainGUI();
         this.openMarketFacadeService.addObservador(pnlbajasuspenderproducto);
         this.openMarketFacadeService.addObservador(pnlbuscarproductos);
         this.openMarketFacadeService.addObservador(pnlcomprarproductos);
@@ -40,7 +43,6 @@ public class MainGUI extends javax.swing.JFrame {
         this.openMarketFacadeService.addObservador(pnlpuntuarorden);
         this.openMarketFacadeService.addObservador(pnlregistrarentrega);
         this.openMarketFacadeService.addObservador(pnlcarritocompras);
-        initMainGUI();
     }
 
     /**

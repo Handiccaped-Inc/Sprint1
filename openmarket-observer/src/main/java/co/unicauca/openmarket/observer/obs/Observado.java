@@ -24,7 +24,7 @@ public class Observado {
 
     public void notificar() {
         for (Observador each : misObservadores) {
-            each.actualizar();
+            // each.actualizar();
         }
     }
 
