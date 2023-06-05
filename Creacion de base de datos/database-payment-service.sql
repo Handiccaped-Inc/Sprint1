@@ -1,3 +1,10 @@
+-- Drop table "transactions"
+DROP TABLE IF EXISTS transactions;
+
+-- Drop table "account"
+DROP TABLE IF EXISTS account;
+
+
 --Tabla cuenta: Almacena la informacion sobre la cuenta y su dinero
 create table account(
     account_id integer primary key,
