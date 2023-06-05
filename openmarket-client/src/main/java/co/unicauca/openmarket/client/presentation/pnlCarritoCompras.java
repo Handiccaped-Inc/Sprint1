@@ -4,8 +4,10 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.domain.service.OpenMarketFacadeService;
 import co.unicauca.openmarket.client.infra.Messages;
 import co.unicauca.openmarket.commons.domain.Product;
+import co.unicauca.openmarket.commons.domain.ShoppingCart;
 import co.unicauca.openmarket.observer.obs.Observador;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -20,12 +22,13 @@ public class pnlCarritoCompras extends javax.swing.JPanel implements Observador 
      * Creates new form pnlComprador
      */
     
-    //private ShoppingCartService shoppingcartService;
+    private OpenMarketFacadeService OpenMarketFacadeService;
+    private List<ShoppingCart> shoppingCart;
     
-    public pnlCarritoCompras(/*ShoppingCartService shoppingcartService*/) {
+    public pnlCarritoCompras(OpenMarketFacadeService OpenMarketFacadeService) {
         initComponents();
         initializeTable();
-        //this.shoppingcartService = shoppingcartService;
+        this.OpenMarketFacadeService = OpenMarketFacadeService;
     }
 
     /**
@@ -40,6 +43,7 @@ public class pnlCarritoCompras extends javax.swing.JPanel implements Observador 
         jScrollPane1 = new javax.swing.JScrollPane();
         tblCarrito = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
+        btnBuscar = new javax.swing.JButton();
         btnComprarCarrito = new javax.swing.JButton();
         btnEliminarCarrito = new javax.swing.JButton();
 
@@ -59,6 +63,14 @@ public class pnlCarritoCompras extends javax.swing.JPanel implements Observador 
         jScrollPane1.setViewportView(tblCarrito);
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 30, 5));
+
+        btnBuscar.setText("Buscar Carrito");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnBuscar);
 
         btnComprarCarrito.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnComprarCarrito.setText("Comprar Carrito");
@@ -108,35 +120,46 @@ public class pnlCarritoCompras extends javax.swing.JPanel implements Observador 
         Messages.showMessageDialog("Carrito Eliminado", "Atención");
     }//GEN-LAST:event_btnEliminarCarritoActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        getShoppingCart();
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     private void initializeTable() {
         tblCarrito.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
                 new String[]{
-                    "ID", "Nombre", "Descripcion", "Precio", "Stock", "Latitud", "Longitud", "Categoria"
+                    "ID", "Nombre Producto", "Cantidad"
                 }
         ));
     }
 
-    private void fillTable(List<Product> listProducts) {
+    private void fillTable(List<ShoppingCart> shoppingCart) {
         initializeTable();
         DefaultTableModel model = (DefaultTableModel) tblCarrito.getModel();
 
-        Object rowData[] = new Object[7];//No columnas
-        for (int i = 0; i < listProducts.size(); i++) {
-            rowData[0] = listProducts.get(i).getId();
-            rowData[1] = listProducts.get(i).getName();
-            rowData[2] = listProducts.get(i).getDescription();
-            rowData[3] = listProducts.get(i).getPrice();
-            rowData[4] = listProducts.get(i).getStock();
-            rowData[5] = listProducts.get(i).getLatitude();
-            rowData[6] = listProducts.get(i).getLongitude();
-            rowData[7] = listProducts.get(i).getCategory().getName();
+        Object rowData[] = new Object[3];//No columnas
+        for (int i = 0; i < shoppingCart.size(); i++) {
+            rowData[0] = shoppingCart.get(i).getId();
+            rowData[1] = shoppingCart.get(i).getProduct().getName();
+            rowData[2] = shoppingCart.get(i).getQuantity();
 
             model.addRow(rowData);
         }
     }
 
+    private void getShoppingCart(){
+        shoppingCart = OpenMarketFacadeService.getShoppingCart();
+        
+        if (shoppingCart == null) {
+            Messages.showMessageDialog("No tienes carrito", "Atención");
+            return;
+        }
+        
+        fillTable(shoppingCart);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnComprarCarrito;
     private javax.swing.JButton btnEliminarCarrito;
     private javax.swing.JPanel jPanel1;
@@ -146,7 +169,7 @@ public class pnlCarritoCompras extends javax.swing.JPanel implements Observador 
 
     @Override
     public void actualizar() {
-        //fillTable(shoppingcartService.findAll());
+        fillTable(shoppingCart);
     }
 
 }

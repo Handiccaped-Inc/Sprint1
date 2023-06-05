@@ -4,6 +4,7 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.domain.service.OpenMarketFacadeService;
 import co.unicauca.openmarket.client.infra.Messages;
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.observer.obs.Observador;
@@ -14,18 +15,18 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author restr
  */
-public class pnlComprarProductos extends javax.swing.JPanel implements Observador{
+public class pnlComprarProductos extends javax.swing.JPanel implements Observador {
 
     /**
      * Creates new form pnlComprador
      */
-    
-    //private ProductService productService;
-    
-    public pnlComprarProductos(/*ProductService productService*/) {
+    private OpenMarketFacadeService openMarketFacadeService;
+    private List<Product> products;
+
+    public pnlComprarProductos(OpenMarketFacadeService openMarketFacadeService) {
         initComponents();
         initializeTable();
-        //this.productService = productService;
+        this.openMarketFacadeService = openMarketFacadeService;
     }
 
     /**
@@ -45,6 +46,8 @@ public class pnlComprarProductos extends javax.swing.JPanel implements Observado
         jPanel1 = new javax.swing.JPanel();
         btnComprar = new javax.swing.JButton();
         btnAgrCarrito = new javax.swing.JButton();
+        lblCantidad = new javax.swing.JLabel();
+        txtCantidad = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(700, 515));
 
@@ -89,6 +92,12 @@ public class pnlComprarProductos extends javax.swing.JPanel implements Observado
         });
         jPanel1.add(btnAgrCarrito);
 
+        lblCantidad.setText("Cantidad:");
+        jPanel1.add(lblCantidad);
+
+        txtCantidad.setText("1");
+        jPanel1.add(txtCantidad);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,10 +141,15 @@ public class pnlComprarProductos extends javax.swing.JPanel implements Observado
     }
 
     private void fillTable(List<Product> listProducts) {
+        if (listProducts.isEmpty()) {
+            initializeTable();
+            return;
+        }
+        
         initializeTable();
         DefaultTableModel model = (DefaultTableModel) tblProductos.getModel();
 
-        Object rowData[] = new Object[7];//No columnas
+        Object rowData[] = new Object[8];//No columnas
         for (int i = 0; i < listProducts.size(); i++) {
             rowData[0] = listProducts.get(i).getId();
             rowData[1] = listProducts.get(i).getName();
@@ -156,18 +170,52 @@ public class pnlComprarProductos extends javax.swing.JPanel implements Observado
             txtNombre.requestFocus();
             return;
         }
+        
+        products = openMarketFacadeService.findProductByNameAndDescription(txtNombre.getText(), txtDescripcion.getText());
+        
+        fillTable(products);
 
-        //fillTable(productService.findByNameAndDescription(txtNombre.getText(), txtDescripcion.getText()));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprarActionPerformed
-        // TODO add your handling code here:
+        if (this.products == null) {
+            Messages.showMessageDialog("Busque un Producto primero", "Atención");
+            return;
+        }
+
+        if (openMarketFacadeService.buyProduct(products.get(0))) {
+            Messages.showMessageDialog("Producto comprado", "Atención");
+        } else{
+            Messages.showMessageDialog("Ocurrio un error", "Atención");
+        } 
     }//GEN-LAST:event_btnComprarActionPerformed
 
     private void btnAgrCarritoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgrCarritoActionPerformed
-        // TODO add your handling code here:
+        if (txtCantidad.getText().isEmpty()) {
+            Messages.showMessageDialog("Ingrese la cantidad", "Atención");
+            return;
+        }
+        
+        if (!correctFormat(txtCantidad.getText())) {
+            Messages.showMessageDialog("Ingrese un dato numerico", "Atención");
+            return;
+        }
+        
+        if (openMarketFacadeService.addProductToTheShoppingCart(products.get(0), Long.parseLong(txtCantidad.getText()))) {
+            Messages.showMessageDialog("Producto guardado en el carrito", "Atención");
+        } else{
+            Messages.showMessageDialog("Ocurrio un error", "Atención");
+        }
     }//GEN-LAST:event_btnAgrCarritoActionPerformed
 
+    private boolean correctFormat(String id) {
+        for (int i = 0; i < id.length(); i++) {
+            if (!Character.isDigit(id.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgrCarrito;
@@ -175,13 +223,15 @@ public class pnlComprarProductos extends javax.swing.JPanel implements Observado
     private javax.swing.JButton btnComprar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblCantidad;
     private javax.swing.JTable tblProductos;
+    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtDescripcion;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void actualizar() {
-        //fillTable(productService.findAllProducts());
+        fillTable(openMarketFacadeService.findAvailableProducts());
     }
 }

@@ -4,6 +4,7 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.domain.service.OpenMarketFacadeService;
 import co.unicauca.openmarket.commons.domain.Product;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -20,11 +21,11 @@ public class pnlBuscarProductos extends javax.swing.JPanel implements Observador
      * Creates new form pnlComprador
      */
     
-    //private ProductService productService;
+    private OpenMarketFacadeService openMarketFacadeService;
     
-    public pnlBuscarProductos(/*ProductService productService*/) {
+    public pnlBuscarProductos(OpenMarketFacadeService openMarketFacadeService) {
         initComponents();
-        //this.productService = productService;
+        this.openMarketFacadeService = openMarketFacadeService;
         initializeTable();
     }
 
@@ -121,7 +122,7 @@ public class pnlBuscarProductos extends javax.swing.JPanel implements Observador
         initializeTable();
         DefaultTableModel model = (DefaultTableModel) tblProductos.getModel();
 
-        Object rowData[] = new Object[7];//No columnas
+        Object rowData[] = new Object[8];//No columnas
         for (int i = 0; i < listProducts.size(); i++) {
             rowData[0] = listProducts.get(i).getId();
             rowData[1] = listProducts.get(i).getName();
@@ -143,11 +144,11 @@ public class pnlBuscarProductos extends javax.swing.JPanel implements Observador
             return;
         }
 
-        //fillTable(productService.findByNameAndDescription(txtNombre.getText(), txtDescripcion.getText()));
+        fillTable(openMarketFacadeService.findProductByNameAndDescription(txtNombre.getText(), txtDescripcion.getText()));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
-        //fillTable(productService.findAllProducts());
+        fillTable(openMarketFacadeService.findAvailableProducts());
     }//GEN-LAST:event_btnListarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -161,6 +162,6 @@ public class pnlBuscarProductos extends javax.swing.JPanel implements Observador
 
     @Override
     public void actualizar() {
-        //fillTable(productService.findAllProducts());
+        fillTable(openMarketFacadeService.findAvailableProducts());
     }
 }

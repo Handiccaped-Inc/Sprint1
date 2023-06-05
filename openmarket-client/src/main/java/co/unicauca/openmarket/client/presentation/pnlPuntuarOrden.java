@@ -4,6 +4,7 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.domain.service.OpenMarketFacadeService;
 import co.unicauca.openmarket.client.infra.Messages;
 import co.unicauca.openmarket.commons.domain.Order;
 import co.unicauca.openmarket.observer.obs.Observador;
@@ -20,12 +21,12 @@ public class pnlPuntuarOrden extends javax.swing.JPanel implements Observador {
      * Creates new form pnlComprador
      */
     
-    //private OrderService orderService;
+    private OpenMarketFacadeService OpenMarketFacadeService;
     
-    public pnlPuntuarOrden(/*OrderService orderService*/) {
+    public pnlPuntuarOrden(OpenMarketFacadeService OpenMarketFacadeService) {
         initComponents();
         initializeTable();
-        //this.orderService = orderService;
+        this.OpenMarketFacadeService = OpenMarketFacadeService;
     }
 
     /**
