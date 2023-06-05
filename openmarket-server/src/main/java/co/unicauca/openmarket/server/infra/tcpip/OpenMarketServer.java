@@ -24,6 +24,12 @@ import co.unicauca.openmarket.server.access.UserRepository;
  * Clase OpenMarketServer
  */
 public class OpenMarketServer {
+
+    /**
+     * Constructor default
+     */
+    OpenMarketServer(){}
+
     /** main of the server
      * @param args the command line arguments
      */

@@ -16,7 +16,10 @@ public class DeliveryService implements IDeliveryService {
 
     private IDeliveryRepository myDeliverRepository;
 
-    /** Constructor default */
+    /**
+     * Constructor
+     * @param myDeliveryRespository Repositorio de delivery
+     */
     public DeliveryService(IDeliveryRepository myDeliveryRespository) {
         this.myDeliverRepository = myDeliveryRespository;
     }

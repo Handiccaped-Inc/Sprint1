@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
- * @author Braian Rey / Arturo Restrepo Ruiz
+ * Clase handler
  */
 public class OpenMarketHandler extends ServerHandler {
     private Map<String, Function<Protocol, String>> actionMap;
@@ -62,7 +62,7 @@ public class OpenMarketHandler extends ServerHandler {
 
     /**
      * Implementa un nuevo facade
-     * @param facade
+     * @param facade nuevo facade
      */
     public void SetOpenMarketFacade(OpenMarketFacade facade) {
         this.facade = facade;
