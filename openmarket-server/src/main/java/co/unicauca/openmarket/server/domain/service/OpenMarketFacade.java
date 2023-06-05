@@ -1,6 +1,7 @@
 package co.unicauca.openmarket.server.domain.service;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.sql.Date;
 import java.util.List;
 
 import co.unicauca.openmarket.commons.domain.Delivery;
@@ -111,10 +112,13 @@ public class OpenMarketFacade implements IOpenMarketFacade {
             if (dbProduct.getStock() == 0) {
                 return "!error";
             }
+
+            LocalDate currentDate = LocalDate.now();
+            Date date = Date.valueOf(currentDate);
             // crear la orden
             Order order = new Order(0L, requester, dbProduct, new StatusOrder(3L, "en espera"),
                     dbProduct.getPrice(),
-                    new Date(), (double) 0);
+                    date, (double) 0);
             // guardar la orden
             if (orderService.save(order).contains("error")) {
                 return "!error";
@@ -373,7 +377,9 @@ public class OpenMarketFacade implements IOpenMarketFacade {
     public String registerDelivery(Delivery delivery) {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
-            delivery.setDate(new Date());
+            LocalDate currentDate = LocalDate.now();
+            Date date = Date.valueOf(currentDate);
+            delivery.setDate(date);
             return deliveryService.save(delivery);
         }
         return "!error";
