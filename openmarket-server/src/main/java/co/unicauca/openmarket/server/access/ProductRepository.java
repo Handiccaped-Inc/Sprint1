@@ -214,7 +214,7 @@ public class ProductRepository implements IProductRepository {
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setLong(1, user.getId());
             ResultSet result = pstm.executeQuery();
-            if (result.next()) {
+            while(result.next()) {
                 Product newProduct = new Product();
                 newProduct.setId(result.getLong("product_id"));
                 newProduct.setOwner(new UserRepository().findById(result.getLong("user_id")));

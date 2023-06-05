@@ -77,7 +77,7 @@ public class ShoppingCartRepositoryTest {
     public void findAllTest(){
         List<ShoppingCart> listFindAllSucces = repository.findAll();
         assertFalse(listFindAllSucces.isEmpty());
-        assertEquals(3, listFindAllSucces.size());
+        assertEquals(4, listFindAllSucces.size());
     }
 
     /**

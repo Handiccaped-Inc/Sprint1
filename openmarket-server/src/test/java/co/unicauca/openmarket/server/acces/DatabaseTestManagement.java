@@ -124,9 +124,9 @@ public class DatabaseTestManagement {
     public void insertCategory(){
         try{
             String sqlCategory = "INSERT INTO category (category_name) VALUES " +
-                     "('Categoría 1'), " +
-                     "('Categoría 2'), " +
-                     "('Categoría 3')";
+                     "('Categoria 1'), " +
+                     "('Categoria 2'), " +
+                     "('Categoria 3')";
             PreparedStatement pstm;
             pstm = connection.prepareStatement(sqlCategory);
             pstm.executeUpdate();
@@ -154,8 +154,9 @@ public class DatabaseTestManagement {
         try{
             String sqlProduct = "INSERT INTO product (user_id, category_id, state_product_id, product_name, product_description, product_price, product_stock, product_latitude, product_longitude) VALUES " +
                     "(1, 1, 1, 'Producto 1', 'Descripción del producto 1', 10.99, 50, 123.456, 789.012), " +
-                    "(2, 2, 1, 'Producto 2', 'Descripción del producto 2', 19.99, 20, 345.678, 901.234), " +
-                    "(3, 3, 2, 'Producto 3', 'Descripción del producto 3', 5.99, 10, 567.890, 123.456)";
+                    "(2, 2, 2, 'Producto 2', 'Descripción del producto 2', 19.99, 20, 345.678, 901.234), " +
+                    "(3, 3, 1, 'Lambo Rey', 'En un carro Deportivo', 5.99, 10, 567.890, 123.456),"+
+                    "(3, 3, 1, 'Twingo', 'En un carro normal', 5.99, 10, 567.890, 123.456)";
             PreparedStatement pstm;
             pstm = connection.prepareStatement(sqlProduct);
             pstm.executeUpdate();
@@ -169,7 +170,8 @@ public class DatabaseTestManagement {
             String sqlShoppingCart = "INSERT INTO shopping_cart (user_id, product_id, shopping_cart_quantity) VALUES " +
                          "(1, 1, 2), " +
                          "(2, 2, 1), " +
-                         "(3, 3, 3)";
+                         "(4, 3, 3),"+
+                         "(4, 4, 4)";
             PreparedStatement pstm;
             pstm = connection.prepareStatement(sqlShoppingCart);
             pstm.executeUpdate();
@@ -197,7 +199,8 @@ public class DatabaseTestManagement {
             String sqlOrders = "INSERT INTO orders (user_id, product_id, orders_id, order_status_id, orders_price, orders_qualification, orders_date) VALUES " +
                    "(1, 1, 1, 1, 10.99, NULL, '2023-05-29'), " +
                    "(2, 2, 2, 2, 19.99, NULL, '2023-05-29'), " +
-                   "(3, 3, 3, 3, 5.99, NULL, '2023-05-29')";
+                   "(4, 3, 3, 3, 5.99, NULL, '2023-05-29'),"+
+                   "(4, 4, 4, 3, 5.99, NULL, '2023-05-29')";
             PreparedStatement pstm;
             pstm = connection.prepareStatement(sqlOrders);
             pstm.executeUpdate();
@@ -209,9 +212,9 @@ public class DatabaseTestManagement {
     public void insertDelivery(){
         try{
             String sqlDelivery = "INSERT INTO delivery (orders_id, deliveryman_id, delivery_receiver, delivery_date) VALUES " +
-                    "(1, 3, 'Receptor 1', '2023-05-29'), " +
+                    "(1, 2, 'Receptor 1', '2023-05-29'), " +
                     "(2, 2, 'Receptor 2', '2023-05-29'), " +
-                    "(3, 1, 'Receptor 3', '2023-05-29')";
+                    "(3, 2, 'Receptor 3', '2023-05-29')";
             PreparedStatement pstm;
             pstm = connection.prepareStatement(sqlDelivery);
             pstm.executeUpdate();
