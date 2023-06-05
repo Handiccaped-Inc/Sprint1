@@ -119,6 +119,7 @@ public class pnlConfirmarOrden extends javax.swing.JPanel implements Observador 
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         fillTable(openMarketFacadeService.getOrders());
+        this.orders = openMarketFacadeService.getOrders();
     }//GEN-LAST:event_btnListarActionPerformed
 
     private void initializeTable() {
@@ -136,7 +137,7 @@ public class pnlConfirmarOrden extends javax.swing.JPanel implements Observador 
         Object rowData[] = new Object[4];// No columnas
         for (int i = 0; i < listOrders.size(); i++) {
             rowData[0] = listOrders.get(i).getId();
-            rowData[1] = listOrders.get(i).getStatus();
+            rowData[1] = listOrders.get(i).getStatus().getName();
             rowData[2] = listOrders.get(i).getPrice();
             rowData[3] = listOrders.get(i).getDate();
 
