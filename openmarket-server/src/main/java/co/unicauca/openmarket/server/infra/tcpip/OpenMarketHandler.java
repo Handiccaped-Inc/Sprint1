@@ -81,7 +81,7 @@ public class OpenMarketHandler extends ServerHandler {
         if (action != null) {
             return action.apply(protocolRequest);
         }
-        String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+        String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
         return errorJson;
     }
 
@@ -92,7 +92,7 @@ public class OpenMarketHandler extends ServerHandler {
         User user = facade.findUserByEmailAndPassword(name, password);
 
         if (user == null) {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return objectToJSON(user);
@@ -103,7 +103,7 @@ public class OpenMarketHandler extends ServerHandler {
         List<Product> products = facade.findAvailableProducts();
 
         if (products == null) {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return objectToJSON(products);
@@ -118,7 +118,7 @@ public class OpenMarketHandler extends ServerHandler {
         List<Product> products = facade.findProductByNameAndDescription(name, description);
 
         if (products == null) {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return objectToJSON(products);
@@ -132,8 +132,8 @@ public class OpenMarketHandler extends ServerHandler {
 
         String reply = facade.buyProduct(product);
 
-        if (reply == "!error") {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+        if (reply.equals("!error")) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return reply;
@@ -149,8 +149,8 @@ public class OpenMarketHandler extends ServerHandler {
 
         String reply = facade.addProductToTheShoppingCart(product, quantity);
 
-        if (reply == "!error") {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+        if (reply.equals("!error")) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return reply;
@@ -161,7 +161,7 @@ public class OpenMarketHandler extends ServerHandler {
         List<ShoppingCart> products = facade.getShoppingCart();
 
         if (products == null) {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return objectToJSON(products);
@@ -171,8 +171,8 @@ public class OpenMarketHandler extends ServerHandler {
     public String processBuyShoppingCart(Protocol protocolRequest) {
         String reply = facade.buyShoppingCart();
 
-        if (reply == "!error") {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+        if (reply.equals("!error")) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return reply;
@@ -182,8 +182,8 @@ public class OpenMarketHandler extends ServerHandler {
     public String processDeleteShoppingCart(Protocol protocolRequest) {
         String reply = facade.deleteShoppingCart();
 
-        if (reply == "!error") {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+        if (reply.equals("!error")) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return reply;
@@ -196,8 +196,8 @@ public class OpenMarketHandler extends ServerHandler {
 
         String reply = facade.saveProduct(product);
 
-        if (reply == "!error") {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+        if (reply.equals("!error")) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return reply;
@@ -210,8 +210,8 @@ public class OpenMarketHandler extends ServerHandler {
 
         String reply = facade.updateProduct(product);
 
-        if (reply == "!error") {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+        if (reply.equals("!error")) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return reply;
@@ -222,7 +222,7 @@ public class OpenMarketHandler extends ServerHandler {
         List<Product> products = facade.getOwnProducts();
 
         if (products == null) {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return objectToJSON(products);
@@ -232,7 +232,7 @@ public class OpenMarketHandler extends ServerHandler {
     public String processGetOrders(Protocol protocolRequest) {
         List<Order> orders = facade.getOrders();
         if (orders == null) {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return objectToJSON(orders);
@@ -245,8 +245,8 @@ public class OpenMarketHandler extends ServerHandler {
 
         String reply = facade.confirmOrder(order);
 
-        if (reply == "!error") {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+        if (reply.equals("!error")) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return reply;
@@ -259,8 +259,8 @@ public class OpenMarketHandler extends ServerHandler {
         Long qualification = Long.parseLong(protocolRequest.getParameters().get(2).getValue());
         String reply = facade.qualificateOrder(order, qualification);
 
-        if (reply == "!error") {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+        if (reply.equals("!error")) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return reply;
@@ -273,8 +273,8 @@ public class OpenMarketHandler extends ServerHandler {
 
         String reply = facade.registerDelivery(delivery);
 
-        if (reply == "!error") {
-            String errorJson = generateNotFoundErrorJson(protocolRequest.getResource());
+        if (reply.equals("!error")) {
+            String errorJson = generateNotFoundErrorJson(protocolRequest.getAction());
             return errorJson;
         } else {
             return reply;
@@ -286,7 +286,7 @@ public class OpenMarketHandler extends ServerHandler {
         JsonError error = new JsonError();
         error.setCode("404");
         error.setError("NOT_FOUND");
-        error.setMessage("El " + object + " No Existe");
+        error.setMessage("El " + object + " No puedo ser procesado");
         errors.add(error);
 
         Gson gson = new Gson();
