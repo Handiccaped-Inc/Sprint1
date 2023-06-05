@@ -4,10 +4,10 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.domain.service.OpenMarketFacadeService;
 import co.unicauca.openmarket.client.infra.Messages;
 import co.unicauca.openmarket.commons.domain.Category;
 import co.unicauca.openmarket.commons.domain.Product;
-import co.unicauca.openmarket.commons.domain.StateProduct;
 import co.unicauca.openmarket.observer.obs.Observador;
 
 /**
@@ -20,13 +20,11 @@ public class pnlCrearProducto extends javax.swing.JPanel implements Observador {
      * Creates new form pnlComprador
      */
     
-    //private ProductService productService;
-    //private CategoryService categoryService;
-    //private StateProductService stateproductService;
+    private OpenMarketFacadeService OpenMarketFacadeService;
     
-    public pnlCrearProducto(/*ProductService productService*/) {
+    public pnlCrearProducto(OpenMarketFacadeService OpenMarketFacadeService) {
         initComponents();
-        //this.productService = productService;
+        this.OpenMarketFacadeService = OpenMarketFacadeService;
     }
 
     /**
@@ -221,10 +219,10 @@ public class pnlCrearProducto extends javax.swing.JPanel implements Observador {
             return;
         }
         
-        /*Category categoria = new Category();
+        Category categoria = new Category();
         
-        if (categoryService.findCategoryById(Long.parseLong(this.txtCategoriaID.getText())) != null) {
-                categoria = categoryService.findCategoryById(Long.parseLong(this.txtCategoriaID.getText()));
+        /*if (OpenMarketFacadeService.findCategoryById(Long.parseLong(this.txtCategoriaID.getText())) != null) {
+                categoria = OpenMarketFacadeService.findCategoryById(Long.parseLong(this.txtCategoriaID.getText()));
             } else {
                 Messages.showMessageDialog("Error Id De Categoria No Encontrado", "Atención");
                 return;
@@ -232,8 +230,8 @@ public class pnlCrearProducto extends javax.swing.JPanel implements Observador {
         
         StateProduct stateproduct = new StateProduct();
         
-        if (stateproductService.findById(Long.parseLong(this.jcbEstado.getSelectedItem().toString())) != null) {
-                stateproduct = stateproductService.findById(Long.parseLong(this.jcbEstado.getSelectedItem().toString()));
+        if (OpenMarketFacadeService.findById(Long.parseLong(this.jcbEstado.getSelectedItem().toString())) != null) {
+                stateproduct = OpenMarketFacadeService.findById(Long.parseLong(this.jcbEstado.getSelectedItem().toString()));
             } else {
                 Messages.showMessageDialog("Error Id De Categoria No Encontrado", "Atención");
                 return;
@@ -282,6 +280,6 @@ public class pnlCrearProducto extends javax.swing.JPanel implements Observador {
 
     @Override
     public void actualizar() {
-        //fillTable(productService.findAllProducts());
+        //fillTable(OpenMarketFacadeService.findAllProducts());
     }
 }

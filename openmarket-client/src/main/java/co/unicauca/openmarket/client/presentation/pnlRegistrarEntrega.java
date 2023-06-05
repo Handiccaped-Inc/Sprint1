@@ -4,6 +4,7 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.domain.service.OpenMarketFacadeService;
 import co.unicauca.openmarket.client.infra.Messages;
 import co.unicauca.openmarket.commons.domain.Delivery;
 import co.unicauca.openmarket.observer.obs.Observador;
@@ -20,12 +21,12 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
      * Creates new form pnlComprador
      */
     
-    //private DeliveryService deliveryService;
+    private OpenMarketFacadeService OpenMarketFacadeService;
     
-    public pnlRegistrarEntrega(/*DeliveryService deliveryService*/) {
+    public pnlRegistrarEntrega(OpenMarketFacadeService OpenMarketFacadeService) {
         initComponents();
         initializeTable();
-        //this.deliveryService = deliveryService;
+        this.OpenMarketFacadeService = OpenMarketFacadeService;
     }
 
     /**

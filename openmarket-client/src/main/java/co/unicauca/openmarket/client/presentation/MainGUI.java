@@ -32,8 +32,8 @@ public class MainGUI extends javax.swing.JFrame {
 
     public MainGUI(OpenMarketFacadeService openMarketFacadeService) {
         initComponents();
-        initMainGUI();
         this.openMarketFacadeService = openMarketFacadeService;
+        initMainGUI();
     }
 
     /**
@@ -267,14 +267,14 @@ public class MainGUI extends javax.swing.JFrame {
         btnRegistrarEntrega.setVisible(false);
         btnBajaSuspender.setVisible(false);
 
-        this.pnlcrearproducto = new pnlCrearProducto();
-        this.pnlbajasuspenderproducto = new pnlBajaSuspenderProducto();
-        this.pnlbuscarproductos = new pnlBuscarProductos();
-        this.pnlcomprarproductos = new pnlComprarProductos();
-        this.pnlconfirmarorden = new pnlConfirmarOrden();
-        this.pnlpuntuarorden = new pnlPuntuarOrden();
-        this.pnlregistrarentrega = new pnlRegistrarEntrega();
-        this.pnlcarritocompras = new pnlCarritoCompras();
+        this.pnlcrearproducto = new pnlCrearProducto(openMarketFacadeService);
+        this.pnlbajasuspenderproducto = new pnlBajaSuspenderProducto(openMarketFacadeService);
+        this.pnlbuscarproductos = new pnlBuscarProductos(openMarketFacadeService);
+        this.pnlcomprarproductos = new pnlComprarProductos(openMarketFacadeService);
+        this.pnlconfirmarorden = new pnlConfirmarOrden(openMarketFacadeService);
+        this.pnlpuntuarorden = new pnlPuntuarOrden(openMarketFacadeService);
+        this.pnlregistrarentrega = new pnlRegistrarEntrega(openMarketFacadeService);
+        this.pnlcarritocompras = new pnlCarritoCompras(openMarketFacadeService);
     }
 
     private void cambiarPanel(JPanel jpanel) {
@@ -321,20 +321,12 @@ public class MainGUI extends javax.swing.JFrame {
     }// GEN-LAST:event_btnSalirActionPerformed
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnIniciarSesionActionPerformed
-        btnBuscarProductos.setVisible(true);
-        btnCarritodeCompras.setVisible(true);
-        btnComprarProductos.setVisible(true);
-        btnConfirmarOrdenes.setVisible(true);
-        btnCrearEditarProductos.setVisible(true);
-        btnPuntuarOrdenes.setVisible(true);
-        btnRegistrarEntrega.setVisible(true);
-        btnBajaSuspender.setVisible(true);
         // 1.Usar el OpenMarket facade service para encontrar el usuario por nombre y
         // contraseña
-        String password = txtConstraseniaUsuario.getPassword().toString();
+        char[] passwordC = txtConstraseniaUsuario.getPassword();
+        String password = new String(passwordC);
         String email = txtCorreoUsuario.getText();
-        User user = null;
-        user = openMarketFacadeService.findUserByEmailAndPassword(email, password);
+        User user = openMarketFacadeService.findUserByEmailAndPassword(email, password);
         // 2. Si el usuario no es nulo entonces settear en
         // SessionManager.getInstance().setUsuario(); a ese usuario
         if (user != null) {
@@ -348,23 +340,71 @@ public class MainGUI extends javax.swing.JFrame {
         // 3 Luego de las anteriores validaciones dependiendo del tipo de usuario que
         // sea
         // el usuario que se logueo activar los botones correspondientes
-        pnlCentral.removeAll();
-        pnlCentral.revalidate();
-        pnlCentral.repaint();
+        
+        switch (user.getRol().getName()) {
+            case "vendedor":
+                rolVendedor();
+                break;
+            case "comprador":
+                rolComprador();
+                break;
+            case "repartidor":
+                rolRepartidor();
+                break;
+            case "administrador":
+                rolAdministrador();
+                break;
+            default:
+                Messages.showMessageDialog("Ocurrio un error", "Error");
+                break;
+        }
+
     }// GEN-LAST:event_btnIniciarSesionActionPerformed
 
     private void btnAnonimoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnAnonimoActionPerformed
-        btnBuscarProductos.setVisible(true);
-
         // Settear un usuaio anonimo en SessionManager.getInstance().setUsuario(); y
         // ocultar los botones que no puede usar
         User anonUser = new User();
         anonUser.setUserName("Anonimo");
         SessionManager.getInstance().setUser(anonUser);
+        rolAnonimo();
+
+    }// GEN-LAST:event_btnAnonimoActionPerformed
+
+    private void rolVendedor() {
+        cleanPanel();
+        btnCrearEditarProductos.setVisible(true);
+        btnBajaSuspender.setVisible(true);
+    }
+
+    private void rolComprador() {
+        cleanPanel();
+        btnBuscarProductos.setVisible(true);
+        btnComprarProductos.setVisible(true);
+        btnCarritodeCompras.setVisible(true);
+        btnConfirmarOrdenes.setVisible(true);
+        btnPuntuarOrdenes.setVisible(true);
+    }
+
+    private void rolRepartidor() {
+        cleanPanel();
+        btnRegistrarEntrega.setVisible(true);
+    }
+
+    private void rolAdministrador() {
+        cleanPanel();
+    }
+
+    private void rolAnonimo() {
+        cleanPanel();
+        btnBuscarProductos.setVisible(true);
+    }
+
+    private void cleanPanel() {
         pnlCentral.removeAll();
         pnlCentral.revalidate();
         pnlCentral.repaint();
-    }// GEN-LAST:event_btnAnonimoActionPerformed
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAnonimo;

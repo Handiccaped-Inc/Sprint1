@@ -4,6 +4,7 @@
  */
 package co.unicauca.openmarket.client.presentation;
 
+import co.unicauca.openmarket.client.domain.service.OpenMarketFacadeService;
 import co.unicauca.openmarket.client.infra.Messages;
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.observer.obs.Observador;
@@ -20,12 +21,12 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
      * Creates new form pnlComprador
      */
     
-    //private ProductService productService;
+    private OpenMarketFacadeService OpenMarketFacadeService;
     
-    public pnlBajaSuspenderProducto(/*ProductService productService*/) {
+    public pnlBajaSuspenderProducto(OpenMarketFacadeService OpenMarketFacadeService) {
         initComponents();
         initializeTable();
-        //this.productService = productService;
+        this.OpenMarketFacadeService = OpenMarketFacadeService;
     }
 
     /**
@@ -117,6 +118,8 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
             return;
         }
         
+        //OpenMarketFacadeService.
+        
         Messages.showMessageDialog("Producto dado de baja", "Atención");
     }//GEN-LAST:event_btnDarBajaActionPerformed
 
@@ -132,6 +135,9 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
             txtProducto.requestFocus();
             return;
         }
+        Product product = new Product();
+        //product = OpenMarketFacadeService.findProductByNameAndDescription(TOOL_TIP_TEXT_KEY, TOOL_TIP_TEXT_KEY)
+        OpenMarketFacadeService.updateProduct(product);
         
         Messages.showMessageDialog("Producto suspendido", "Atención");
     }//GEN-LAST:event_btnSuspenderActionPerformed
