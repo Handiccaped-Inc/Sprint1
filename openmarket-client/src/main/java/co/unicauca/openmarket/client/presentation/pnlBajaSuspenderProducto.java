@@ -53,21 +53,12 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
     private void initComponents() {
 
         txtProducto = new javax.swing.JTextField();
-        btnDarBaja = new javax.swing.JButton();
         btnSuspender = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
         btnListar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(700, 515));
-
-        btnDarBaja.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnDarBaja.setText("Dar de Baja");
-        btnDarBaja.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDarBajaActionPerformed(evt);
-            }
-        });
 
         btnSuspender.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSuspender.setText("Suspender");
@@ -107,9 +98,7 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnDarBaja)
+                        .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSuspender)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -123,7 +112,6 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnDarBaja)
                     .addComponent(btnSuspender)
                     .addComponent(btnListar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -133,30 +121,10 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        this.productos = OpenMarketFacadeService.getOwnProducts();
         fillTable(OpenMarketFacadeService.getOwnProducts());
+        
     }//GEN-LAST:event_btnListarActionPerformed
-
-    private void btnDarBajaActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnDarBajaActionPerformed
-        if (txtProducto.getText().isEmpty()) {
-            Messages.showMessageDialog("Debe ingresar el ID del producto", "Atenci�n");
-            txtProducto.requestFocus();
-            return;
-        }
-
-        if (!correctFormatId(txtProducto.getText())) {
-            Messages.showMessageDialog("Debe ingresar un dato numerico", "Atenci�n");
-            txtProducto.requestFocus();
-            return;
-        }
-
-        int selectedIndex = tblProductos.getSelectedRow();
-        Product product = productos.get(selectedIndex);
-        product.getState().setId(2L);
-        product.getState().setName("no disponible");
-        OpenMarketFacadeService.updateProduct(product);
-
-        Messages.showMessageDialog("Producto dado de baja", "Atenci�n");
-    }// GEN-LAST:event_btnDarBajaActionPerformed
 
     private void btnSuspenderActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSuspenderActionPerformed
         if (txtProducto.getText().isEmpty()) {
@@ -215,7 +183,6 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnDarBaja;
     private javax.swing.JButton btnListar;
     private javax.swing.JButton btnSuspender;
     private javax.swing.JScrollPane jScrollPane1;

@@ -45,7 +45,7 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
         txtOrden = new javax.swing.JTextField();
         btnCambiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblOrdenes = new javax.swing.JTable();
+        tblEntregas = new javax.swing.JTable();
         jcbEstado = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(700, 515));
@@ -66,7 +66,7 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
             }
         });
 
-        tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
+        tblEntregas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -77,7 +77,7 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblOrdenes);
+        jScrollPane1.setViewportView(tblEntregas);
 
         jcbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "entregado", "cancelado", "en espera", " " }));
 
@@ -115,7 +115,8 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
-        //fillTable(openMarketFacadeService);
+        fillTable(openMarketFacadeService.getOrders());
+        this.orders = openMarketFacadeService.getOrders();
     }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnCambiarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCambiarActionPerformed
@@ -131,26 +132,30 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
             return;
         }
 
-        Messages.showMessageDialog("Entrega registrada", "Atenci�n");
+        int selectedIndex = tblEntregas.getSelectedRow();
+        Order order = orders.get(selectedIndex);
+        openMarketFacadeService.confirmOrder(order);
+        Messages.showMessageDialog("Orden confirmada", "Atenci�n");
     }// GEN-LAST:event_btnCambiarActionPerformed
 
     private void initializeTable() {
-        tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
+        tblEntregas.setModel(new javax.swing.table.DefaultTableModel(
                 new Object[][] {},
                 new String[] {
-                        "ID", "Estado", "Fecha"
+                        "ID", "Estatus", "Precio", "Fecha"
                 }));
     }
 
-    private void fillTable(List<Delivery> listDeliveries) {
+    private void fillTable(List<Order> listOrders) {
         initializeTable();
-        DefaultTableModel model = (DefaultTableModel) tblOrdenes.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblEntregas.getModel();
 
-        Object rowData[] = new Object[3];// No columnas
-        for (int i = 0; i < listDeliveries.size(); i++) {
-            rowData[0] = listDeliveries.get(i).getId();
-            rowData[1] = listDeliveries.get(i).getOrder().getStatus().getName();
-            rowData[2] = listDeliveries.get(i).getDate();
+        Object rowData[] = new Object[4];// No columnas
+        for (int i = 0; i < listOrders.size(); i++) {
+            rowData[0] = listOrders.get(i).getId();
+            rowData[1] = listOrders.get(i).getStatus().getName();
+            rowData[2] = listOrders.get(i).getPrice();
+            rowData[3] = listOrders.get(i).getDate();
 
             model.addRow(rowData);
         }
@@ -170,7 +175,7 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
     private javax.swing.JButton btnListar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcbEstado;
-    private javax.swing.JTable tblOrdenes;
+    private javax.swing.JTable tblEntregas;
     private javax.swing.JTextField txtOrden;
     // End of variables declaration//GEN-END:variables
 

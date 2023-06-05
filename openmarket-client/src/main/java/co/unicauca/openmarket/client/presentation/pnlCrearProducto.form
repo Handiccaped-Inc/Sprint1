@@ -56,8 +56,6 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                   <Component id="jcbEstado" min="-2" pref="170" max="-2" attributes="0"/>
-                                  <Component id="jLabel9" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txtProductoID" alignment="0" min="-2" pref="170" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
@@ -129,10 +127,6 @@
                           <Component id="txtLatitud" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jcbEstado" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="txtProductoID" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="288" max="32767" attributes="0"/>
@@ -160,7 +154,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCrearProductoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnEditarProducto">
+        <Component class="javax.swing.JButton" name="btnEditarProducto1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="12" style="1"/>
@@ -168,7 +162,7 @@
             <Property name="text" type="java.lang.String" value="Editar Producto"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarProductoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarProducto1ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -263,16 +257,6 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JTextField" name="txtProductoID">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel9">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Producto ID:"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -26,9 +26,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" pref="688" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="txtProducto" min="-2" pref="415" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnDarBaja" min="-2" max="-2" attributes="0"/>
+                      <Component id="txtProducto" min="-2" pref="514" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSuspender" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -46,7 +44,6 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtProducto" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnDarBaja" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSuspender" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnListar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -59,17 +56,6 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JTextField" name="txtProducto">
-    </Component>
-    <Component class="javax.swing.JButton" name="btnDarBaja">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Segoe UI" size="12" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Dar de Baja"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDarBajaActionPerformed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSuspender">
       <Properties>
