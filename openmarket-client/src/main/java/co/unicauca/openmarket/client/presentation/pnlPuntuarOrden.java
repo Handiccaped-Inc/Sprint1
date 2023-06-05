@@ -6,7 +6,9 @@ package co.unicauca.openmarket.client.presentation;
 
 import co.unicauca.openmarket.client.domain.service.OpenMarketFacadeService;
 import co.unicauca.openmarket.client.infra.Messages;
+import co.unicauca.openmarket.client.infra.SessionManager;
 import co.unicauca.openmarket.commons.domain.Order;
+import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.observer.obs.Observador;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -27,8 +29,15 @@ public class pnlPuntuarOrden extends javax.swing.JPanel implements Observador {
         initComponents();
         initializeTable();
         this.OpenMarketFacadeService = OpenMarketFacadeService;
-        this.listOrders = OpenMarketFacadeService.getOrders();
-        fillTable(listOrders);
+
+        User usr = SessionManager.getInstance().getUser();
+        if (usr != null) {
+            if (!usr.getUserName().equals("Anonimo")) {
+                this.listOrders = OpenMarketFacadeService.getOrders();
+                fillTable(listOrders);
+            }
+        }
+
     }
 
     /**

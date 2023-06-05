@@ -6,7 +6,9 @@ package co.unicauca.openmarket.client.presentation;
 
 import co.unicauca.openmarket.client.domain.service.OpenMarketFacadeService;
 import co.unicauca.openmarket.client.infra.Messages;
+import co.unicauca.openmarket.client.infra.SessionManager;
 import co.unicauca.openmarket.commons.domain.Product;
+import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.observer.obs.Observador;
 
 import java.util.ArrayList;
@@ -30,8 +32,14 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
         initComponents();
         initializeTable();
         this.OpenMarketFacadeService = OpenMarketFacadeService;
-        this.productos = OpenMarketFacadeService.getOwnProducts();
-        fillTable(productos);
+        User usr = SessionManager.getInstance().getUser();
+        if (usr != null) {
+            if (!usr.getUserName().equals("Anonimo")) {
+                this.productos = OpenMarketFacadeService.getOwnProducts();
+                fillTable(productos);
+            }
+        }
+
     }
 
     /**

@@ -29,7 +29,6 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
         initComponents();
         initializeTable();
         this.openMarketFacadeService = openMarketFacadeService;
-        orders = openMarketFacadeService.getOrders();
     }
 
     /**
@@ -71,7 +70,8 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
         jScrollPane1.setViewportView(tblOrdenes);
 
         jcbEstado.setModel(
-                new javax.swing.DefaultComboBoxModel<>(new String[] { "entregado", "cancelado", "en espera", " " }));
+                new javax.swing.DefaultComboBoxModel<>(
+                        new String[] { "entregado", "cancelado", "en espera", " " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -79,32 +79,47 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 688,
+                                .addGroup(layout.createParallelGroup(
+                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                688,
                                                 Short.MAX_VALUE)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txtOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 455,
+                                                .addComponent(txtOrden,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        455,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jcbEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                .addPreferredGap(
+                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jcbEstado,
+                                                        0,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
                                                         Short.MAX_VALUE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addPreferredGap(
+                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(btnCambiar)))
                                 .addContainerGap()));
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtOrden, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                .addGroup(layout.createParallelGroup(
+                                        javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(txtOrden,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE,
                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(btnCambiar)
-                                        .addComponent(jcbEstado, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        .addComponent(jcbEstado,
+                                                javax.swing.GroupLayout.PREFERRED_SIZE,
                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                                .addPreferredGap(
+                                        javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane1,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        469, Short.MAX_VALUE)
                                 .addContainerGap()));
     }// </editor-fold>//GEN-END:initComponents
 
