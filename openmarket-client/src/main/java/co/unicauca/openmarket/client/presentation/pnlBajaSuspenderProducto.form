@@ -26,11 +26,14 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane1" pref="688" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Component id="txtProducto" max="32767" attributes="0"/>
+                      <Component id="txtProducto" min="-2" pref="415" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnDarBaja" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnSuspender" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnListar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -45,6 +48,7 @@
                   <Component id="txtProducto" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnDarBaja" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnSuspender" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnListar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="469" max="32767" attributes="0"/>
@@ -99,5 +103,16 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnListar">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Segoe UI" size="12" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Listar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnListarActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>

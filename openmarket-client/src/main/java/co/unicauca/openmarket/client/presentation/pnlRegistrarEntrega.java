@@ -38,9 +38,10 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnListar = new javax.swing.JButton();
         txtOrden = new javax.swing.JTextField();
         btnCambiar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -48,6 +49,14 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
         jcbEstado = new javax.swing.JComboBox<>();
 
         setPreferredSize(new java.awt.Dimension(700, 515));
+
+        btnListar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
 
         btnCambiar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnCambiar.setText("Cambiar");
@@ -58,70 +67,56 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
         });
 
         tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null }
-                },
-                new String[] {
-                        "Title 1", "Title 2", "Title 3", "Title 4"
-                }));
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
         jScrollPane1.setViewportView(tblOrdenes);
 
-        jcbEstado.setModel(
-                new javax.swing.DefaultComboBoxModel<>(
-                        new String[] { "entregado", "cancelado", "en espera", " " }));
+        jcbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "entregado", "cancelado", "en espera", " " }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(
-                                        javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                688,
-                                                Short.MAX_VALUE)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txtOrden,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                        455,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(
-                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jcbEstado,
-                                                        0,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        Short.MAX_VALUE)
-                                                .addPreferredGap(
-                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnCambiar)))
-                                .addContainerGap()));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 377, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCambiar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnListar)))
+                .addContainerGap())
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(
-                                        javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtOrden,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnCambiar)
-                                        .addComponent(jcbEstado,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(
-                                        javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                        469, Short.MAX_VALUE)
-                                .addContainerGap()));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCambiar)
+                    .addComponent(jcbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnListar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        //fillTable(openMarketFacadeService);
+    }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnCambiarActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCambiarActionPerformed
         if (txtOrden.getText().isEmpty()) {
@@ -172,6 +167,7 @@ public class pnlRegistrarEntrega extends javax.swing.JPanel implements Observado
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCambiar;
+    private javax.swing.JButton btnListar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcbEstado;
     private javax.swing.JTable tblOrdenes;
