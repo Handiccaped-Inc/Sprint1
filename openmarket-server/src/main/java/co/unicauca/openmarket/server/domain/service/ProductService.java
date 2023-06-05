@@ -19,6 +19,7 @@ public class ProductService implements IProductService {
 
     /**
      * Constructor del servicio
+     * 
      * @param myProductRepository Repositorio del producto
      */
     public ProductService(IProductRepository myProductRepository) {
@@ -31,7 +32,6 @@ public class ProductService implements IProductService {
         if (newProduct.getName().isEmpty()
                 || newProduct.getDescription().isEmpty()
                 || newProduct.getOwner() == null
-                || newProduct.getCategory() == null
                 || newProduct.getState() == null) {
             errors.add(new JsonError("400", "BAD_REQUEST", "LA INFORMACION ESTA INCOMPLETA"));
         }
@@ -108,17 +108,16 @@ public class ProductService implements IProductService {
 
     @Override
     public List<Product> findByOwner(User user) {
-        if(user == null || user.getId() <= 0 || user.getUserName().isEmpty() 
-        || user.getAddress().isEmpty()
-        || user.getCard().isEmpty()
-        || user.getEmail().isEmpty()
-        || user.getRealName().isEmpty()){
+        if (user == null || user.getId() <= 0 || user.getUserName().isEmpty()
+                || user.getAddress().isEmpty()
+                || user.getCard().isEmpty()
+                || user.getEmail().isEmpty()
+                || user.getRealName().isEmpty()) {
             return new ArrayList<>();
         }
 
         return myProductRepository.findByOwner(user);
 
     }
-
 
 }

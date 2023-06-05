@@ -27,6 +27,7 @@ public class OpenMarketFacade implements IOpenMarketFacade {
     IUserService userService;
     PaymentFacade paymentFacade;
     User requester;
+    Long quantity = 1L;
 
     /**
      * Constructor del facade. Inicializa las fachadas que se encargan de cada una
@@ -122,12 +123,14 @@ public class OpenMarketFacade implements IOpenMarketFacade {
             if (!paymentFacade.processPayment(
                     new Account(0L, requester.getCard(), 0l),
                     new Account(0L, "openmarket", 0l),
-                    order.getPrice().longValue())) {
-                return "!error"; //Mirar bien lo de los pagos
+                    order.getPrice().longValue() * quantity)) {
+                return "!error"; // Mirar bien lo de los pagos
             }
-
+            if ((dbProduct.getStock() - quantity) <= 0) {
+                return "!error";
+            }
             // Reducir la cantidad de productos disponibles
-            dbProduct.setStock(dbProduct.getStock() - 1);
+            dbProduct.setStock(dbProduct.getStock() - quantity);
             if (dbProduct.getStock() == 0) {
                 dbProduct.setState(new StateProduct(2L, "no disponible"));
             }
@@ -182,18 +185,24 @@ public class OpenMarketFacade implements IOpenMarketFacade {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
             // encontrar los productos del carrito
-            List<Product> products = shoppingCartService.findByOwner(requester);
-            if (products.isEmpty()) {
+
+            List<ShoppingCart> entries = shoppingCartService.findRepoByOwner(requester);
+
+            if (entries.isEmpty()) {
                 return "!error";
             }
-            for (Product product : products) {
-                String result = buyProduct(product);
+            for (ShoppingCart entry : entries) {
+                this.quantity = entry.getQuantity();
+                String result = buyProduct(entry.getProduct());
                 if (result.contains("error")) {
+                    this.quantity = 1L;
                     return "!error";
                 }
             }
+            this.quantity = 1L;
             return "ok";
         }
+        this.quantity = 1L;
         return "!error";
     }
 
@@ -287,7 +296,7 @@ public class OpenMarketFacade implements IOpenMarketFacade {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
             if (requester.getRol().getName().equals("repartidor")) {
-               return orderService.findByState(new StatusOrder(3L, "en espera"));
+                return orderService.findByState(new StatusOrder(3L, "en espera"));
             } else {
                 return orderService.findByUser(requester.getId());
             }
