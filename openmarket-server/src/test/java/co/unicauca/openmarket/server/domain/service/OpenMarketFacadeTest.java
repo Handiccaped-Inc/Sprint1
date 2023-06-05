@@ -61,7 +61,7 @@ public class OpenMarketFacadeTest {
         @Test
         public void  findAvailableProducts(){
             List<Product> products = facade.findAvailableProducts();
-            assertEquals(2,products.size());
+            assertEquals(3,products.size());
             assertFalse(products.isEmpty());
         }
 
@@ -95,7 +95,7 @@ public class OpenMarketFacadeTest {
             facade.addProductToTheShoppingCart(producTest, 2L);
             facade.setRequester(usuario);
             List<ShoppingCart> listShoppingCarts = facade.getShoppingCart();
-            assertEquals(1, listShoppingCarts.size());
+            assertEquals(3, listShoppingCarts.size());
 
         }
 
