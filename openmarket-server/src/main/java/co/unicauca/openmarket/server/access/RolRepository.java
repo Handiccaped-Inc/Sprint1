@@ -11,6 +11,7 @@ import co.unicauca.openmarket.commons.domain.Rol;
 
 /**
  * Clase RolRepository
+ * 
  * @author Arturo
  */
 public class RolRepository implements IRolRepository {
@@ -45,6 +46,12 @@ public class RolRepository implements IRolRepository {
             }
         } catch (SQLException ex) {
             Logger.getLogger(RolRepository.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }

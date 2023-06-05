@@ -38,12 +38,18 @@ public class DeliveryRepository implements IDeliveryRepository {
             pstm.setLong(2, newDelivery.getDeliveryMan().getId());
             pstm.setString(3, newDelivery.getReceiver().getRealName());
             String date = newDelivery.getDate().toString();
-            pstm.setString(4,date);
+            pstm.setString(4, date);
 
             return pstm.executeUpdate() > 0;
 
         } catch (SQLException ex) {
             Logger.getLogger(DeliveryRepository.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return false;
     }
@@ -63,12 +69,19 @@ public class DeliveryRepository implements IDeliveryRepository {
             pstm.setLong(2, newDelivery.getDeliveryMan().getId());
             pstm.setString(3, newDelivery.getReceiver().getRealName());
             String date = newDelivery.getDate().toString();
-            pstm.setString(4,date);
+            pstm.setString(4, date);
             pstm.setLong(5, newDelivery.getId());
             return pstm.executeUpdate() > 0;
 
         } catch (SQLException ex) {
             Logger.getLogger(DeliveryRepository.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
         }
 
         return false;

@@ -48,6 +48,12 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
             // this.disconnect();
         } catch (SQLException ex) {
             Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return false;
     }
@@ -74,6 +80,12 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
 
         } catch (SQLException ex) {
             Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return carts;
     }
@@ -81,7 +93,7 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
     @Override
     public List<ShoppingCart> findRepoByOwner(User owner) {
         List<ShoppingCart> carts = new ArrayList<>();
-        if(owner == null){
+        if (owner == null) {
             return carts;
         }
         try {
@@ -104,6 +116,12 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
 
         } catch (SQLException ex) {
             Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return carts;
     }
@@ -111,7 +129,7 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
     @Override
     public List<Product> findByOwner(User owner) {
         List<Product> Products = new ArrayList<>();
-        if(owner == null){
+        if (owner == null) {
             return Products;
         }
         try {
@@ -141,13 +159,19 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
 
         } catch (SQLException ex) {
             Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return Products;
     }
 
     @Override
     public boolean delete(User owner) {
-        if(owner == null){
+        if (owner == null) {
             return false;
         }
         try {
@@ -161,6 +185,12 @@ public class ShoppingCartRepository implements IShoppingCartRepository {
             // this.disconnect();
         } catch (SQLException ex) {
             Logger.getLogger(ShoppingCart.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return false;
     }

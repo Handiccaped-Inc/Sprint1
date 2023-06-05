@@ -39,6 +39,12 @@ public class StatusOrderRepository implements IStatusOrderRepository {
             }
         } catch (SQLException ex) {
             Logger.getLogger(StatusOrderRepository.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
         return null;
     }
