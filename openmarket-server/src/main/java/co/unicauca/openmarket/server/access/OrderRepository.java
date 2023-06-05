@@ -120,8 +120,6 @@ public class OrderRepository implements IOrderRepository {
                 orders.add(order);
             }
 
-            rs.close();
-            pstmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(OrderRepository.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -160,8 +158,6 @@ public class OrderRepository implements IOrderRepository {
                 orders.add(order);
             }
 
-            rs.close();
-            pstmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(OrderRepository.class.getName()).log(Level.SEVERE, null, ex);
         }

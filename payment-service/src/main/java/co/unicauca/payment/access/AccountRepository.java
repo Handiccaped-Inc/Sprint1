@@ -39,12 +39,6 @@ public class AccountRepository implements IAccountRepository {
             }
         } catch (SQLException ex) {
             Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return null;
     }
@@ -59,12 +53,6 @@ public class AccountRepository implements IAccountRepository {
             return pstmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             Logger.getLogger(AccountRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return false;
     }

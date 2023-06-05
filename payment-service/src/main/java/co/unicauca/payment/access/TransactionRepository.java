@@ -35,12 +35,6 @@ public class TransactionRepository implements ITransactionRepository {
 
         } catch (SQLException ex) {
             Logger.getLogger(TransactionRepository.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-            try {
-                conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
         }
         return false;
     }
