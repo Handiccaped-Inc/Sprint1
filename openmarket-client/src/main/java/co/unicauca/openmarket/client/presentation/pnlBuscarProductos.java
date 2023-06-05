@@ -149,7 +149,9 @@ public class pnlBuscarProductos extends javax.swing.JPanel implements Observador
 			rowData[4] = listProducts.get(i).getStock();
 			rowData[5] = listProducts.get(i).getLatitude();
 			rowData[6] = listProducts.get(i).getLongitude();
-			rowData[7] = listProducts.get(i).getCategory().getName();
+			if (listProducts.get(i).getCategory() != null) {
+				rowData[7] = listProducts.get(i).getCategory().getName();
+			}
 
 			model.addRow(rowData);
 		}
