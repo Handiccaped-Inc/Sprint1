@@ -358,11 +358,10 @@ public class OpenMarketFacade implements IOpenMarketFacade {
     public String qualificateOrder(Order order, Long qualification) {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
-            if (order.getCustomer() == requester) {
 
-                order.setQualification(qualification.doubleValue());
-                return orderService.update(order);
-            }
+            order.setQualification(qualification.doubleValue());
+            return orderService.update(order);
+
         }
         return "!error";
     }
