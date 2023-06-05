@@ -72,7 +72,7 @@ CREATE TABLE state_product (
 -- Tabla product: Almacena los datos de los productos
 CREATE TABLE product (
     user_id INTEGER NOT NULL,
-    category_id INTEGER NOT NULL,
+    category_id INTEGER,
     state_product_id INTEGER NOT NULL,
     product_id INTEGER PRIMARY KEY,
     product_name TEXT NOT NULL,

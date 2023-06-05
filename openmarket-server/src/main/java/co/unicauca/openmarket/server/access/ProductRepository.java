@@ -37,18 +37,17 @@ public class ProductRepository implements IProductRepository {
             }
             // this.connect();
 
-            String sql = "INSERT INTO product (user_id, category_id, state_product_id, product_name, product_description, product_price, product_stock, product_latitude, product_longitude) VALUES (?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO product (user_id, state_product_id, product_name, product_description, product_price, product_stock, product_latitude, product_longitude) VALUES (?,?,?,?,?,?,?,?,?)";
 
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setLong(1, newProduct.getOwner().getId());
-            pstmt.setLong(2, newProduct.getCategory().getId());
-            pstmt.setLong(3, newProduct.getState().getId());
-            pstmt.setString(4, newProduct.getName());
-            pstmt.setString(5, newProduct.getDescription());
-            pstmt.setDouble(6, newProduct.getPrice());
-            pstmt.setLong(7, newProduct.getStock());
-            pstmt.setDouble(8, newProduct.getLatitude());
-            pstmt.setDouble(9, newProduct.getLongitude());
+            pstmt.setLong(2, newProduct.getState().getId());
+            pstmt.setString(3, newProduct.getName());
+            pstmt.setString(4, newProduct.getDescription());
+            pstmt.setDouble(5, newProduct.getPrice());
+            pstmt.setLong(6, newProduct.getStock());
+            pstmt.setDouble(7, newProduct.getLatitude());
+            pstmt.setDouble(8, newProduct.getLongitude());
 
             // this.disconnect();
             return pstmt.executeUpdate() > 0;
@@ -198,8 +197,9 @@ public class ProductRepository implements IProductRepository {
         return false;
     }
 
-        /**
+    /**
      * Metodo de encontar productos por su dueño
+     * 
      * @param User usurio que es dueño de los productos
      * @return lista de los elementos encontrados
      */
@@ -214,7 +214,7 @@ public class ProductRepository implements IProductRepository {
             PreparedStatement pstm = conn.prepareStatement(sql);
             pstm.setLong(1, user.getId());
             ResultSet result = pstm.executeQuery();
-            while(result.next()) {
+            while (result.next()) {
                 Product newProduct = new Product();
                 newProduct.setId(result.getLong("product_id"));
                 newProduct.setOwner(new UserRepository().findById(result.getLong("user_id")));
