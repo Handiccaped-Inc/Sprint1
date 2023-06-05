@@ -119,17 +119,17 @@ public class OpenMarketFacade implements IOpenMarketFacade {
                 return "!error";
             }
             // realizar el pago a la cuenta de openmarket
-            if (paymentFacade.processPayment(
+            if (!paymentFacade.processPayment(
                     new Account(0L, requester.getCard(), 0l),
                     new Account(0L, "openmarket", 0l),
                     order.getPrice().longValue())) {
-                return "ok";
+                return "!error"; //Mirar bien lo de los pagos
             }
 
             // Reducir la cantidad de productos disponibles
             dbProduct.setStock(dbProduct.getStock() - 1);
-            if (product.getStock() == 0) {
-                product.setState(new StateProduct(2L, "no disponible"));
+            if (dbProduct.getStock() == 0) {
+                dbProduct.setState(new StateProduct(2L, "no disponible"));
             }
             productService.update(dbProduct);
 

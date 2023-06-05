@@ -2,7 +2,8 @@
 INSERT INTO account (account_id, account_card, account_available_money)
 VALUES (1, '1234567890', 5000),
        (2, '9876543210', 10000),
-       (3, '5678901234', 7500);
+       (3, '5678901234', 7500),
+       (4, 'openmarket', 7500);
 
 -- Inserción en la tabla "transactions"
 INSERT INTO transactions (transactions_id, transactions_date, transactions_ammount, account_id_sender, account_id_receiver)
