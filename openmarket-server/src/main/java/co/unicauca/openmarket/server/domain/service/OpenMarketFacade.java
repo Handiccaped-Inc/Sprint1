@@ -126,7 +126,7 @@ public class OpenMarketFacade implements IOpenMarketFacade {
                     order.getPrice().longValue() * quantity)) {
                 return "!error"; // Mirar bien lo de los pagos
             }
-            if ((product.getStock() - quantity) <= 0) {
+            if ((dbProduct.getStock() - quantity) <= 0) {
                 return "!error";
             }
             // Reducir la cantidad de productos disponibles
