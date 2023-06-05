@@ -23,7 +23,7 @@ import java.util.function.Function;
  */
 public class OpenMarketHandler extends ServerHandler {
     private Map<String, Function<Protocol, String>> actionMap;
-    private OpenMarketFacade facade;
+    private static OpenMarketFacade facade;
     User requester;
     Gson gson;
 
@@ -70,8 +70,9 @@ public class OpenMarketHandler extends ServerHandler {
         Protocol protocolRequest;
         protocolRequest = gson.fromJson(requestJson, Protocol.class);
         String userJson = protocolRequest.getParameters().get(0).getValue();
-        User requester = gson.fromJson(userJson, User.class);
-        facade.setRequester(requester);
+        User requesterProcces = gson.fromJson(userJson, User.class);
+        System.out.println(requestJson);
+        facade.setRequester(requesterProcces);
 
         // Obtener la clave para el HashMap
         String key = protocolRequest.getAction();

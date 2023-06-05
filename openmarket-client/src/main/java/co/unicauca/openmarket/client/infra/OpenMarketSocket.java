@@ -30,11 +30,14 @@ public class OpenMarketSocket {
     /**
      * Ip del Server Socket
      */
-    private final String IP_SERVER = Utilities.loadProperty("server.ip");
+    //private final String IP_SERVER = Utilities.loadProperty("server.ip");
+    private final String IP_SERVER = "localhost";
     /**
      * Puerto del server socket
      */
-    private final int PORT = Integer.parseInt(Utilities.loadProperty("server.port"));
+   // private final int PORT = Integer.parseInt(Utilities.loadProperty("server.port"));
+
+   private final int PORT = 5000;
 
     /**
      * Envia una solicitud desde la aplicación cliente al servidor mediate el

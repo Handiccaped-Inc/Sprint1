@@ -407,7 +407,9 @@ public class OpenMarketFacadeAccesImplSockets implements IOpenMarketFacadeDeseri
 
     private String doFindUserByEmailAndPasswordRequestJson(String email, String password) {
 
-        User usuario = SessionManager.getInstance().getUser();
+        User usuario = new User();
+        usuario.setUserName("Anonimo");
+        usuario.setEmail("anonimo@anonimo.com");
         String jsonUser = gson.toJson(usuario);
 
         Protocol protocol = new Protocol();
