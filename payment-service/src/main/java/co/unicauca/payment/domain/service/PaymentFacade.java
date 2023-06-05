@@ -64,11 +64,11 @@ public class PaymentFacade {
             return false;
         }
         // Actualizar la cuenta del emisor
-        sender.setAvailableMoney(sender.getAvailableMoney() - amount);
-        boolean resultSender = accountService.update(sender);
+        senderAccount.setAvailableMoney(senderAccount.getAvailableMoney() - amount);
+        boolean resultSender = accountService.update(senderAccount);
         // Actualizar la cuenta del receptor
-        receiver.setAvailableMoney(receiver.getAvailableMoney() + amount);
-        boolean resultReceiver = accountService.update(receiver);
+        receiverAccount.setAvailableMoney(receiverAccount.getAvailableMoney() + amount);
+        boolean resultReceiver = accountService.update(receiverAccount);
         // Verificar que ambas cuentas se actualizaron correctamente
         if (resultSender && resultReceiver) {
             return true;
