@@ -3,6 +3,7 @@ package co.unicauca.openmarket.server.infra.tcpip;
 import java.util.Scanner;
 
 import co.unicauca.openmarket.server.access.DeliveryRepository;
+import co.unicauca.openmarket.server.access.Factory;
 import co.unicauca.openmarket.server.domain.service.DeliveryService;
 import co.unicauca.openmarket.server.domain.service.IDeliveryService;
 import co.unicauca.openmarket.server.domain.service.IOrderService;
@@ -32,13 +33,18 @@ public class OpenMarketServer {
         int port = teclado.nextInt();
         
         /** 
+         * Creacion del factory
+         */
+        Factory factory = Factory.getInstance();
+
+        /** 
          * Creacion del facade
          */
-        IDeliveryService deliveryService = new DeliveryService(new DeliveryRepository());
-        IOrderService orderService = new OrderService(new OrderRepository());
-        IProductService productService = new ProductService(new ProductRepository());
-        IShoppingCartService shoppingCartService = new ShoppingCartService(new ShoppingCartRepository());
-        IUserService userService = new UserService(new UserRepository());
+        IDeliveryService deliveryService = new DeliveryService(factory.getDeliveryRepository("default"));
+        IOrderService orderService = new OrderService(factory.getOrderRepository("default"));
+        IProductService productService = new ProductService(factory.getProductRepository("default"));
+        IShoppingCartService shoppingCartService = new ShoppingCartService(factory.getShoppingCartRepository("default"));
+        IUserService userService = new UserService(factory.getUserRepository("default"));
         OpenMarketFacade facade = new OpenMarketFacade(deliveryService, orderService, productService, shoppingCartService, userService,null);
 
         /**
