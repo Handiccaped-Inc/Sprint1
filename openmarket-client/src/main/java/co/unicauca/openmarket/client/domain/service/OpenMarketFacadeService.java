@@ -10,6 +10,9 @@ import co.unicauca.openmarket.commons.domain.ShoppingCart;
 import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.observer.obs.Observado;
 
+/**
+ * Clase de servicio OpenMarketFacadeService
+ */
 public class OpenMarketFacadeService extends Observado {
     public IOpenMarketFacadeDeserialized openMarkedFacade;
 
