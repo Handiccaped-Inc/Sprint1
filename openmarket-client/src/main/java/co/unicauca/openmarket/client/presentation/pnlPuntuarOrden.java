@@ -125,6 +125,7 @@ public class pnlPuntuarOrden extends javax.swing.JPanel implements Observador {
 
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         fillTable(OpenMarketFacadeService.getOrders());
+        this.listOrders = OpenMarketFacadeService.getOrders();
     }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnPuntuarOrdenActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnPuntuarOrdenActionPerformed
@@ -139,8 +140,9 @@ public class pnlPuntuarOrden extends javax.swing.JPanel implements Observador {
             txtOrden.requestFocus();
             return;
         }
-        
-        //OpenMarketFacadeService.qualificateOrder();
+        int selectedIndex = tblOrdenes.getSelectedRow();
+        Order order = listOrders.get(selectedIndex);
+        OpenMarketFacadeService.qualificateOrder(order, 2L);
         Messages.showMessageDialog("Orden calificada", "Atenci�n");
     }// GEN-LAST:event_btnPuntuarOrdenActionPerformed
 
