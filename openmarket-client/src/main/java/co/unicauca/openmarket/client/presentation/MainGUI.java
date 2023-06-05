@@ -33,6 +33,13 @@ public class MainGUI extends javax.swing.JFrame {
     public MainGUI(OpenMarketFacadeService openMarketFacadeService) {
         initComponents();
         this.openMarketFacadeService = openMarketFacadeService;
+        this.openMarketFacadeService.addObservador(pnlbajasuspenderproducto);
+        this.openMarketFacadeService.addObservador(pnlbuscarproductos);
+        this.openMarketFacadeService.addObservador(pnlcomprarproductos);
+        this.openMarketFacadeService.addObservador(pnlconfirmarorden);
+        this.openMarketFacadeService.addObservador(pnlpuntuarorden);
+        this.openMarketFacadeService.addObservador(pnlregistrarentrega);
+        this.openMarketFacadeService.addObservador(pnlcarritocompras);
         initMainGUI();
     }
 
@@ -340,7 +347,7 @@ public class MainGUI extends javax.swing.JFrame {
         // 3 Luego de las anteriores validaciones dependiendo del tipo de usuario que
         // sea
         // el usuario que se logueo activar los botones correspondientes
-        
+
         switch (user.getRol().getName()) {
             case "vendedor":
                 rolVendedor();

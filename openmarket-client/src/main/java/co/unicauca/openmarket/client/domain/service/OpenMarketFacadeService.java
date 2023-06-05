@@ -8,12 +8,14 @@ import co.unicauca.openmarket.commons.domain.Order;
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.ShoppingCart;
 import co.unicauca.openmarket.commons.domain.User;
+import co.unicauca.openmarket.observer.obs.Observado;
 
-public class OpenMarketFacadeService {
+public class OpenMarketFacadeService extends Observado {
     public IOpenMarketFacadeDeserialized openMarkedFacade;
 
     public OpenMarketFacadeService(IOpenMarketFacadeDeserialized openMarkedFacade) {
         this.openMarkedFacade = openMarkedFacade;
+
     }
 
     /**
@@ -60,6 +62,7 @@ public class OpenMarketFacadeService {
         if (product.getId() == null || product.getId() <= 0) {
             return false;
         }
+        this.notificar();
         return openMarkedFacade.buyProduct(product);
     }
 
@@ -74,6 +77,7 @@ public class OpenMarketFacadeService {
         if (product.getId() == null || product.getId() <= 0 || quantity == null || quantity <= 0) {
             return false;
         }
+        this.notificar();
         return openMarkedFacade.addProductToTheShoppingCart(product, quantity);
     }
 
@@ -93,6 +97,7 @@ public class OpenMarketFacadeService {
      *         contrario
      */
     public boolean buyShoppingCart() {
+        this.notificar();
         return openMarkedFacade.buyShoppingCart();
     }
 
@@ -103,6 +108,7 @@ public class OpenMarketFacadeService {
      *         exitosa, false de lo contrario
      */
     public boolean deleteShoppingCart() {
+        this.notificar();
         return openMarkedFacade.deleteShoppingCart();
     }
 
@@ -116,6 +122,7 @@ public class OpenMarketFacadeService {
         if (product.getName().isEmpty() || product.getDescription().isEmpty() || product.getStock() <= 0) {
             return false;
         }
+        this.notificar();
         return openMarkedFacade.saveProduct(product);
     }
 
@@ -129,6 +136,7 @@ public class OpenMarketFacadeService {
         if (product.getId() == null || product.getId() <= 0) {
             return false;
         }
+        this.notificar();
         return openMarkedFacade.updateProduct(product);
     }
 
@@ -162,6 +170,7 @@ public class OpenMarketFacadeService {
         if (order.getId() <= 0 || order.getCustomer().getId() <= 0) {
             return false;
         }
+        this.notificar();
         return openMarkedFacade.confirmOrder(order);
     }
 
@@ -176,6 +185,7 @@ public class OpenMarketFacadeService {
         if (order.getId() <= 0 || qualification <= 0) {
             return false;
         }
+        this.notificar();
         return openMarkedFacade.qualificateOrder(order, qualification);
     }
 
@@ -189,6 +199,7 @@ public class OpenMarketFacadeService {
         if (delivery.getOrder().getId() <= 0) {
             return false;
         }
+        this.notificar();
         return openMarkedFacade.registerDelivery(delivery);
     }
 }
