@@ -202,11 +202,12 @@ public class pnlCrearProducto extends javax.swing.JPanel implements Observador {
         productos = openMarketFacadeService.findProductByNameAndDescription(txtNombre.getText(), txtDescripcion.getText());
 
         if (productos.isEmpty()) {
+            Messages.showMessageDialog("No se encontro el producto", "Atencion");
             return;
         }
         Category category = new Category();
         category.setId(1L);
-        category.setName("Ropa");
+        category.setName("Categoria");
         productos.get(0).setName(txtNombre.getText());
         productos.get(0).setState(new StateProduct(1L, "disponible"));
         productos.get(0).setCategory(category);
@@ -216,9 +217,11 @@ public class pnlCrearProducto extends javax.swing.JPanel implements Observador {
         productos.get(0).setLatitude(Double.parseDouble(txtLatitud.getText()));
         productos.get(0).setLongitude(Double.parseDouble(txtLongitud.getText()));
 
-        openMarketFacadeService.updateProduct(productos.get(0));
-        
-        Messages.showMessageDialog("Se edito el producto", "Atencion");
+        if (openMarketFacadeService.updateProduct(productos.get(0))) {
+            Messages.showMessageDialog("Se edito el producto", "Atencion");
+        } else{
+            Messages.showMessageDialog("Ocurrio un error", "Atencion");
+        } 
     }//GEN-LAST:event_btnEditarProducto1ActionPerformed
 
     private void btnCrearProductoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCrearProductoActionPerformed
@@ -232,6 +235,15 @@ public class pnlCrearProducto extends javax.swing.JPanel implements Observador {
             Messages.showMessageDialog("Hay espacios vacios", "Atenci�n");
             return;
         }
+        
+        if (!correctFormat(txtPrecio.getText()) 
+                || !correctFormat(txtStock.getText()) 
+                || !correctFormat(txtLatitud.getText()) 
+                || !correctFormat(txtLongitud.getText())) {
+            Messages.showMessageDialog("Ingrese un dato numerico", "Atenci�n");
+            return;
+        }
+        
         Product product = new Product();
 
         product.setName(txtNombre.getText());
@@ -249,6 +261,15 @@ public class pnlCrearProducto extends javax.swing.JPanel implements Observador {
         }
     }// GEN-LAST:event_btnCrearProductoActionPerformed
 
+    private boolean correctFormat(String id) {
+        for (int i = 0; i < id.length(); i++) {
+            if (!Character.isDigit(id.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCrearProducto;
     private javax.swing.JButton btnEditarProducto1;

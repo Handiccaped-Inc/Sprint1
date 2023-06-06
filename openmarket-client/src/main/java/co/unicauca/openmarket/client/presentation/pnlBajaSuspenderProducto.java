@@ -7,11 +7,11 @@ package co.unicauca.openmarket.client.presentation;
 import co.unicauca.openmarket.client.domain.service.OpenMarketFacadeService;
 import co.unicauca.openmarket.client.infra.Messages;
 import co.unicauca.openmarket.client.infra.SessionManager;
+import co.unicauca.openmarket.commons.domain.Category;
 import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.observer.obs.Observador;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -52,13 +52,15 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtProducto = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
         btnSuspender = new javax.swing.JButton();
+        btnListar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
-        btnListar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(700, 515));
+
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 30, 5));
 
         btnSuspender.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnSuspender.setText("Suspender");
@@ -67,6 +69,16 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
                 btnSuspenderActionPerformed(evt);
             }
         });
+        jPanel1.add(btnSuspender);
+
+        btnListar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnListar);
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,14 +93,6 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
         ));
         jScrollPane1.setViewportView(tblProductos);
 
-        btnListar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnListar.setText("Listar");
-        btnListar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnListarActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -97,25 +101,16 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSuspender)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnListar)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSuspender)
-                    .addComponent(btnListar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 470, Short.MAX_VALUE)
+                .addGap(1, 1, 1)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -123,34 +118,33 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
     private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
         this.productos = OpenMarketFacadeService.getOwnProducts();
         fillTable(OpenMarketFacadeService.getOwnProducts());
-        
+
     }//GEN-LAST:event_btnListarActionPerformed
 
     private void btnSuspenderActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnSuspenderActionPerformed
-        if (txtProducto.getText().isEmpty()) {
-            Messages.showMessageDialog("Debe ingresar el ID del producto", "Atenci�n");
-            txtProducto.requestFocus();
-            return;
-        }
-
-        if (!correctFormatId(txtProducto.getText())) {
-            Messages.showMessageDialog("Debe ingresar un dato numerico", "Atenci�n");
-            txtProducto.requestFocus();
-            return;
-        }
         int selectedIndex = tblProductos.getSelectedRow();
+        
+        if (selectedIndex < 0) {
+            Messages.showMessageDialog("Seleccione un producto de la tabla", "Atenci�n");
+            return;
+        }
+        
         Product product = productos.get(selectedIndex);
         product.getState().setId(2L);
         product.getState().setName("no disponible");
+        Category category = new Category();
+        category.setId(1L);
+        category.setName("Ropa");
+        product.setCategory(category);
         OpenMarketFacadeService.updateProduct(product);
         Messages.showMessageDialog("Producto suspendido", "Atenci�n");
     }// GEN-LAST:event_btnSuspenderActionPerformed
 
     private void initializeTable() {
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {},
-                new String[] {
-                        "ID", "Nombre", "Descripcion", "Precio", "Stock", "Latitud", "Longitud", "Categoria"
+                new Object[][]{},
+                new String[]{
+                    "Estado", "Nombre", "Descripcion", "Precio", "Stock", "Latitud", "Longitud", "Categoria"
                 }));
     }
 
@@ -158,37 +152,29 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
         initializeTable();
         DefaultTableModel model = (DefaultTableModel) tblProductos.getModel();
 
-        Object rowData[] = new Object[9];// No columnas
+        Object rowData[] = new Object[8];// No columnas
         for (int i = 0; i < listProducts.size(); i++) {
-            rowData[0] = listProducts.get(i).getId();
+            rowData[0] = listProducts.get(i).getState().getName();
             rowData[1] = listProducts.get(i).getName();
             rowData[2] = listProducts.get(i).getDescription();
             rowData[3] = listProducts.get(i).getPrice();
             rowData[4] = listProducts.get(i).getStock();
             rowData[5] = listProducts.get(i).getLatitude();
             rowData[6] = listProducts.get(i).getLongitude();
-            rowData[7] = listProducts.get(i).getCategory().getName();
-            rowData[8] = listProducts.get(i).getState().getName();
+            if (listProducts.get(i).getCategory() != null) {
+                rowData[7] = listProducts.get(i).getCategory().getName();
+            }
 
             model.addRow(rowData);
         }
-    }
-
-    private boolean correctFormatId(String id) {
-        for (int i = 0; i < id.length(); i++) {
-            if (!Character.isDigit(id.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
+    }  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnListar;
     private javax.swing.JButton btnSuspender;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProductos;
-    private javax.swing.JTextField txtProducto;
     // End of variables declaration//GEN-END:variables
 
     @Override
