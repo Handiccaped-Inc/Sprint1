@@ -1,6 +1,6 @@
 ## Integrantes:
 - Santiago Agredo Vallejo
-- Brain rey Castillo
+- Brain Rey Castillo
 - Arturo Restrepo Ruiz
 - Pablo Jose Restrepo Ruiz
 - Jojan Esteban Serna Serna
