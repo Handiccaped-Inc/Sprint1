@@ -3,6 +3,7 @@ package co.unicauca.openmarket.server.access;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,8 +39,8 @@ public class DeliveryRepository implements IDeliveryRepository {
             pstm.setLong(1, newDelivery.getOrder().getId());
             pstm.setLong(2, newDelivery.getDeliveryMan().getId());
             pstm.setString(3, newDelivery.getReceiver().getRealName());
-            String date = newDelivery.getDate().toString();
-            pstm.setString(4, date);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            pstm.setString(4, dateFormat.format(newDelivery.getDate()));
 
             return pstm.executeUpdate() > 0;
 
@@ -64,8 +65,10 @@ public class DeliveryRepository implements IDeliveryRepository {
             pstm.setLong(1, newDelivery.getOrder().getId());
             pstm.setLong(2, newDelivery.getDeliveryMan().getId());
             pstm.setString(3, newDelivery.getReceiver().getRealName());
-            String date = newDelivery.getDate().toString();
-            pstm.setString(4, date);
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+            pstm.setString(4, dateFormat.format(newDelivery.getDate()));
             pstm.setLong(5, newDelivery.getId());
             return pstm.executeUpdate() > 0;
 

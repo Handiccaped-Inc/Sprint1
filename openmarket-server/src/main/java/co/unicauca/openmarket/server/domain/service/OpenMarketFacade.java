@@ -128,7 +128,7 @@ public class OpenMarketFacade implements IOpenMarketFacade {
                     new Account(0L, requester.getCard(), 0l),
                     new Account(0L, "openmarket", 0l),
                     order.getPrice().longValue() * quantity)) {
-                return "!error"; // Mirar bien lo de los pagos
+                // return "!error"; // Mirar bien lo de los pagos
             }
             if ((dbProduct.getStock() - quantity) < 0) {
                 return "!error";
@@ -339,7 +339,7 @@ public class OpenMarketFacade implements IOpenMarketFacade {
                     new Account(0L, "openmarket", 0l),
                     new Account(0L, seller.getCard(), 0l),
                     price - openMarketComission)) {
-                return "!error";
+                // return "!error";
             }
             return "ok";
 
@@ -358,11 +358,10 @@ public class OpenMarketFacade implements IOpenMarketFacade {
     public String qualificateOrder(Order order, Long qualification) {
         if ((this.requester = userService.findByEmailAndPassword(requester.getEmail(),
                 requester.getPassword())) != null) {
-            if (order.getCustomer() == requester) {
 
-                order.setQualification(qualification.doubleValue());
-                return orderService.update(order);
-            }
+            order.setQualification(qualification.doubleValue());
+            return orderService.update(order);
+
         }
         return "!error";
     }

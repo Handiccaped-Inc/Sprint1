@@ -7,7 +7,6 @@ package co.unicauca.openmarket.client.presentation;
 import co.unicauca.openmarket.client.domain.service.OpenMarketFacadeService;
 import co.unicauca.openmarket.client.infra.Messages;
 import co.unicauca.openmarket.client.infra.SessionManager;
-import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.ShoppingCart;
 import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.observer.obs.Observador;
@@ -23,7 +22,6 @@ public class pnlCarritoCompras extends javax.swing.JPanel implements Observador 
     /**
      * Creates new form pnlComprador
      */
-
     private OpenMarketFacadeService openMarketFacadeService;
     private List<ShoppingCart> shoppingCart;
 
@@ -125,6 +123,13 @@ public class pnlCarritoCompras extends javax.swing.JPanel implements Observador 
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnComprarCarritoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnComprarCarritoActionPerformed
+
+        shoppingCart = openMarketFacadeService.getShoppingCart();
+        if (shoppingCart.isEmpty()) {
+            Messages.showMessageDialog("No tienes carrito", "Atenci�n");
+            return;
+        }
+
         if (openMarketFacadeService.buyShoppingCart()) {
             Messages.showMessageDialog("Carrito comprado", "Atenci�n");
         } else {
@@ -134,6 +139,13 @@ public class pnlCarritoCompras extends javax.swing.JPanel implements Observador 
     }// GEN-LAST:event_btnComprarCarritoActionPerformed
 
     private void btnEliminarCarritoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnEliminarCarritoActionPerformed
+        
+        shoppingCart = openMarketFacadeService.getShoppingCart();
+        if (shoppingCart.isEmpty()) {
+            Messages.showMessageDialog("No tienes carrito", "Atenci�n");
+            return;
+        }
+        
         if (openMarketFacadeService.deleteShoppingCart()) {
             Messages.showMessageDialog("Carrito Eliminado", "Atenci�n");
         } else {
@@ -147,9 +159,9 @@ public class pnlCarritoCompras extends javax.swing.JPanel implements Observador 
 
     private void initializeTable() {
         tblCarrito.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {},
-                new String[] {
-                        "ID", "Nombre Producto", "Cantidad"
+                new Object[][]{},
+                new String[]{
+                    "ID", "Nombre Producto", "Cantidad"
                 }));
     }
 
@@ -170,7 +182,7 @@ public class pnlCarritoCompras extends javax.swing.JPanel implements Observador 
     private void getShoppingCart() {
         shoppingCart = openMarketFacadeService.getShoppingCart();
 
-        if (shoppingCart == null) {
+        if (shoppingCart.isEmpty()) {
             Messages.showMessageDialog("No tienes carrito", "Atenci�n");
             return;
         }

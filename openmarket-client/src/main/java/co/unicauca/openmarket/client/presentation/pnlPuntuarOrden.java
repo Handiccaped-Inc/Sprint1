@@ -37,7 +37,6 @@ public class pnlPuntuarOrden extends javax.swing.JPanel implements Observador {
                 fillTable(listOrders);
             }
         }
-
     }
 
     /**
@@ -47,16 +46,35 @@ public class pnlPuntuarOrden extends javax.swing.JPanel implements Observador {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtOrden = new javax.swing.JTextField();
-        btnPuntuarOrden = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrdenes = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
         jcbPuntuar = new javax.swing.JComboBox<>();
+        btnPuntuarOrden = new javax.swing.JButton();
+        btnListar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(700, 515));
+
+        tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblOrdenes);
+
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 30, 5));
+
+        jcbPuntuar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+        jPanel1.add(jcbPuntuar);
 
         btnPuntuarOrden.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnPuntuarOrden.setText("Puntuar");
@@ -65,69 +83,53 @@ public class pnlPuntuarOrden extends javax.swing.JPanel implements Observador {
                 btnPuntuarOrdenActionPerformed(evt);
             }
         });
+        jPanel1.add(btnPuntuarOrden);
 
-        tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null }
-                },
-                new String[] {
-                        "Title 1", "Title 2", "Title 3", "Title 4"
-                }));
-        jScrollPane1.setViewportView(tblOrdenes);
-
-        jcbPuntuar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+        btnListar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnListar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 688,
-                                                Short.MAX_VALUE)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txtOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 455,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jcbPuntuar, 0, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        Short.MAX_VALUE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnPuntuarOrden)))
-                                .addContainerGap()));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
+                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtOrden, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnPuntuarOrden)
-                                        .addComponent(jcbPuntuar, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
-                                .addContainerGap()));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        fillTable(OpenMarketFacadeService.getOrders());
+        this.listOrders = OpenMarketFacadeService.getOrders();
+    }//GEN-LAST:event_btnListarActionPerformed
+
     private void btnPuntuarOrdenActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnPuntuarOrdenActionPerformed
-        if (txtOrden.getText().isEmpty() || jcbPuntuar.getSelectedItem().toString().isEmpty()) {
-            Messages.showMessageDialog("Debe ingresar el ID de la orden", "Atenci�n");
-            txtOrden.requestFocus();
+        int selectedIndex = tblOrdenes.getSelectedRow();
+        
+        if (selectedIndex < 0) {
+            Messages.showMessageDialog("Seleccione una orden de la tabla", "Atenci�n");
             return;
         }
-
-        if (!correctFormatId(txtOrden.getText())) {
-            Messages.showMessageDialog("Debe ingresar un dato numerico", "Atenci�n");
-            txtOrden.requestFocus();
-            return;
-        }
-
+        
+        Order order = listOrders.get(selectedIndex);
+        OpenMarketFacadeService.qualificateOrder(order, Long.parseLong(jcbPuntuar.getSelectedItem().toString()));
         Messages.showMessageDialog("Orden calificada", "Atenci�n");
     }// GEN-LAST:event_btnPuntuarOrdenActionPerformed
 
@@ -146,7 +148,7 @@ public class pnlPuntuarOrden extends javax.swing.JPanel implements Observador {
         Object rowData[] = new Object[5];// No columnas
         for (int i = 0; i < listOrders.size(); i++) {
             rowData[0] = listOrders.get(i).getId();
-            rowData[1] = listOrders.get(i).getStatus();
+            rowData[1] = listOrders.get(i).getStatus().getName();
             rowData[2] = listOrders.get(i).getPrice();
             rowData[3] = listOrders.get(i).getDate();
             rowData[4] = listOrders.get(i).getQualification();
@@ -155,21 +157,13 @@ public class pnlPuntuarOrden extends javax.swing.JPanel implements Observador {
         }
     }
 
-    private boolean correctFormatId(String id) {
-        for (int i = 0; i < id.length(); i++) {
-            if (!Character.isDigit(id.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnListar;
     private javax.swing.JButton btnPuntuarOrden;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> jcbPuntuar;
     private javax.swing.JTable tblOrdenes;
-    private javax.swing.JTextField txtOrden;
     // End of variables declaration//GEN-END:variables
 
     @Override

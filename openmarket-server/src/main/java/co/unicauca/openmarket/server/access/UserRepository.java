@@ -99,7 +99,7 @@ public class UserRepository implements IUserRepository {
                 String user_Card = res.getString("user_card");
                 String real_Name = res.getString("user_realname");
                 String user_name = res.getString("user_username");
-                String user_password = res.getString("user_password");
+                String user_password = "oculta";
                 String user_Address = res.getString("user_address");
                 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 Date birth_Date = dateFormat.parse(birth_DateStr);

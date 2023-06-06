@@ -48,8 +48,10 @@ public class OrderRepository implements IOrderRepository {
             pstmt.setLong(3, newOrder.getStatus().getId());
             pstmt.setDouble(4, newOrder.getPrice());
             pstmt.setDouble(5, newOrder.getQualification());
-            String date = newOrder.getDate().toString();
-            pstmt.setString(6, date);
+
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            pstmt.setString(6, dateFormat.format(newOrder.getDate()));
+
             return pstmt.executeUpdate() > 0;
         } catch (SQLException ex) {
             Logger.getLogger(OrderRepository.class.getName()).log(Level.SEVERE, null, ex);
@@ -75,8 +77,8 @@ public class OrderRepository implements IOrderRepository {
             pstmt.setLong(3, newOrder.getStatus().getId());
             pstmt.setDouble(4, newOrder.getPrice());
             pstmt.setDouble(5, newOrder.getQualification());
-            String date = newOrder.getDate().toString();
-            pstmt.setString(6, date);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            pstmt.setString(6, dateFormat.format(newOrder.getDate()));
             pstmt.setLong(7, newOrder.getId());
 
             int rowsUpdated = pstmt.executeUpdate();

@@ -48,15 +48,31 @@ public class pnlConfirmarOrden extends javax.swing.JPanel implements Observador 
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtOrden = new javax.swing.JTextField();
-        btnConfirmarOrden = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrdenes = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        btnConfirmarOrden = new javax.swing.JButton();
+        btnListar = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(700, 515));
+
+        tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblOrdenes);
+
+        jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 30, 5));
 
         btnConfirmarOrden.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnConfirmarOrden.setText("Confirmar");
@@ -65,46 +81,42 @@ public class pnlConfirmarOrden extends javax.swing.JPanel implements Observador 
                 btnConfirmarOrdenActionPerformed(evt);
             }
         });
+        jPanel1.add(btnConfirmarOrden);
 
-        tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
-                new Object[][] {
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null },
-                        { null, null, null, null }
-                },
-                new String[] {
-                        "Title 1", "Title 2", "Title 3", "Title 4"
-                }));
-        jScrollPane1.setViewportView(tblOrdenes);
+        btnListar.setText("Listar");
+        btnListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnListar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 688,
-                                                Short.MAX_VALUE)
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txtOrden)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(btnConfirmarOrden)))
-                                .addContainerGap()));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))
+                .addContainerGap())
+        );
         layout.setVerticalGroup(
-                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(txtOrden, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(btnConfirmarOrden))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
-                                .addContainerGap()));
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 463, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListarActionPerformed
+        fillTable(openMarketFacadeService.getOrders());
+        this.orders = openMarketFacadeService.getOrders();
+    }//GEN-LAST:event_btnListarActionPerformed
 
     private void initializeTable() {
         tblOrdenes.setModel(new javax.swing.table.DefaultTableModel(
@@ -121,7 +133,7 @@ public class pnlConfirmarOrden extends javax.swing.JPanel implements Observador 
         Object rowData[] = new Object[4];// No columnas
         for (int i = 0; i < listOrders.size(); i++) {
             rowData[0] = listOrders.get(i).getId();
-            rowData[1] = listOrders.get(i).getStatus();
+            rowData[1] = listOrders.get(i).getStatus().getName();
             rowData[2] = listOrders.get(i).getPrice();
             rowData[3] = listOrders.get(i).getDate();
 
@@ -130,37 +142,24 @@ public class pnlConfirmarOrden extends javax.swing.JPanel implements Observador 
     }
 
     private void btnConfirmarOrdenActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnConfirmarOrdenActionPerformed
-        if (txtOrden.getText().isEmpty()) {
-            Messages.showMessageDialog("Debe ingresar el ID de la orden", "Atenci�n");
-            txtOrden.requestFocus();
-            return;
-        }
-
-        if (!correctFormatId(txtOrden.getText())) {
-            Messages.showMessageDialog("Debe ingresar un dato numerico", "Atenci�n");
-            txtOrden.requestFocus();
-            return;
-        }
         int selectedIndex = tblOrdenes.getSelectedRow();
+        
+        if (selectedIndex < 0) {
+            Messages.showMessageDialog("Seleccione una orden de la tabla", "Atenci�n");
+            return;
+        }
+        
         Order order = orders.get(selectedIndex);
         openMarketFacadeService.confirmOrder(order);
         Messages.showMessageDialog("Orden confirmada", "Atenci�n");
     }// GEN-LAST:event_btnConfirmarOrdenActionPerformed
 
-    private boolean correctFormatId(String id) {
-        for (int i = 0; i < id.length(); i++) {
-            if (!Character.isDigit(id.charAt(i))) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmarOrden;
+    private javax.swing.JButton btnListar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblOrdenes;
-    private javax.swing.JTextField txtOrden;
     // End of variables declaration//GEN-END:variables
 
     @Override
