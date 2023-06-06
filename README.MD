@@ -11,6 +11,7 @@
 ### Cree las bases de datos con los scripts usando DB Browser for SQLite en las siguiente ruta
 - C:\sqlite\db
 #### Base de datos de openmarket, se debe llamar `openmarket.db`
+#### Nota: Todas las contraseñas hasheadas aqui son la siguiente contraseña: 1
 #### Base de datos de el servicio de pagos, se debe llamar `payment-service.db`
 
 #### Ahora construya el proyecto, si desea correr pruebas use la interfaz de el ide de su preferencia `vscode` o `netbeans`
