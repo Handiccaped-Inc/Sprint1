@@ -57,7 +57,7 @@ public interface IProductService {
 
      /**
      * Metodo que encuentra los productos de un vendedor
-     * @param User_id
+     * @param user usuario propietario
      * @return lista de objetos Encontrados
      */
     public List<Product> findByOwner(User user);

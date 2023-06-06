@@ -19,7 +19,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 /**
- * @author Braian Rey / Arturo Restrepo Ruiz
+ * Clase handler
  */
 public class OpenMarketHandler extends ServerHandler {
     private Map<String, Function<Protocol, String>> actionMap;
@@ -60,6 +60,10 @@ public class OpenMarketHandler extends ServerHandler {
         this.facade = facade;
     }
 
+    /**
+     * Implementa un nuevo facade
+     * @param facade nuevo facade
+     */
     public void SetOpenMarketFacade(OpenMarketFacade facade) {
         this.facade = facade;
     }
@@ -85,6 +89,11 @@ public class OpenMarketHandler extends ServerHandler {
         return errorJson;
     }
 
+    /**
+     * Proceso encontrar usuario
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processFindUserByEmailAndPassword(Protocol protocolRequest) {
         String name = protocolRequest.getParameters().get(1).getValue();
         String password = protocolRequest.getParameters().get(2).getValue();
@@ -99,6 +108,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Proceso encontrar productos disponibles
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processFindAvailableProducts(Protocol protocolRequest) {
         List<Product> products = facade.findAvailableProducts();
 
@@ -110,6 +124,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Proceso encontrar producto por nombre y descripcion
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processFindProductByNameAndDescription(Protocol protocolRequest) {
 
         String name = protocolRequest.getParameters().get(1).getValue();
@@ -125,6 +144,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Proceso comprar producto
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processBuyProduct(Protocol protocolRequest) {
         Product product = new Product();
         Long id = Long.parseLong(protocolRequest.getParameters().get(1).getValue());
@@ -141,6 +165,11 @@ public class OpenMarketHandler extends ServerHandler {
 
     }
 
+    /**
+     * Proceso agregar producto al carrito
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processAddProductToShoppingCart(Protocol protocolRequest) {
         Product product = new Product();
         Long id = Long.parseLong(protocolRequest.getParameters().get(1).getValue());
@@ -157,6 +186,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Proceso obtener carritos
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processGetShoppingCart(Protocol protocolRequest) {
         List<ShoppingCart> products = facade.getShoppingCart();
 
@@ -168,6 +202,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Proceso comprar/confirmar carrito
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processBuyShoppingCart(Protocol protocolRequest) {
         String reply = facade.buyShoppingCart();
 
@@ -179,6 +218,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Proceso eliminar carrito
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processDeleteShoppingCart(Protocol protocolRequest) {
         String reply = facade.deleteShoppingCart();
 
@@ -190,6 +234,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Proceso guardar producto
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processSaveProduct(Protocol protocolRequest) {
         String productJson = protocolRequest.getParameters().get(1).getValue();
         Product product = gson.fromJson(productJson, Product.class);
@@ -204,6 +253,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Proceso actualizar producto
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processUpdateProduct(Protocol protocolRequest) {
         String productJson = protocolRequest.getParameters().get(1).getValue();
         Product product = gson.fromJson(productJson, Product.class);
@@ -218,6 +272,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Proceso obtener productos agregados por un usuario
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processGetOwnProducts(Protocol protocolRequest) {
         List<Product> products = facade.getOwnProducts();
 
@@ -229,6 +288,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Proceso obtener ordenes
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processGetOrders(Protocol protocolRequest) {
         List<Order> orders = facade.getOrders();
         if (orders == null) {
@@ -239,6 +303,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Proceso confirmar orden
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processConfirmOrder(Protocol protocolRequest) {
         String orderJson = protocolRequest.getParameters().get(1).getValue();
         Order order = gson.fromJson(orderJson, Order.class);
@@ -253,6 +322,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Proceso puntuar orden
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processQualificateOrder(Protocol protocolRequest) {
         String orderJson = protocolRequest.getParameters().get(1).getValue();
         Order order = gson.fromJson(orderJson, Order.class);
@@ -267,6 +341,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Registrar entrega
+     * @param protocolRequest key
+     * @return resultado
+     */
     public String processRegisterDelivery(Protocol protocolRequest) {
         String deliveryJson = protocolRequest.getParameters().get(1).getValue();
         Delivery delivery = gson.fromJson(deliveryJson, Delivery.class);
@@ -281,6 +360,11 @@ public class OpenMarketHandler extends ServerHandler {
         }
     }
 
+    /**
+     * Generar json de error a partir de un objeto
+     * @param object objeto a convertir
+     * @return Resultado
+     */
     private String generateNotFoundErrorJson(String object) {
         List<JsonError> errors = new ArrayList<>();
         JsonError error = new JsonError();

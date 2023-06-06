@@ -206,7 +206,7 @@ public class ProductRepository implements IProductRepository {
     /**
      * Metodo de encontar productos por su dueño
      * 
-     * @param User usurio que es dueño de los productos
+     * @param user usuario que es dueño de los productos
      * @return lista de los elementos encontrados
      */
     @Override

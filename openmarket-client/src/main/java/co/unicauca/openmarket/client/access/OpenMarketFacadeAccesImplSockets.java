@@ -18,11 +18,17 @@ import co.unicauca.openmarket.commons.domain.User;
 import co.unicauca.openmarket.commons.infra.JsonError;
 import co.unicauca.openmarket.commons.infra.Protocol;
 
+/**
+ * Clase fachada OpenMarketFacadeAccesImplSockets
+ */
 public class OpenMarketFacadeAccesImplSockets implements IOpenMarketFacadeDeserialized {
 
     private OpenMarketSocket mySocket;
     private Gson gson;
 
+    /**
+     * Constructor sin parametros de la clase
+     */
     public OpenMarketFacadeAccesImplSockets() {
         mySocket = new OpenMarketSocket();
         gson = new Gson();

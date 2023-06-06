@@ -8,6 +8,9 @@ import co.unicauca.openmarket.commons.domain.Product;
 import co.unicauca.openmarket.commons.domain.ShoppingCart;
 import co.unicauca.openmarket.commons.domain.User;
 
+/**
+ * Interfaz grafica que usa los metodos implementados en OpenMarketFacadeAccesImplSockets
+ */
 public interface IOpenMarketFacadeDeserialized {
 
     /**

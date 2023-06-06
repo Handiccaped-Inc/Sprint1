@@ -20,9 +20,17 @@ import co.unicauca.openmarket.server.access.ProductRepository;
 import co.unicauca.openmarket.server.access.ShoppingCartRepository;
 import co.unicauca.openmarket.server.access.UserRepository;
 
-
+/**
+ * Clase OpenMarketServer
+ */
 public class OpenMarketServer {
-        /**
+
+    /**
+     * Constructor default
+     */
+    OpenMarketServer(){}
+
+    /** main of the server
      * @param args the command line arguments
      */
     public static void main(String[] args) {

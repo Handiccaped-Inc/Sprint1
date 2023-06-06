@@ -1,16 +1,21 @@
 package co.unicauca.openmarket.client.access;
 
+/**
+ * Clase factory
+ */
 public class Factory {
 
     private static Factory instance;
 
+    /**
+     * Constructor default
+     */
     private Factory() {
     }
 
     /**
      * Clase singleton
-     *
-     * @return
+     * @return Instancia actual de factory
      */
     public static Factory getInstance() {
 

@@ -34,7 +34,7 @@ public class SessionManager {
     /**
      * Obtiene el usuario
      * 
-     * @return
+     * @return Usuario actual
      */
     public User getUser() {
         return user;
@@ -43,7 +43,7 @@ public class SessionManager {
     /**
      * Asigna el usuario
      * 
-     * @param user Usuario
+     * @param user nuevo usuario
      */
     public void setUser(User user) {
         this.user = user;
