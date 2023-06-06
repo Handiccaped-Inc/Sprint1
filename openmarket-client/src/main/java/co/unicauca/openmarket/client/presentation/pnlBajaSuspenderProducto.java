@@ -158,7 +158,7 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
         initializeTable();
         DefaultTableModel model = (DefaultTableModel) tblProductos.getModel();
 
-        Object rowData[] = new Object[8];// No columnas
+        Object rowData[] = new Object[9];// No columnas
         for (int i = 0; i < listProducts.size(); i++) {
             rowData[0] = listProducts.get(i).getId();
             rowData[1] = listProducts.get(i).getName();
@@ -168,6 +168,7 @@ public class pnlBajaSuspenderProducto extends javax.swing.JPanel implements Obse
             rowData[5] = listProducts.get(i).getLatitude();
             rowData[6] = listProducts.get(i).getLongitude();
             rowData[7] = listProducts.get(i).getCategory().getName();
+            rowData[8] = listProducts.get(i).getState().getName();
 
             model.addRow(rowData);
         }

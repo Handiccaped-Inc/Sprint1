@@ -201,9 +201,15 @@ public class pnlCrearProducto extends javax.swing.JPanel implements Observador {
     private void btnEditarProducto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProducto1ActionPerformed
         productos = openMarketFacadeService.findProductByNameAndDescription(txtNombre.getText(), txtDescripcion.getText());
 
+        if (productos.isEmpty()) {
+            return;
+        }
+        Category category = new Category();
+        category.setId(1L);
+        category.setName("Ropa");
         productos.get(0).setName(txtNombre.getText());
         productos.get(0).setState(new StateProduct(1L, "disponible"));
-        productos.get(0).setName(txtNombre.getText());
+        productos.get(0).setCategory(category);
         productos.get(0).setDescription(txtDescripcion.getText());
         productos.get(0).setPrice(Double.parseDouble(txtPrecio.getText()));
         productos.get(0).setStock(Long.parseLong(txtStock.getText()));
@@ -211,6 +217,8 @@ public class pnlCrearProducto extends javax.swing.JPanel implements Observador {
         productos.get(0).setLongitude(Double.parseDouble(txtLongitud.getText()));
 
         openMarketFacadeService.updateProduct(productos.get(0));
+        
+        Messages.showMessageDialog("Se edito el producto", "Atencion");
     }//GEN-LAST:event_btnEditarProducto1ActionPerformed
 
     private void btnCrearProductoActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnCrearProductoActionPerformed

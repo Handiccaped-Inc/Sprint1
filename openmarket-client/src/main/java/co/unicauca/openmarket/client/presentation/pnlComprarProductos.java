@@ -203,7 +203,14 @@ public class pnlComprarProductos extends javax.swing.JPanel implements Observado
             return;
         }
         int selectedIndex = tblProductos.getSelectedRow();
+        
+        if (selectedIndex < 0) {
+            Messages.showMessageDialog("Seleccione un producto de la tabla", "Atenci�n");
+            return;
+        }
+        
         Product product = products.get(selectedIndex);
+        
         if (openMarketFacadeService.buyProduct(product)) {
             Messages.showMessageDialog("Producto comprado", "Atenci�n");
         } else {
@@ -221,8 +228,16 @@ public class pnlComprarProductos extends javax.swing.JPanel implements Observado
             Messages.showMessageDialog("Ingrese un dato numerico", "Atenci�n");
             return;
         }
+        
         int selectedIndex = tblProductos.getSelectedRow();
+        
+        if (selectedIndex < 0) {
+            Messages.showMessageDialog("Seleccione un producto de la tabla", "Atenci�n");
+            return;
+        }
+        
         Product product = products.get(selectedIndex);
+        
         if (openMarketFacadeService.addProductToTheShoppingCart(product,
                 Long.parseLong(txtCantidad.getText()))) {
             Messages.showMessageDialog("Producto guardado en el carrito", "Atenci�n");

@@ -339,7 +339,7 @@ public class OpenMarketFacade implements IOpenMarketFacade {
                     new Account(0L, "openmarket", 0l),
                     new Account(0L, seller.getCard(), 0l),
                     price - openMarketComission)) {
-                return "!error";
+                // return "!error";
             }
             return "ok";
 
